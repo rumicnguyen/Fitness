@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "819592355905",
+    "project_id": "dominic-fitness-app",
+    "storage_bucket": "dominic-fitness-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819592355905:android:78fd786cd2d650949766c0",
+        "android_client_info": {
+          "package_name": "dev.flutter.fitness_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwq9KJ6l8X_I-4uUuv0j-KERHymiZbRaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
