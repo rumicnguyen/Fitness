@@ -1,11 +1,11 @@
-## Issue
+## Ticket
 
-issue
+- [Ticket]()
 
-## Description
+## Task
 
-- Detail description about the feature/bug.
-- ...
+- [ ] List you do
+- [ ] ...
 
 ## Screenshot
 
