@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fitness_app/firebase_options/firebase_options.dart';
@@ -10,12 +11,20 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  
+
   await dot_env.dotenv.load(
     fileName: "assets/.env",
   );
-  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
-  FirebaseCrashlytics.instance.crash();
-  
-  runApp(const MyApp());
+  FlutterError.onError = (errorDetails) {
+    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    return true;
+  };
+
+  runApp(
+    const MyApp(),
+  );
 }
