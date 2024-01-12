@@ -6,8 +6,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      routerConfig: AppRouter().router,
+    // return MaterialApp.router(
+    //   routerConfig: AppRouter().router,
+    // );
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: TextButton(
+            onPressed: () => throw Exception(),
+            child: const Text("Throw Test Exception"),
+          ),
+        ),
+      ),
     );
   }
 }

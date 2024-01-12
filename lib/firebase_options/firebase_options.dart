@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '819592355905',
     projectId: 'dominic-fitness-app',
     storageBucket: 'dominic-fitness-app.appspot.com',
+    androidClientId: '819592355905-3ul7vj2s09g8pn7b30c8c608lhneqjmp.apps.googleusercontent.com',
+    iosClientId: '819592355905-hg8a35t1u42ul39fjfigdv8jf107hb1e.apps.googleusercontent.com',
     iosBundleId: 'dev.flutter.fitnessApp',
   );
 }

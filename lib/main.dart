@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fitness_app/firebase_options/firebase_options.dart';
 import 'package:fitness_app/src/app.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ Future main() async {
   await dot_env.dotenv.load(
     fileName: "assets/.env",
   );
-
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+  FirebaseCrashlytics.instance.crash();
+  
   runApp(const MyApp());
 }
