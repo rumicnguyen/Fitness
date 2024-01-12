@@ -12,12 +12,15 @@ class AppRouter {
         path: AppRouteName.home.path,
         name: AppRouteName.home.name,
         builder: (_, __) => const HomeView(),
-        routes: <RouteBase>[
+        routes: const <RouteBase>[
+          /* 
+          /// Will be developed in other feature
           GoRoute(
             path: AppRouteName.home.subPath,
             name: AppRouteName.home.subPath,
             builder: (_, __) => const HomeView(),
           ),
+          */
         ],
       ),
     ],
