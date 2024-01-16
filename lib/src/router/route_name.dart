@@ -1,5 +1,7 @@
 enum AppRouteName {
-  home(path: '/'),;
+  intro(path: '/'),
+  home(path: '/home'),
+  ;
 
   final String path;
 
