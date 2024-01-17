@@ -11,8 +11,11 @@ dependencies:
   # FLUTTER
   flutter:
     sdk: flutter
+
+  # L10N
   flutter_localizations:
     sdk: flutter
+  intl: any
   
   # HELPER
   equatable: ^2.0.0
@@ -39,4 +42,5 @@ flutter:
   assets:
     - assets/.env
   
+  generate: true
   uses-material-design: true

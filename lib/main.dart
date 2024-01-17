@@ -1,8 +1,9 @@
 import 'dart:ui';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:fitness_app/firebase_options/firebase_options.dart';
+import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/src/app.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
@@ -15,6 +16,8 @@ Future main() async {
   await dot_env.dotenv.load(
     fileName: "assets/.env",
   );
+
+  await UserPrefs.instance.initialize();
   FlutterError.onError = (errorDetails) {
     FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
   };
