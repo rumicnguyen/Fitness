@@ -1,3 +1,6 @@
 {
-  "common_appTitle":"Fitness app"
+  "common_appTitle":"Fitness app",
+  "intro_title":"MYFIT",
+  "intro_description":"This App will help you\n keep your body fit and strong",
+  "get_started":"Get Started"
 }

@@ -2,7 +2,6 @@ import 'package:fitness_app/src/features/setting/logic/setting_bloc.dart';
 import 'package:fitness_app/src/features/setting/logic/setting_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/router/router.dart';
-import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,7 +22,6 @@ class MyApp extends StatelessWidget {
           return previous.locale != current.locale;
         },
         builder: (context, state) {
-          UserPrefs.instance.initialize();
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
             localizationsDelegates: [
