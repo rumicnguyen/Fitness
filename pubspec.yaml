@@ -11,8 +11,11 @@ dependencies:
   # FLUTTER
   flutter:
     sdk: flutter
+
+  # L10N
   flutter_localizations:
     sdk: flutter
+  intl: 0.18.1
   
   # HELPER
   equatable: ^2.0.0
@@ -42,4 +45,5 @@ flutter:
     - assets/images/eng.png
     - assets/images/vie.png
   
+  generate: true
   uses-material-design: true
