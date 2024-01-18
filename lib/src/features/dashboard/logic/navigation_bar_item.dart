@@ -52,13 +52,6 @@ enum XNavigationBarItems {
   final IconData? selectedIcon;
   final int selectedIndex;
 
-  // static XNavigationBarItems fromLocation(String location) {
-  //   if (location == XNavigationBarItems.home.route.name) {
-  //     return XNavigationBarItems.home;
-  //   }
-  //   return XNavigationBarItems.home;
-  // }
-
   static XNavigationBarItems fromLocation(AppRouteNames value) {
     return values.firstWhere((element) => element.route == value,
         orElse: () => XNavigationBarItems.home);

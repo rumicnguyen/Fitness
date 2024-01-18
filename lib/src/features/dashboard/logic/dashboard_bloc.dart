@@ -4,21 +4,6 @@ import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardBloc extends Cubit<DashboardState> {
-  /*
-  /// Change to config router. It need to be corrected
-  DashboardBloc(super.current) {
-    checkForceUpdate();
-  }
-
-  Future checkForceUpdate() async {
-    final needForceUpdate = await RemoteConfigService.config.needForceUpdate();
-    if (needForceUpdate) {
-      XAlert.showForceUpdate();
-      return true;
-    }
-    return false;
-  }
-*/
   DashboardBloc() : super(DashboardState.ds());
 
   void onDestinationSelected(int index) {
