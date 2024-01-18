@@ -6,12 +6,14 @@ import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final appRouter = GetIt.I<AppRouter>();
     return BlocProvider<SettingBloc>(
       create: (BuildContext context) {
         return SettingBloc();
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
               Locale('vi'),
             ],
             locale: state.locale,
-            routerConfig: AppRouter().router,
+            routerConfig: appRouter.router,
           );
         },
       ),

@@ -15,7 +15,7 @@ dependencies:
   # L10N
   flutter_localizations:
     sdk: flutter
-  intl: 0.19.0
+  intl: 0.18.1
   
   # HELPER
   equatable: ^2.0.0

@@ -1,33 +1,26 @@
-import 'dart:ui';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:fitness_app/firebase_options.dart';
 import 'package:fitness_app/src/app.dart';
-import 'package:fitness_app/src/services/user_prefs.dart';
+import 'package:fitness_app/src/locator.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
+
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  await dot_env.dotenv.load(
-    fileName: "assets/.env",
-  );
-
-  await UserPrefs.instance.initialize();
-  FlutterError.onError = (errorDetails) {
-    FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-  };
-
-  PlatformDispatcher.instance.onError = (error, stack) {
-    FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    return true;
-  };
-
-  runApp(
-    const MyApp(),
-  );
+  await initializeApp(
+      name: "production",
+      firebaseOptions: DefaultFirebaseOptions.currentPlatform);
+  if (kIsWeb) {
+    runApp(const MyApp());
+  } else {
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+    
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
+    runApp(const MyApp());
+  }
 }
