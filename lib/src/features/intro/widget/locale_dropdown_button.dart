@@ -1,3 +1,4 @@
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/enum/locale_enum.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
@@ -56,8 +57,8 @@ class _LocaleDropDownButtonState extends State<LocaleDropDownButton> {
           children: [
             Image.asset(
               e.label == 'ENG'
-                  ? 'assets/images/eng.png'
-                  : 'assets/images/vie.png',
+                  ? Assets.images.eng.path
+                  : Assets.images.vie.path,
               height: 30,
             ),
             const SizedBox(

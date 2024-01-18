@@ -19,7 +19,7 @@ import 'package:go_router/go_router.dart';
 class AppRouter {
   final router = GoRouter(
     navigatorKey: AppCoordinator.navigatorKey,
-    initialLocation: AppRouteNames.home.path,
+    initialLocation: AppRouteNames.intro.path,
     debugLogDiagnostics: kDebugMode,
     routes: <RouteBase>[
       GoRoute(

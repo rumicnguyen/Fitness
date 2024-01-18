@@ -1,13 +1,12 @@
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/intro/widget/locale_dropdown_button.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
-/// Title and backgroundImage screen will be developed later
-///
-/// Design miss image
 class IntroView extends StatelessWidget {
   const IntroView({super.key});
 
@@ -17,13 +16,12 @@ class IntroView extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(
-          // This UI will be developed latter.
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/intro.png'),
+            image: AssetImage(Assets.images.intro.path),
             fit: BoxFit.fill,
           ),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
               AppColors.first,
               AppColors.second,
@@ -37,18 +35,18 @@ class IntroView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             const LocaleDropDownButton(),
-            _buildTitle(),
+            _buildTitle(context),
             XTextButton(
-              title: 'Get Started',
+              title: S.of(context).get_started,
               ending: const Padding(
-                padding: EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                padding: EdgeInsets.only(left: 8),
                 child: Icon(
                   Icons.arrow_right_alt,
                   color: AppColors.white,
                 ),
               ),
               onPressed: () {
-                context.go('/home');
+                AppCoordinator.showSignInScreen();
               },
             ),
           ],
@@ -57,18 +55,17 @@ class IntroView extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle() {
-    return const Column(
+  Widget _buildTitle(BuildContext context) {
+    return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // This UI will be developed latter.
         Text(
-          'MYFIT',
+          S.of(context).intro_title,
           style: AppStyles.titleIntro,
         ),
         Text(
-          'This App will help you\n keep your body fit and strong',
+          S.of(context).intro_description,
           style: AppStyles.titleButtonSmall,
           textAlign: TextAlign.center,
         )
