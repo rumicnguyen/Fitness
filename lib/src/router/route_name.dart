@@ -5,10 +5,9 @@ enum AppRouteNames {
   workout(path: '/workout'),
   challenge(path: '/challenge'),
   account(
-    path: 'account',
+    path: '/account',
     paramName: 'id',
   ),
-
 
   signIn(path: '/sign-in'),
   signUp(path: '/sign-up'),
@@ -20,23 +19,23 @@ enum AppRouteNames {
   filterWorkout(path: '/filter-workout'),
   // List workout when search, show all
   workoutList(
-    path: 'workout-list',
+    path: '/workout-list',
     paramName: 'id',
   ),
   mostPopular(
-    path: 'most-popular',
+    path: '/most-popular',
     paramName: 'id',
   ),
   workoutDetails(
-    path: 'workout-detail',
+    path: '/workout-detail',
     paramName: 'id',
   ),
   challengeDetails(
-    path: 'challenge-detail',
+    path: '/challenge-detail',
     paramName: 'id',
   ),
   startWorkout(
-    path: 'start-workout',
+    path: '/start-workout',
     paramName: 'id',
   ),
   ;
