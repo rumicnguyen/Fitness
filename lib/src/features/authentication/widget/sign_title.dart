@@ -8,9 +8,11 @@ class SignTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 50, 32, 0),
+      margin: const EdgeInsets.only(top: 50),
       alignment: Alignment.topCenter,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             title,

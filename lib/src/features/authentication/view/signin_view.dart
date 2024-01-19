@@ -1,3 +1,5 @@
+import 'package:fitness_app/gen/assets.gen.dart';
+import 'package:fitness_app/src/features/authentication/widget/scaffold.dart';
 import 'package:fitness_app/src/features/authentication/widget/sign_title.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
@@ -8,32 +10,27 @@ import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:fitness_app/widgets/forms/input.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              AppColors.second,
-              AppColors.thirth,
-            ],
-            transform: GradientRotation(90),
+    return XScaffold(
+      child: Column(
+        children: [
+          XSection(
+            top: 25,
+            child: _buildAppBar(context),
           ),
-        ),
-        child: XSection(
-          top: 20.0,
-          bottom: 30.0,
-          left: 15.0,
-          right: 15.0,
-          child: _buider(context),
-        ),
+          XSection(
+            bottom: 30.0,
+            left: 15.0,
+            right: 15.0,
+            child: _buider(context),
+          ),
+        ],
       ),
     );
   }
@@ -41,15 +38,14 @@ class SignInView extends StatelessWidget {
   Widget _buider(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        _buildAppBar(context),
         SignTitle(
           title: S.of(context).sign_in_title,
           guide: S.of(context).sign_in_guide,
         ),
         const SizedBox(
-          height: 100,
+          height: 80,
         ),
         _buildForm(context),
         const SizedBox(
@@ -57,20 +53,9 @@ class SignInView extends StatelessWidget {
         ),
         _buildForgotPassword(context),
         const SizedBox(
-          height: 100,
+          height: 80,
         ),
-        XButton(
-          width: double.infinity,
-          height: 60.0,
-          backgroundColor: AppColors.second,
-          child: Text(
-            S.of(context).sign_in,
-            style: AppStyles.whiteTextMidium,
-          ),
-          onPressed: () {
-            AppCoordinator.showHomeScreen();
-          },
-        ),
+        _buildButton(context),
       ],
     );
   }
@@ -84,6 +69,7 @@ class SignInView extends StatelessWidget {
           icon: const Icon(
             Icons.arrow_back,
             color: AppColors.gray,
+            size: 17.0,
           ),
           style: AppStyles.grayTextSmall,
           onPressed: () {
@@ -95,6 +81,7 @@ class SignInView extends StatelessWidget {
           onPressed: () {
             AppCoordinator.showSignUpScreen();
           },
+          style: AppStyles.whiteTextSmallU,
         ),
       ],
     );
@@ -111,6 +98,7 @@ class SignInView extends StatelessWidget {
           onChanged: context.read<SigninBloc>().onEmailChanged,
           */
           onChanged: null,
+          style: AppStyles.whiteTextMidium,
           labelStyle: AppStyles.grayTextMidium,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
@@ -124,13 +112,14 @@ class SignInView extends StatelessWidget {
         const SizedBox(height: 16.0),
         XInput(
           key: Key(S.of(context).sign_in_key_password),
-          value: '',
+          value: 'password',
           /*
           Will be developed in logic task
           onChanged: context.read<SigninBloc>().onPasswordChanged,
           */
           onChanged: null,
           obscureText: true,
+          style: AppStyles.whiteTextMidium,
           labelStyle: AppStyles.grayTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_password_lable,
@@ -145,13 +134,72 @@ class SignInView extends StatelessWidget {
   }
 
   Widget _buildForgotPassword(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: XTextButton(
-        title: S.of(context).sign_in_forgot_password,
-        style: AppStyles.grayTextMidium,
-        onPressed: AppCoordinator.showForgotPasswordScreen,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        XTextButton(
+          title: S.of(context).sign_in_forgot_password,
+          style: AppStyles.grayTextMidiumU,
+          onPressed: AppCoordinator.showForgotPasswordScreen,
+        ),
+      ],
+    );
+  }
+
+  Padding _buildLineDivider(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        children: [
+          const Expanded(child: Divider()),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              S.of(context).or,
+              style: AppStyles.grayTextMidium,
+            ),
+          ),
+          const Expanded(child: Divider()),
+        ],
       ),
+    );
+  }
+
+  Widget _buildButton(BuildContext context) {
+    return Column(
+      children: [
+        XButton(
+          width: double.infinity,
+          height: 60.0,
+          backgroundColor: AppColors.white,
+          child: Text(
+            S.of(context).sign_in,
+            style: AppStyles.blackTextMidium,
+          ),
+          onPressed: () {
+            AppCoordinator.showHomeScreen();
+          },
+        ),
+        _buildLineDivider(context),
+        XButton(
+          width: double.infinity,
+          height: 60.0,
+          icon: SvgPicture.asset(
+            Assets.svgs.icGoogle,
+            width: 38,
+            height: 38,
+          ),
+          backgroundColor: AppColors.white,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 7.0),
+            child: Text(
+              S.of(context).sign_in_with_google,
+              style: AppStyles.blackTextMidium,
+            ),
+          ),
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }

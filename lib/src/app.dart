@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         builder: (context, state) {
           return MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            theme: ThemeData(fontFamily: FontFamily.montserrat),
+            theme: ThemeData(fontFamily: FontFamily.avenir),
             localizationsDelegates: [
               S.delegate,
               GlobalMaterialLocalizations.delegate,

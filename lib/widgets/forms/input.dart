@@ -73,7 +73,10 @@ class _XInputState extends State<XInput> {
             onTap: () {
               widget.onChanged?.call('');
             },
-            child: const Icon(Icons.cancel),
+            child: const Icon(
+              Icons.cancel,
+              size: 18,
+            ),
           ),
         );
       }
@@ -90,6 +93,7 @@ class _XInputState extends State<XInput> {
                   ? Icons.visibility_outlined
                   : Icons.visibility_off_outlined,
               color: AppColors.gray,
+              size: 18,
             ),
           ),
         );

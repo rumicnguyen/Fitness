@@ -6,6 +6,7 @@
   "intro_description":"This App will help you\n keep your body fit and strong",
   "get_started":"Get Started",
   "back":"back",
+  "or":"or",
 
   "sign_in_key_username":"loginForm_emailAndUsernameInput_textField",
   "sign_in_key_password":"loginForm_passwordInput_textField",
@@ -15,5 +16,6 @@
   "sign_in_guide":"Enter your credentials to continue",
   "sign_in_accout_lable":"Email / Username",
   "sign_in_password_lable":"Password",
-  "sign_in_forgot_password":"Forgot Password?"
+  "sign_in_forgot_password":"Forgot Password?",
+  "sign_in_with_google":"Sign in with Google"
 }
