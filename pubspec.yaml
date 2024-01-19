@@ -49,12 +49,7 @@ flutter:
   fonts:
     - family: Avenir
       fonts:
-        # - asset: assets/fonts/avenir/Avenir-Light.otf
-        #   weight: 400
         - asset: assets/fonts/avenir/Avenir-Regular.otf
-        #   style: normal
-        # - asset: assets/fonts/avenir/Avenir-Bold.otf
-        #   weight: 900
     - family: Avenir-Bold
       fonts:
         - asset: assets/fonts/avenir/Avenir-Bold.otf
