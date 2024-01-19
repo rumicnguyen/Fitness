@@ -18,19 +18,23 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return XScaffold(
-      child: Column(
-        children: [
-          XSection(
-            top: 25,
-            child: _buildAppBar(context),
+      actions: [
+        XSection(
+          right: 10.0,
+          child: XTextButton(
+            title: S.of(context).sign_up,
+            onPressed: () {
+              AppCoordinator.showSignUpScreen();
+            },
+            style: AppStyles.whiteTextSmallU,
           ),
-          XSection(
-            bottom: 30.0,
-            left: 15.0,
-            right: 15.0,
-            child: _buider(context),
-          ),
-        ],
+        ),
+      ],
+      child: XSection(
+        bottom: 30.0,
+        left: 30.0,
+        right: 30.0,
+        child: _buider(context),
       ),
     );
   }
@@ -60,33 +64,6 @@ class SignInView extends StatelessWidget {
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        XTextButton(
-          title: S.of(context).back,
-          icon: const Icon(
-            Icons.arrow_back,
-            color: AppColors.gray,
-            size: 17.0,
-          ),
-          style: AppStyles.grayTextSmall,
-          onPressed: () {
-            AppCoordinator.pop();
-          },
-        ),
-        XTextButton(
-          title: S.of(context).sign_up,
-          onPressed: () {
-            AppCoordinator.showSignUpScreen();
-          },
-          style: AppStyles.whiteTextSmallU,
-        ),
-      ],
-    );
-  }
-
   Widget _buildForm(BuildContext context) {
     return Column(
       children: [
@@ -99,7 +76,7 @@ class SignInView extends StatelessWidget {
           */
           onChanged: null,
           style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.grayTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_accout_lable,
@@ -120,7 +97,7 @@ class SignInView extends StatelessWidget {
           onChanged: null,
           obscureText: true,
           style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.grayTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_password_lable,
             /*
