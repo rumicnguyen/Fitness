@@ -60,7 +60,7 @@ class ForgotView extends StatelessWidget {
           key: Key(S.of(context).forgot_key_email),
           onChanged: context.read<ForgotBloc>().onEmailChanged,
           labelText: S.of(context).forgot_email_lable,
-          errorText: state.error == '' ? null : state.error,
+          errorText: state.email.isPure == true ? null : state.error,
           style: AppStyles.whiteTextMidium,
         );
       },
