@@ -8,8 +8,8 @@
   "back":"back",
   "or":"or",
 
-  "sign_in_key_username":"loginForm_emailAndUsernameInput_textField",
-  "sign_in_key_password":"loginForm_passwordInput_textField",
+  "sign_in_key_username":"signIn_emailAndUsernameInput_textField",
+  "sign_in_key_password":"signIn_passwordInput_textField",
   "sign_in":"Sign In",
   "sign_up":"Sign Up",
   "sign_in_title":"WELLCOME BACK!",
@@ -17,5 +17,11 @@
   "sign_in_accout_lable":"Email / Username",
   "sign_in_password_lable":"Password",
   "sign_in_forgot_password":"Forgot Password?",
-  "sign_in_with_google":"Sign in with Google"
+  "sign_in_with_google":"Sign in with Google",
+  "sign_up_title":"CREATE YOUR ACCOUNT",
+  "sign_up_guide":"Enter your informations to register an account",
+  "sign_up_confirm_password_lable":"Confirm Password",
+  "sign_up_key_username":"signUp_emailAndUsernameInput_textField",
+  "sign_up_key_password":"signUp_passwordInput_textField",
+  "sign_up_key_confirm_password":"signUp_confirmPasswordInput_textField"
 }
