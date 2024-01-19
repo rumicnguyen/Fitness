@@ -17,6 +17,8 @@ class XInput extends StatefulWidget {
     this.inputFormatters,
     this.onFieldSubmitted,
     this.labelStyle,
+    this.labelText,
+    this.errorText,
   });
   final String value;
   final TextInputType? keyboardType;
@@ -30,6 +32,8 @@ class XInput extends StatefulWidget {
   final TextAlign textAlign;
   final TextStyle? style;
   final TextStyle? labelStyle;
+  final String? labelText;
+  final String? errorText;
   final List<TextInputFormatter>? inputFormatters;
   final void Function(String)? onFieldSubmitted;
 
@@ -127,6 +131,8 @@ class _XInputState extends State<XInput> {
         prefixIcon: widget.textAlign == TextAlign.center
             ? const SizedBox(width: 24)
             : null,
+        labelText: widget.labelText,
+        errorText: widget.errorText,
         labelStyle:
             widget.labelStyle ?? const TextStyle(color: AppColors.slate_600),
         floatingLabelBehavior: FloatingLabelBehavior.auto,
