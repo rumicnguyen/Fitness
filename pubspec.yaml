@@ -22,6 +22,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.9
 
   # STATE MANAGEMENT
   flutter_bloc: ^8.1.3
@@ -44,6 +45,14 @@ flutter:
   assets:
     - assets/.env
     - assets/images/
-  
+    - assets/svgs/
+  fonts:
+    - family: Avenir
+      fonts:
+        - asset: assets/fonts/avenir/Avenir-Regular.otf
+    - family: Avenir-Bold
+      fonts:
+        - asset: assets/fonts/avenir/Avenir-Bold.otf
+
   generate: true
   uses-material-design: true

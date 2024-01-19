@@ -3,11 +3,18 @@ import 'package:fitness_app/src/themes/styles.dart';
 import 'package:flutter/material.dart';
 
 class XTextButton extends StatelessWidget {
-  const XTextButton(
-      {super.key, this.icon, required this.title, this.onPressed, this.ending});
+  const XTextButton({
+    super.key,
+    this.icon,
+    required this.title,
+    this.onPressed,
+    this.ending,
+    this.style,
+  });
 
   final Widget? icon;
   final Widget? ending;
+  final TextStyle? style;
   final String title;
   final void Function()? onPressed;
 
@@ -24,7 +31,7 @@ class XTextButton extends StatelessWidget {
               onPressed: onPressed,
               label: Text(
                 title,
-                style: AppStyles.titleButtonSmall,
+                style: style ?? AppStyles.titleButtonSmall,
               ),
             )
           : (ending != null)
@@ -35,7 +42,7 @@ class XTextButton extends StatelessWidget {
                     children: [
                       Text(
                         title,
-                        style: AppStyles.titleButtonSmall,
+                        style: style ?? AppStyles.titleButtonSmall,
                       ),
                       ending ?? const Icon(Icons.arrow_right_alt)
                     ],
@@ -45,7 +52,7 @@ class XTextButton extends StatelessWidget {
                   onPressed: onPressed,
                   child: Text(
                     title,
-                    style: AppStyles.titleButtonSmall,
+                    style: style ?? AppStyles.titleButtonSmall,
                   ),
                 ),
     );

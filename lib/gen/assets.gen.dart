@@ -25,11 +25,22 @@ class $AssetsImagesGen {
   List<AssetGenImage> get values => [eng, intro, vie];
 }
 
+class $AssetsSvgsGen {
+  const $AssetsSvgsGen();
+
+  /// File path: assets/svgs/ic_google.svg
+  String get icGoogle => 'assets/svgs/ic_google.svg';
+
+  /// List of all assets
+  List<String> get values => [icGoogle];
+}
+
 class Assets {
   Assets._();
 
   static const String env = 'assets/.env';
   static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSvgsGen svgs = $AssetsSvgsGen();
 
   /// List of all assets
   static List<String> get values => [env];
