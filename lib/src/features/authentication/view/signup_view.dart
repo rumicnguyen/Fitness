@@ -5,7 +5,6 @@ import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
-import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:fitness_app/widgets/forms/input.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
@@ -16,19 +15,11 @@ class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return XScaffold(
-      child: Column(
-        children: [
-          XSection(
-            top: 25,
-            child: _buildAppBar(context),
-          ),
-          XSection(
-            bottom: 30.0,
-            left: 15.0,
-            right: 15.0,
-            child: _buider(context),
-          ),
-        ],
+      child: XSection(
+        bottom: 30.0,
+        left: 30.0,
+        right: 30.0,
+        child: _buider(context),
       ),
     );
   }
@@ -57,24 +48,6 @@ class SignUpView extends StatelessWidget {
     );
   }
 
-  Widget _buildAppBar(BuildContext context) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: XTextButton(
-        title: S.of(context).back,
-        icon: const Icon(
-          Icons.arrow_back,
-          color: AppColors.gray,
-          size: 17.0,
-        ),
-        style: AppStyles.grayTextSmall,
-        onPressed: () {
-          AppCoordinator.pop();
-        },
-      ),
-    );
-  }
-
   Widget _buildForm(BuildContext context) {
     return Column(
       children: [
@@ -87,7 +60,7 @@ class SignUpView extends StatelessWidget {
           */
           onChanged: null,
           style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.grayTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_accout_lable,
@@ -107,7 +80,7 @@ class SignUpView extends StatelessWidget {
           */
           onChanged: null,
           style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.grayTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_password_lable,
             /*
@@ -126,7 +99,7 @@ class SignUpView extends StatelessWidget {
           */
           onChanged: null,
           style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.grayTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_up_confirm_password_lable,
             /*

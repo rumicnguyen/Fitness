@@ -39,11 +39,10 @@ class AppStyles {
 
   static const whiteTextSmallU = TextStyle(
     color: AppColors.white,
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: FontWeight.w600,
     decoration: TextDecoration.underline,
     decorationColor: AppColors.white,
-    height: 1.2,
   );
 
   static const grayTextSmallThin = TextStyle(

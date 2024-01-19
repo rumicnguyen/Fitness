@@ -24,6 +24,7 @@ class SignTitle extends StatelessWidget {
           ),
           Text(
             guide,
+            textAlign: TextAlign.center,
             style: AppStyles.grayTextSmallThin,
           ),
         ],
