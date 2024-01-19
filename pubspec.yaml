@@ -23,6 +23,7 @@ dependencies:
   shared_preferences: ^2.2.2
   cupertino_icons: ^1.0.2
   flutter_svg: ^2.0.9
+  formz: ^0.6.1
 
   # STATE MANAGEMENT
   flutter_bloc: ^8.1.3
