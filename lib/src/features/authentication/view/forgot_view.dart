@@ -55,23 +55,14 @@ class ForgotView extends StatelessWidget {
   Widget _buildForm(BuildContext context) {
     return BlocBuilder<ForgotBloc, ForgotState>(
       builder: (context, state) {
-        return state.error == ''
-            ? XInput(
-                value: state.email.value,
-                key: Key(S.of(context).forgot_key_email),
-                onChanged: context.read<ForgotBloc>().onEmailChanged,
-                labelText: S.of(context).forgot_email_lable,
-                style: AppStyles.whiteTextMidium,
-                labelStyle: AppStyles.whiteTextMidium,
-              )
-            : XInput(
-                value: state.email.value,
-                key: Key(S.of(context).forgot_key_email),
-                onChanged: context.read<ForgotBloc>().onEmailChanged,
-                labelText: S.of(context).forgot_email_lable,
-                errorText: state.error,
-                style: AppStyles.whiteTextMidium,
-              );
+        return XInput(
+          value: state.email.value,
+          key: Key(S.of(context).forgot_key_email),
+          onChanged: context.read<ForgotBloc>().onEmailChanged,
+          labelText: S.of(context).forgot_email_lable,
+          errorText: state.error == '' ? null : state.error,
+          style: AppStyles.whiteTextMidium,
+        );
       },
     );
   }
