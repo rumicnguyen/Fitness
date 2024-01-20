@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/themes/colors.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutView extends StatelessWidget {
@@ -5,8 +6,11 @@ class WorkoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Workout screen'),
+    return const Scaffold(
+      backgroundColor: AppColors.white,
+      body: Center(
+        child: Text('Workout screen'),
+      ),
     );
   }
 }

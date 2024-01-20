@@ -10,6 +10,7 @@ class AppColors {
   static const black = Colors.black;
   static const white = Color(0xFFFFFFFF);
   static const gray = Color(0xFFC1C1C6);
+  static const lightGray = Color(0xFFE8E8E9);
   static const bgTop = Color(0xFF6475B9);
   static const bgBottom = Color(0xFF675899);
   // slate
