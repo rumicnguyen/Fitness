@@ -5,7 +5,6 @@ import 'package:fitness_app/src/locator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-
 Future main() async {
   await initializeApp(
       name: "production",
