@@ -34,5 +34,25 @@
   "forgot_guide":"Enter your email to reset password",
   "forgot_email_lable":"Email",
   "forgot_confirm":"Confirm",
-  "forgot_key_email":"forgot_emailInput_textField"
+  "forgot_key_email":"forgot_emailInput_textField",
+
+  "home_dashboard":"Dashboard",
+  "workouts_completed":"workouts\ncompleted",
+  "hours_spent_on_training":"hours spent\non training",
+  "challenge_participated_in":"challenges\nparticipated in",
+  "continue_label":"Continue",
+  "percent_completed":"% Completed",
+  "kcal":"kcal",
+  "km":"km",
+  "hours_workout":"hours workout",
+  "see_all":"See All",
+  "today_activity":"Today Activity",
+  "next_workout":"Next Workout",
+  "active_challenge":"Active Challenge",
+  "podcasts":"Podcasts",
+  "friends_activity":"Friend's Activity",
+  "members":"members",
+  
+  "level_midium":"Midium level",
+  "waist_cinching_workout":"Waist Cinching Workout"
 }

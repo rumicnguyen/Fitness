@@ -17,7 +17,7 @@ class SignInView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return XScaffold(
+    return SignScaffold(
       actions: [
         XSection(
           right: 10.0,

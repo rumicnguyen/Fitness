@@ -20,11 +20,18 @@ class AppStyles {
     fontWeight: FontWeight.w700,
   );
 
+  static const whiteTextSmall = TextStyle(
+    color: AppColors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+
   static const whiteTextMidium = TextStyle(
     color: AppColors.white,
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
+
   static const blackTextMidium = TextStyle(
     color: AppColors.black,
     fontSize: 16,
@@ -70,5 +77,29 @@ class AppStyles {
     fontSize: 34,
     wordSpacing: 0.8,
     fontFamily: FontFamily.avenirBold,
+  );
+
+  static const mainTitle = TextStyle(
+    color: AppColors.black,
+    fontSize: 28,
+    fontFamily: FontFamily.avenirBold,
+  );
+
+  static const resultNumber = TextStyle(
+    color: AppColors.resultNumber,
+    fontSize: 24,
+    fontFamily: FontFamily.avenirBold,
+  );
+
+  static const primaryColorText = TextStyle(
+    color: AppColors.textButton,
+    fontSize: 16,
+    fontWeight: FontWeight.w600,
+  );
+
+  static const homeText = TextStyle(
+    color: AppColors.gray_400,
+    fontSize: 16,
+    fontWeight: FontWeight.w500,
   );
 }

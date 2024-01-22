@@ -13,6 +13,9 @@ class AppColors {
   static const lightGray = Color(0xFFE8E8E9);
   static const bgTop = Color(0xFF6475B9);
   static const bgBottom = Color(0xFF675899);
+  static const resultNumber = Color(0xFF8484C0);
+  static const textButton = Color(0xFF5A59AB);
+
   // slate
   static const slate_50 = Color(0xfff8fafc);
   static const slate_100 = Color(0xfff1f5f9);

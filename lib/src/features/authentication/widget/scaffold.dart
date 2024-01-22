@@ -1,8 +1,8 @@
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:flutter/material.dart';
 
-class XScaffold extends StatelessWidget {
-  const XScaffold({
+class SignScaffold extends StatelessWidget {
+  const SignScaffold({
     super.key,
     required this.child,
     this.actions,
