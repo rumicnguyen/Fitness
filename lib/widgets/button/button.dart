@@ -13,6 +13,7 @@ class XButton extends StatelessWidget {
     required this.width,
     required this.height,
     super.key,
+    this.titleStyle,
   });
 
   final bool busy;
@@ -24,6 +25,7 @@ class XButton extends StatelessWidget {
   final Widget? icon;
   final String? title;
   final Widget? child;
+  final TextStyle? titleStyle;
   final VoidCallback? onPressed;
 
   @override
@@ -42,14 +44,24 @@ class XButton extends StatelessWidget {
           ? ElevatedButton.icon(
               onPressed: onPressed,
               style: _buildStyle(),
-              label: child ?? Text(title ?? ''),
+              label: child ??
+                  Text(
+                    title ?? '',
+                    style: titleStyle,
+                  ),
               icon: icon!,
             )
           : ElevatedButton(
               onPressed: onPressed,
               style: _buildStyle(),
               child: Center(
-                child: busy ? null : (child ?? Text(title ?? '')),
+                child: busy
+                    ? null
+                    : (child ??
+                        Text(
+                          title ?? '',
+                          style: titleStyle,
+                        )),
               ),
             ),
     );

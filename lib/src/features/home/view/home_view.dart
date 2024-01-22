@@ -1,4 +1,5 @@
-import 'package:fitness_app/src/themes/colors.dart';
+import 'package:fitness_app/src/features/home/view/dashboard_view.dart';
+import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
@@ -6,10 +7,13 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColors.white,
-      body: Center(
-        child: Text('Home screen'),
+    return const XScaffold(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            DashboardView(),
+          ],
+        ),
       ),
     );
   }

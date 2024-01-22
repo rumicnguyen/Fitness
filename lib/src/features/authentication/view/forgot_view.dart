@@ -15,7 +15,7 @@ class ForgotView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return XScaffold(
+    return SignScaffold(
       child: BlocProvider<ForgotBloc>(
         create: (context) {
           return ForgotBloc();
