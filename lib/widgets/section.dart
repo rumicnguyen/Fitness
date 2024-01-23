@@ -27,7 +27,7 @@ class XSection extends StatelessWidget {
     return Padding(
       padding: all != null
           ? EdgeInsets.all(all!)
-          : vertical == null
+          : vertical == null && horizontal == null
               ? EdgeInsets.fromLTRB(
                   left ?? 0,
                   top ?? 0,

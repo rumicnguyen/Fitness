@@ -3,7 +3,7 @@ import 'package:fitness_app/src/features/home/widget/result.dart';
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/widgets/avatar.dart';
-import 'package:fitness_app/widgets/title.dart';
+import 'package:fitness_app/widgets/title/title.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {
