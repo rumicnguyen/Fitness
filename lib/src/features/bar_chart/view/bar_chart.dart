@@ -1,6 +1,5 @@
 import 'package:fitness_app/src/features/bar_chart/logic/bar_chart_bloc.dart';
-import 'package:fitness_app/src/features/bar_chart/logic/bar_chart_state.dart';
-import 'package:fitness_app/src/features/bar_chart/logic/chart_data.dart';
+import 'package:fitness_app/src/network/model/activity/activity_detail/activity_detail.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/section.dart';
@@ -50,7 +49,7 @@ class XBarChart extends StatelessWidget {
                           _buildLine(),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
                 _buildBottomLabel(),
@@ -64,6 +63,9 @@ class XBarChart extends StatelessWidget {
 
   Widget _buildChart() {
     return BlocBuilder<BarChartBloc, BarChartState>(
+      buildWhen: (previous, current) {
+        return previous.list != current.list;
+      },
       builder: (context, state) {
         return SfCartesianChart(
           plotAreaBorderWidth: 0,
@@ -75,13 +77,18 @@ class XBarChart extends StatelessWidget {
           ),
           primaryYAxis: const NumericAxis(
             isVisible: false,
+            maximum: 60,
           ),
-          series: <CartesianSeries<ChartData, String>>[
-            ColumnSeries<ChartData, String>(
+          series: <CartesianSeries<MActivityDetail, String>>[
+            ColumnSeries<MActivityDetail, String>(
               dataSource: state.list,
-              xValueMapper: (ChartData data, _) => data.time.label,
-              yValueMapper: (ChartData data, _) => data.value,
-              pointColorMapper: (ChartData data, _) {
+              xValueMapper: (MActivityDetail data, _) {
+                return data.time.label;
+              },
+              yValueMapper: (MActivityDetail data, _) {
+                return data.value;
+              },
+              pointColorMapper: (MActivityDetail data, _) {
                 int index = state.list.indexOf(data) + 1;
                 if (index % 2 == 0) {
                   return AppColors.second;
@@ -103,6 +110,9 @@ class XBarChart extends StatelessWidget {
 
   Widget _buildBottomLabel() {
     return BlocBuilder<BarChartBloc, BarChartState>(
+      buildWhen: (previous, current) {
+        return previous.list != current.list;
+      },
       builder: (context, state) {
         return XSection(
           horizontal: 7.0,

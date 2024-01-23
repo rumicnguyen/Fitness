@@ -28,7 +28,6 @@ class TodayActivityView extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        // _buildChart(),
         const XBarChart()
       ],
     );
