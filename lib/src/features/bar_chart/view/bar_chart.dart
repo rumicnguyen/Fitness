@@ -1,8 +1,8 @@
 import 'package:fitness_app/src/features/bar_chart/logic/bar_chart_bloc.dart';
+import 'package:fitness_app/src/network/data/enum/time_data.dart';
 import 'package:fitness_app/src/network/model/activity/activity_detail/activity_detail.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -12,137 +12,87 @@ class XBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<MActivityDetail> emptyData = [
+      const MActivityDetail(id: '1', time: TimeData.hour_6h, value: 0),
+      const MActivityDetail(id: '2', time: TimeData.hour_7h, value: 0),
+      const MActivityDetail(id: '3', time: TimeData.hour_8h, value: 0),
+      const MActivityDetail(id: '4', time: TimeData.hour_9h, value: 0),
+      const MActivityDetail(id: '5', time: TimeData.hour_10h, value: 0),
+      const MActivityDetail(id: '6', time: TimeData.hour_11h, value: 0),
+      const MActivityDetail(id: '7', time: TimeData.hour_12h, value: 0),
+    ];
+
     return BlocProvider<BarChartBloc>(
       create: (context) {
         return BarChartBloc();
       },
-      child: BlocBuilder<BarChartBloc, BarChartState>(
-        buildWhen: (previous, current) {
-          return previous.list != current.list;
-        },
-        builder: (context, state) {
-          return Container(
-            width: double.infinity,
-            height: 250,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: AppColors.backgroundBarChart,
-            ),
-            child: Column(
-              children: [
-                Stack(
-                  children: [
-                    SizedBox(
-                      height: 200,
-                      width: double.infinity,
-                      child: _buildChart(),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-                      width: double.infinity,
-                      height: 200,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          _buildLine(),
-                          _buildLine(),
-                          _buildLine(),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                _buildBottomLabel(),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildChart() {
-    return BlocBuilder<BarChartBloc, BarChartState>(
-      buildWhen: (previous, current) {
-        return previous.list != current.list;
-      },
-      builder: (context, state) {
-        return SfCartesianChart(
-          plotAreaBorderWidth: 0,
-          borderWidth: 0,
-          backgroundColor: AppColors.transparent,
-          primaryXAxis: const CategoryAxis(
-            maximumLabels: 8,
-            isVisible: false,
-          ),
-          primaryYAxis: const NumericAxis(
-            isVisible: false,
-            maximum: 60,
-          ),
-          series: <CartesianSeries<MActivityDetail, String>>[
-            ColumnSeries<MActivityDetail, String>(
-              dataSource: state.list,
-              xValueMapper: (MActivityDetail data, _) {
-                return data.time.label;
-              },
-              yValueMapper: (MActivityDetail data, _) {
-                return data.value;
-              },
-              pointColorMapper: (MActivityDetail data, _) {
-                int index = state.list.indexOf(data) + 1;
-                if (index % 2 == 0) {
-                  return AppColors.second;
-                } else {
-                  if (index % 3 == 0) {
-                    return AppColors.thirth;
-                  } else {
-                    return AppColors.first;
-                  }
-                }
-              },
-              width: 1,
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _buildBottomLabel() {
-    return BlocBuilder<BarChartBloc, BarChartState>(
-      buildWhen: (previous, current) {
-        return previous.list != current.list;
-      },
-      builder: (context, state) {
-        return XSection(
-          horizontal: 7.0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: state.list
-                .map(
-                  (e) => Text(
-                    e.time.label,
-                    style: AppStyles.blackTextSmall,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-                .toList(),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildLine() {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 55,
-        ),
-        Container(
+      child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 5.0),
           width: double.infinity,
-          height: 1,
+          height: 250,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            color: AppColors.backgroundBarChart,
+          ),
+          child: BlocBuilder<BarChartBloc, BarChartState>(
+            buildWhen: (previous, current) {
+              return previous.list != current.list;
+            },
+            builder: (context, state) {
+              if (state.list.isEmpty) return _buildChart(emptyData);
+              return _buildChart(state.list);
+            },
+          )),
+    );
+  }
+
+  Widget _buildChart(List<MActivityDetail> list) {
+    return SfCartesianChart(
+      plotAreaBorderWidth: 0,
+      borderWidth: 0,
+      backgroundColor: AppColors.transparent,
+      primaryXAxis: const CategoryAxis(
+        maximumLabels: 8,
+        axisLine: AxisLine(width: 0),
+        labelStyle: AppStyles.blackTextSmall,
+        majorTickLines: MajorTickLines(width: 0),
+        majorGridLines: MajorGridLines(width: 0),
+      ),
+      primaryYAxis: const NumericAxis(
+        minimum: 0,
+        maximum: 60,
+        interval: 18,
+        axisLine: AxisLine(width: 0),
+        majorTickLines: MajorTickLines(width: 0),
+        majorGridLines: MajorGridLines(
+          width: 1,
           color: AppColors.gray,
+        ),
+        labelStyle: TextStyle(fontSize: 0),
+      ),
+      series: <CartesianSeries<MActivityDetail, String>>[
+        ColumnSeries<MActivityDetail, String>(
+          dataSource: list,
+          xValueMapper: (MActivityDetail data, _) {
+            return data.time.label;
+          },
+          yValueMapper: (MActivityDetail data, _) {
+            return data.value;
+          },
+          pointColorMapper: (MActivityDetail data, _) {
+            int index = list.indexOf(data) + 1;
+            if (index % 2 == 0) {
+              return AppColors.second;
+            } else {
+              if (index % 3 == 0) {
+                return AppColors.thirth;
+              } else {
+                return AppColors.first;
+              }
+            }
+          },
+          opacity: 0.7,
+          width: 1,
         ),
       ],
     );

@@ -31,6 +31,6 @@ class ActivityDetailRepositoryImpl extends ActivityDetailRepository {
       const MActivityDetail(id: '5', time: TimeData.hour_14h, value: 60),
     ];
     TimeDataSort.dataSort(list);
-    return MResult.success(list);
+    return MResult.success(List.from(list));
   }
 }
