@@ -6,7 +6,9 @@ import 'package:fitness_app/src/features/workout/widget/tab_bar.dart';
 import 'package:fitness_app/src/features/workout/widget/workout_header.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/tab_bar_workout.dart';
+import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -86,13 +88,35 @@ class WorkoutView extends StatelessWidget {
       },
       builder: (context, state) {
         if (state.newSessions.isEmpty) {
-          return Text(S.of(context).coming_soon);
+          return _buildNewSessionsNoneData(context);
         }
         return Session(
           label: S.of(context).new_sessions,
           item: state.newSessions,
         );
       },
+    );
+  }
+
+  Widget _buildNewSessionsNoneData(BuildContext context) {
+    return XBlock(
+      header: S.of(context).new_sessions,
+      enableActions: false,
+      child: RichText(
+        text: TextSpan(
+          children: [
+            TextSpan(
+              text: S.of(context).dont_have_any_new_sessions,
+              style: AppStyles.grayTextSmallThin,
+            ),
+            TextSpan(
+              text: S.of(context).all_workout,
+              style: AppStyles.hyperLink,
+              recognizer: TapGestureRecognizer()..onTap = () {},
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

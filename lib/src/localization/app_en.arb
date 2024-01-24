@@ -69,6 +69,8 @@
 
   "workouts":"Workouts",
   "new_sessions":"New Sessions",
+  "dont_have_any_new_sessions":"Don't have any new sessions. Please come back later or see ",
+  "all_workout":"All workout",
   "exercises":"Exercises",
   "most_popular":"Most Popular"
 }

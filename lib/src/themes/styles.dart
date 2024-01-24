@@ -146,4 +146,10 @@ class AppStyles {
     fontSize: 20,
     fontFamily: FontFamily.avenirBold,
   );
+
+  static const hyperLink = TextStyle(
+    color: AppColors.second,
+    fontSize: 16,
+    fontFamily: FontFamily.avenirBold,
+  );
 }
