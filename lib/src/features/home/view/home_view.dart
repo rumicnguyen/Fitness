@@ -25,22 +25,7 @@ class HomeView extends StatelessWidget {
               km: 2.6,
             ),
             _buildPlace(),
-            BlocProvider<NextWorkoutBloc>(
-              create: (context) {
-                return NextWorkoutBloc();
-              },
-              child: BlocBuilder<NextWorkoutBloc, NextWorkoutState>(
-                buildWhen: (previous, current) {
-                  return previous.workouts != current.workouts;
-                },
-                builder: (context, state) {
-                  return WorkoutCard(
-                    label: S.of(context).next_workout,
-                    item: state.workouts,
-                  );
-                },
-              ),
-            ),
+            _buildNextWorkout(),
           ],
         ),
       ),
@@ -50,6 +35,25 @@ class HomeView extends StatelessWidget {
   Widget _buildPlace() {
     return const SizedBox(
       height: 25.0,
+    );
+  }
+
+  Widget _buildNextWorkout() {
+    return BlocProvider<NextWorkoutBloc>(
+      create: (context) {
+        return NextWorkoutBloc();
+      },
+      child: BlocBuilder<NextWorkoutBloc, NextWorkoutState>(
+        buildWhen: (previous, current) {
+          return previous.workouts != current.workouts;
+        },
+        builder: (context, state) {
+          return WorkoutCard(
+            label: S.of(context).next_workout,
+            item: state.workouts,
+          );
+        },
+      ),
     );
   }
 }

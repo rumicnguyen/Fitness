@@ -27,8 +27,8 @@ class WorkoutCard extends StatelessWidget {
     return XBlock(
       header: label,
       onPressed: () {},
-      child: item != null
-          ? (item!.isEmpty ? _buildEmptyItem(empty) : _buildListView(item!))
+      child: item?.isNotEmpty == true
+          ? _buildListView(item ?? [])
           : _buildEmptyItem(empty),
     );
   }
