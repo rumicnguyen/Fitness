@@ -29,7 +29,6 @@ class FriendsActivityView extends StatelessWidget {
           },
           builder: (context, state) {
             List<MUserWorkout> list = List.from(state.friendsActivity);
-            // if (list.isEmpty) return _buildNoneItem(context);
             return _builder(context, list);
           },
         ),
