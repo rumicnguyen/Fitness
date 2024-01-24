@@ -65,5 +65,10 @@
   "tag_2nd":"2nd place!",
   "tag_3rd":"3rd place!",
   "tag_th":"th place!",
-  "completed":"Completed"
+  "completed":"Completed",
+
+  "workouts":"Workouts",
+  "new_sessions":"New Sessions",
+  "exercises":"Exercises",
+  "most_popular":"Most Popular"
 }

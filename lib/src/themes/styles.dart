@@ -46,6 +46,12 @@ class AppStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const blackTextLarge = TextStyle(
+    color: AppColors.black,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
+
   static const grayTextSmall = TextStyle(
     color: AppColors.gray,
     fontSize: 16,
@@ -66,6 +72,12 @@ class AppStyles {
     fontFamily: FontFamily.avenirBold,
   );
 
+  static const blackTextSmallB = TextStyle(
+    color: AppColors.black,
+    fontSize: 16,
+    fontFamily: FontFamily.avenirBold,
+  );
+
   static const overloadText = TextStyle(
     color: AppColors.white,
     fontSize: 28,
@@ -81,6 +93,12 @@ class AppStyles {
   static const grayTextMidium = TextStyle(
     color: AppColors.gray,
     fontSize: 16,
+    fontWeight: FontWeight.w500,
+  );
+  
+  static const grayTextLarge = TextStyle(
+    color: AppColors.gray,
+    fontSize: 20,
     fontWeight: FontWeight.w500,
   );
 

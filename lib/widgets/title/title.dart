@@ -6,16 +6,18 @@ class XTitle extends StatelessWidget {
     super.key,
     required this.title,
     this.actions,
+    this.height,
   });
 
   final String title;
   final Widget? actions;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 150,
+      height: height ?? 150,
       child: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -8,7 +8,7 @@ enum LayoutType { card, grid, overload, none }
 class XCardItem extends StatelessWidget {
   const XCardItem({
     super.key,
-    required this.child,
+    this.child,
     this.width,
     this.height,
     this.image,
@@ -20,7 +20,7 @@ class XCardItem extends StatelessWidget {
     this.overload,
   });
   final int? tag;
-  final Widget child;
+  final Widget? child;
   final double? width;
   final double? height;
   final String? image;
@@ -86,7 +86,7 @@ class XCardItem extends StatelessWidget {
         Positioned(
           bottom: 15,
           left: 15,
-          child: child,
+          child: child ?? const SizedBox(),
         ),
         tag != null ? _buildTag(context) : Container(),
       ],
