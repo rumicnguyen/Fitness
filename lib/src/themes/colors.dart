@@ -11,12 +11,15 @@ class AppColors {
   static const white = Color(0xFFFFFFFF);
   static const gray = Color(0xFFC1C1C6);
   static const lightGray = Color(0xFFE8E8E9);
+  static const boxShadow = Color.fromARGB(65, 1, 1, 1);
+
   static const bgTop = Color(0xFF6475B9);
   static const bgBottom = Color(0xFF675899);
   static const resultNumber = Color(0xFF8484C0);
   static const textButton = Color(0xFF5A59AB);
   static const backgroundBarChart = Color(0xFFF5F6FC);
-
+  static const backgroundCardLight = Color.fromARGB(255, 190, 200, 243);
+  static const backgroundCardDark = Color.fromARGB(255, 77, 70, 143);
   // slate
   static const slate_50 = Color(0xfff8fafc);
   static const slate_100 = Color(0xfff1f5f9);

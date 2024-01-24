@@ -26,6 +26,7 @@ dependencies:
   formz: ^0.6.1
   percent_indicator: 4.2.3
   syncfusion_flutter_charts: 24.1.46+1
+  card_swiper: 3.0.1
 
   # STATE MANAGEMENT
   flutter_bloc: ^8.1.3
