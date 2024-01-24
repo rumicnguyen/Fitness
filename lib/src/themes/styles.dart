@@ -9,11 +9,13 @@ class AppStyles {
     color: AppColors.white,
     fontWeight: FontWeight.w400,
   );
+
   static const titleButtonShow = TextStyle(
     fontSize: 16,
     color: AppColors.black,
     fontWeight: FontWeight.w400,
   );
+
   static const titleIntro = TextStyle(
     fontSize: 80,
     color: AppColors.white,
@@ -61,6 +63,12 @@ class AppStyles {
   static const whiteTextSmallB = TextStyle(
     color: AppColors.white,
     fontSize: 16,
+    fontFamily: FontFamily.avenirBold,
+  );
+
+  static const overloadText = TextStyle(
+    color: AppColors.white,
+    fontSize: 28,
     fontFamily: FontFamily.avenirBold,
   );
 

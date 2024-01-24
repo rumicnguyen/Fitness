@@ -3,6 +3,8 @@ import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:flutter/material.dart';
 
+enum LayoutType { card, grid, overload, none }
+
 class XCardItem extends StatelessWidget {
   const XCardItem({
     super.key,
@@ -13,6 +15,9 @@ class XCardItem extends StatelessWidget {
     this.tag,
     this.magin,
     this.backgroundImage,
+    this.type,
+    this.onTap,
+    this.overload,
   });
   final int? tag;
   final Widget child;
@@ -21,27 +26,53 @@ class XCardItem extends StatelessWidget {
   final String? image;
   final EdgeInsetsGeometry? magin;
   final Image? backgroundImage;
+  final LayoutType? type;
+  final void Function()? onTap;
+  final int? overload;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: magin,
-      width: width ?? 340,
-      height: height ?? 230,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        gradient: const RadialGradient(
-          colors: [
-            AppColors.backgroundCardLight,
-            AppColors.backgroundCardDark,
-          ],
-          center: Alignment.center,
-          radius: 1.0,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: magin,
+        width: width ?? 340,
+        height: height ?? 230,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: _generateGradient(),
         ),
+        child: _builder(context),
       ),
-      child: Stack(
-        children: [
-          Center(
+    );
+  }
+
+  Widget _builder(BuildContext context) {
+    switch (type) {
+      case LayoutType.none:
+        return const Icon(
+          Icons.add_circle,
+          size: 30,
+          color: AppColors.white,
+        );
+      case LayoutType.overload:
+        return Center(
+          child: Text(
+            S.of(context).symbol_add + overload.toString(),
+            style: AppStyles.overloadText,
+          ),
+        );
+      default:
+        return _buildStack(context);
+    }
+  }
+
+  Widget _buildStack(BuildContext context) {
+    return Stack(
+      children: [
+        Center(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
             child: backgroundImage ??
                 Image.asset(
                   image ?? '',
@@ -51,14 +82,14 @@ class XCardItem extends StatelessWidget {
                   height: height ?? 230,
                 ),
           ),
-          Positioned(
-            bottom: 5,
-            left: 5,
-            child: child,
-          ),
-          tag != null ? _buildTag(context) : Container(),
-        ],
-      ),
+        ),
+        Positioned(
+          bottom: 15,
+          left: 15,
+          child: child,
+        ),
+        tag != null ? _buildTag(context) : Container(),
+      ],
     );
   }
 
@@ -90,7 +121,7 @@ class XCardItem extends StatelessWidget {
         ),
         child: Center(
           child: Text(
-            generateTag(context, tag ?? 0),
+            _generateTag(context, tag ?? 0),
             style: AppStyles.primaryColorText,
           ),
         ),
@@ -98,7 +129,7 @@ class XCardItem extends StatelessWidget {
     );
   }
 
-  String generateTag(BuildContext context, int tag) {
+  String _generateTag(BuildContext context, int tag) {
     switch (tag) {
       case 1:
         return S.of(context).tag_1st;
@@ -108,6 +139,40 @@ class XCardItem extends StatelessWidget {
         return S.of(context).tag_3rd;
       default:
         return '$tag ${S.of(context).tag_th}';
+    }
+  }
+
+  Gradient _generateGradient() {
+    switch (type) {
+      case null || LayoutType.card:
+        return const RadialGradient(
+          colors: [
+            AppColors.backgroundCardLight,
+            AppColors.backgroundCardDark,
+          ],
+          center: Alignment.center,
+          radius: 1.0,
+        );
+      case LayoutType.grid || LayoutType.overload:
+        return const LinearGradient(
+          colors: [
+            AppColors.backgroundGridLight,
+            AppColors.backgroundGridMiddleLight,
+            AppColors.backgroundGridMiddleDark,
+            AppColors.backgroundGridDark,
+          ],
+          begin: Alignment.centerRight,
+          end: Alignment.bottomLeft,
+        );
+      default:
+        return const LinearGradient(
+          colors: [
+            AppColors.slate_400,
+            AppColors.gray_200,
+          ],
+          begin: Alignment.centerRight,
+          end: Alignment.bottomLeft,
+        );
     }
   }
 }
