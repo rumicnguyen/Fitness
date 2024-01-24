@@ -20,6 +20,10 @@ class AppColors {
   static const backgroundBarChart = Color(0xFFF5F6FC);
   static const backgroundCardLight = Color.fromARGB(255, 190, 200, 243);
   static const backgroundCardDark = Color.fromARGB(255, 77, 70, 143);
+  static const backgroundGridLight = Color.fromARGB(255, 105, 146, 216);
+  static const backgroundGridMiddleLight = Color.fromARGB(255, 129, 175, 255);
+  static const backgroundGridDark = Color(0xFFCAA0F0);
+  static const backgroundGridMiddleDark = Color.fromARGB(255, 229, 200, 255);
   // slate
   static const slate_50 = Color(0xfff8fafc);
   static const slate_100 = Color(0xfff1f5f9);

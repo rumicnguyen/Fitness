@@ -44,7 +44,10 @@
   "percent_completed":"% Completed",
   "kcal":"kcal",
   "km":"km",
+
   "symbol_space":"•",
+  "symbol_add":"+",
+
   "hours_workout":"hours workout",
   "see_all":"See All",
   "today_activity":"Today Activity",
@@ -61,5 +64,6 @@
   "tag_1st":"1st place!",
   "tag_2nd":"2nd place!",
   "tag_3rd":"3rd place!",
-  "tag_th":"th place!"
+  "tag_th":"th place!",
+  "completed":"Completed"
 }

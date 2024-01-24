@@ -1,6 +1,7 @@
 import 'package:fitness_app/src/features/home/logic/next_workout_bloc.dart';
 import 'package:fitness_app/src/features/home/logic/next_workout_state.dart';
 import 'package:fitness_app/src/features/home/view/dashboard_view.dart';
+import 'package:fitness_app/src/features/home/view/friends_activity_view.dart';
 import 'package:fitness_app/src/features/workout/widget/workout_card.dart';
 import 'package:fitness_app/src/features/home/view/today_activity_view.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
@@ -26,6 +27,9 @@ class HomeView extends StatelessWidget {
             ),
             _buildPlace(),
             _buildNextWorkout(),
+            _buildPlace(),
+            const FriendsActivityView(),
+            _buildPlace(),
           ],
         ),
       ),
