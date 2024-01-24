@@ -12,14 +12,14 @@ Future main() async {
   if (kIsWeb) {
     runApp(const MyApp());
   } else {
-    // FlutterError.onError = (errorDetails) {
-    //   FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
-    // };
-    
-    // PlatformDispatcher.instance.onError = (error, stack) {
-    //   FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
-    //   return true;
-    // };
+    FlutterError.onError = (errorDetails) {
+      FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+    };
+
+    PlatformDispatcher.instance.onError = (error, stack) {
+      FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+      return true;
+    };
     runApp(const MyApp());
   }
 }

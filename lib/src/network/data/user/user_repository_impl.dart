@@ -34,18 +34,6 @@ class UserRepositoryImpl extends UserRepository {
         workoutName: 'gym',
         workoutImage: Assets.images.item5.path,
       ),
-      MUserWorkout(
-        id: '3',
-        userName: 'Olivia',
-        workoutName: 'gym',
-        workoutImage: Assets.images.item5.path,
-      ),
-      MUserWorkout(
-        id: '3',
-        userName: 'Olivia',
-        workoutName: 'gym',
-        workoutImage: Assets.images.item5.path,
-      ),
     ];
 
     return MResult.success(list);
