@@ -58,6 +58,12 @@ class AppStyles {
     decorationColor: AppColors.white,
   );
 
+  static const whiteTextSmallB = TextStyle(
+    color: AppColors.white,
+    fontSize: 16,
+    fontFamily: FontFamily.avenirBold,
+  );
+
   static const grayTextSmallThin = TextStyle(
     color: AppColors.gray,
     fontSize: 16,

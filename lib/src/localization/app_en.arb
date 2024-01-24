@@ -54,6 +54,12 @@
   "friends_activity":"Friend's Activity",
   "members":"members",
   
-  "level_midium":"Midium level",
-  "waist_cinching_workout":"Waist Cinching Workout"
+  "level":"level",
+  "waist_cinching_workout":"Waist Cinching Workout",
+  "get_already_to_the_marathon":"Get already to the marathon",
+  "coming_soon":"Coming Soon",
+  "tag_1st":"1st place!",
+  "tag_2nd":"2nd place!",
+  "tag_3rd":"3rd place!",
+  "tag_th":"th place!"
 }
