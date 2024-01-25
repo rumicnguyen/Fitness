@@ -152,4 +152,10 @@ class AppStyles {
     fontSize: 16,
     fontFamily: FontFamily.avenirBold,
   );
+
+  static const filterText = TextStyle(
+    color: AppColors.second,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+  );
 }

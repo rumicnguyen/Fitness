@@ -69,11 +69,7 @@ class AppRouter {
                 path: AppRouteNames.filterWorkout.subPath,
                 name: AppRouteNames.filterWorkout.name,
                 builder: (context, state) {
-                  final id = state
-                      .pathParameters[AppRouteNames.filterWorkout.paramName]!;
-                  return FilterWorkoutView(
-                    id: id,
-                  );
+                  return const FilterWorkoutView();
                 },
               ),
             ],
