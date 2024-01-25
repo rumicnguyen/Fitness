@@ -11,6 +11,7 @@ class MWorkout with _$MWorkout {
     required String id,
     @Default('None') String name,
     @Default('None') String thumbnail,
+    @Default('None') String backgroundImage,
     // minute
     int? minimumTime,
     int? maximumTime,

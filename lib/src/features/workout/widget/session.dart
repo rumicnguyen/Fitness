@@ -1,12 +1,17 @@
 import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:flutter/material.dart';
 
 class Session extends StatelessWidget {
-  const Session({super.key, required this.item, required this.label});
+  const Session({
+    super.key,
+    required this.item,
+    required this.label,
+  });
 
   final List<MWorkout> item;
   final String label;
@@ -27,7 +32,12 @@ class Session extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: list.length,
       itemBuilder: (_, index) {
-        return _buildItem(list[index], context);
+        return GestureDetector(
+          onTap: () {
+            AppCoordinator.showWorkoutDetailsScreen(id: list[index].id);
+          },
+          child: _buildItem(list[index], context),
+        );
       },
     );
   }

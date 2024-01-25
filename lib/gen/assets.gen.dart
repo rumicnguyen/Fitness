@@ -55,6 +55,14 @@ class $AssetsImagesGen {
   /// File path: assets/images/item_9.png
   AssetGenImage get item9 => const AssetGenImage('assets/images/item_9.png');
 
+  /// File path: assets/images/new_background.jpg
+  AssetGenImage get newBackground =>
+      const AssetGenImage('assets/images/new_background.jpg');
+
+  /// File path: assets/images/new_transparent.png
+  AssetGenImage get newTransparent =>
+      const AssetGenImage('assets/images/new_transparent.png');
+
   /// File path: assets/images/user.png
   AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
@@ -77,6 +85,8 @@ class $AssetsImagesGen {
         item7,
         item8,
         item9,
+        newBackground,
+        newTransparent,
         user,
         vie
       ];

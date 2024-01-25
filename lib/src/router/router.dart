@@ -8,9 +8,10 @@ import 'package:fitness_app/src/features/dashboard/view/dashboard_view.dart';
 import 'package:fitness_app/src/features/filter_workout/view/filter_workout_view.dart';
 import 'package:fitness_app/src/features/home/view/home_view.dart';
 import 'package:fitness_app/src/features/intro/view/intro_view.dart';
+import 'package:fitness_app/src/features/page_not_found/view/page_not_found_view.dart';
 import 'package:fitness_app/src/features/start_workout/view/start_workout_view.dart';
 import 'package:fitness_app/src/features/workout/view/workout_view.dart';
-import 'package:fitness_app/src/features/workout_detail/view/workout_detal.dart';
+import 'package:fitness_app/src/features/workout_detail/view/workout_detail_view.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/router/route_name.dart';
 import 'package:flutter/foundation.dart';
@@ -90,9 +91,15 @@ class AppRouter {
             builder: (_, __) => const ActivityView(),
           ),
           GoRoute(
-            path: AppRouteNames.workoutDetails.path,
+            path: AppRouteNames.workoutDetails.buildPathParam,
             name: AppRouteNames.workoutDetails.name,
-            builder: (_, __) => const WorkoutDetailView(),
+            builder: (context, state) {
+              final id =
+                  state.pathParameters[AppRouteNames.workoutDetails.paramName]!;
+              return WorkoutDetailView(
+                id: id,
+              );
+            },
             routes: [
               GoRoute(
                 parentNavigatorKey: AppCoordinator.navigatorKey,
@@ -111,5 +118,6 @@ class AppRouter {
         ],
       ),
     ],
+    errorBuilder: (_, __) => const PageNotFoundView(),
   );
 }

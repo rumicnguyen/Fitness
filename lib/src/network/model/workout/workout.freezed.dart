@@ -22,7 +22,8 @@ MWorkout _$MWorkoutFromJson(Map<String, dynamic> json) {
 mixin _$MWorkout {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get thumbnail => throw _privateConstructorUsedError; // minute
+  String get thumbnail => throw _privateConstructorUsedError;
+  String get backgroundImage => throw _privateConstructorUsedError; // minute
   int? get minimumTime => throw _privateConstructorUsedError;
   int? get maximumTime => throw _privateConstructorUsedError;
   int get exercises => throw _privateConstructorUsedError;
@@ -45,6 +46,7 @@ abstract class $MWorkoutCopyWith<$Res> {
       {String id,
       String name,
       String thumbnail,
+      String backgroundImage,
       int? minimumTime,
       int? maximumTime,
       int exercises,
@@ -69,6 +71,7 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
     Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
+    Object? backgroundImage = null,
     Object? minimumTime = freezed,
     Object? maximumTime = freezed,
     Object? exercises = null,
@@ -88,6 +91,10 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
       thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      backgroundImage: null == backgroundImage
+          ? _value.backgroundImage
+          : backgroundImage // ignore: cast_nullable_to_non_nullable
               as String,
       minimumTime: freezed == minimumTime
           ? _value.minimumTime
@@ -129,6 +136,7 @@ abstract class _$$MWorkoutImplCopyWith<$Res>
       {String id,
       String name,
       String thumbnail,
+      String backgroundImage,
       int? minimumTime,
       int? maximumTime,
       int exercises,
@@ -151,6 +159,7 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
+    Object? backgroundImage = null,
     Object? minimumTime = freezed,
     Object? maximumTime = freezed,
     Object? exercises = null,
@@ -170,6 +179,10 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
       thumbnail: null == thumbnail
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
+              as String,
+      backgroundImage: null == backgroundImage
+          ? _value.backgroundImage
+          : backgroundImage // ignore: cast_nullable_to_non_nullable
               as String,
       minimumTime: freezed == minimumTime
           ? _value.minimumTime
@@ -206,6 +219,7 @@ class _$MWorkoutImpl extends _MWorkout {
       {required this.id,
       this.name = 'None',
       this.thumbnail = 'None',
+      this.backgroundImage = 'None',
       this.minimumTime,
       this.maximumTime,
       this.exercises = 0,
@@ -225,6 +239,9 @@ class _$MWorkoutImpl extends _MWorkout {
   @override
   @JsonKey()
   final String thumbnail;
+  @override
+  @JsonKey()
+  final String backgroundImage;
 // minute
   @override
   final int? minimumTime;
@@ -244,7 +261,7 @@ class _$MWorkoutImpl extends _MWorkout {
 
   @override
   String toString() {
-    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, tag: $tag)';
+    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, tag: $tag)';
   }
 
   @override
@@ -256,6 +273,8 @@ class _$MWorkoutImpl extends _MWorkout {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.backgroundImage, backgroundImage) ||
+                other.backgroundImage == backgroundImage) &&
             (identical(other.minimumTime, minimumTime) ||
                 other.minimumTime == minimumTime) &&
             (identical(other.maximumTime, maximumTime) ||
@@ -269,8 +288,18 @@ class _$MWorkoutImpl extends _MWorkout {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, thumbnail, minimumTime,
-      maximumTime, exercises, level, members, tag);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      thumbnail,
+      backgroundImage,
+      minimumTime,
+      maximumTime,
+      exercises,
+      level,
+      members,
+      tag);
 
   @JsonKey(ignore: true)
   @override
@@ -291,6 +320,7 @@ abstract class _MWorkout extends MWorkout {
       {required final String id,
       final String name,
       final String thumbnail,
+      final String backgroundImage,
       final int? minimumTime,
       final int? maximumTime,
       final int exercises,
@@ -308,6 +338,8 @@ abstract class _MWorkout extends MWorkout {
   String get name;
   @override
   String get thumbnail;
+  @override
+  String get backgroundImage;
   @override // minute
   int? get minimumTime;
   @override
