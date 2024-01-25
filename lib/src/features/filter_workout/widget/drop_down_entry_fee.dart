@@ -3,7 +3,8 @@ import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_sta
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/entry_fee.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/button/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,9 +33,12 @@ class DropDownEntryFee extends StatelessWidget {
               onPressedIcon: () {
                 context.read<FilterWorkoutBloc>().resetEntryFeeOnFilter();
               },
-              items: _buildListItem(currentItem: state.entryFee),
+              items: _buildList(value: state.entryFee),
               selectedItems: (context) {
-                return _buildListItem(check: true, currentItem: state.entryFee);
+                return _buildList(
+                  check: true,
+                  value: state.entryFee,
+                );
               },
               onChanged: (value) {
                 if (value != null) {
@@ -50,22 +54,15 @@ class DropDownEntryFee extends StatelessWidget {
     );
   }
 
-  List<DropdownMenuItem<String>> _buildListItem({
+  List<DropdownMenuItem<String>> _buildList({
+    required EntryFee value,
     bool check = false,
-    required EntryFee currentItem,
   }) {
-    return EntryFee.values.map((e) {
-      return DropdownMenuItem(
-        value: e.value,
-        child: Text(
-          e.value,
-          style: check
-              ? (e == currentItem
-                  ? AppStyles.grayTextLarge
-                  : AppStyles.filterText)
-              : AppStyles.blackTextLarge,
-        ),
-      );
-    }).toList();
+    return DropDownItem.buildItem(
+      check: check,
+      currentItem: value,
+      list: EntryFee.values,
+      getValue: (e) => e.value,
+    );
   }
 }

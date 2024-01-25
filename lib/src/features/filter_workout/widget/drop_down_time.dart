@@ -3,7 +3,8 @@ import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_sta
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/time_filter.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/button/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +32,12 @@ class DropDownTime extends StatelessWidget {
                 context.read<FilterWorkoutBloc>().resetTimeOnFilter();
               },
               value: state.timeOnFilter.value,
-              items: _buildListItem(currentItem: state.time),
+              items: _buildList(value: state.time),
               selectedItems: (context) {
-                return _buildListItem(check: true, currentItem: state.time);
+                return _buildList(
+                  check: true,
+                  value: state.time,
+                );
               },
               onChanged: (value) {
                 if (value != null) {
@@ -49,22 +53,15 @@ class DropDownTime extends StatelessWidget {
     );
   }
 
-  List<DropdownMenuItem<String>> _buildListItem({
+  List<DropdownMenuItem<String>> _buildList({
+    required TimeFilter value,
     bool check = false,
-    required TimeFilter currentItem,
   }) {
-    return TimeFilter.values.map((e) {
-      return DropdownMenuItem(
-        value: e.value,
-        child: Text(
-          e.value,
-          style: check
-              ? (e == currentItem
-                  ? AppStyles.grayTextLarge
-                  : AppStyles.filterText)
-              : AppStyles.blackTextLarge,
-        ),
-      );
-    }).toList();
+    return DropDownItem.buildItem(
+      check: check,
+      currentItem: value,
+      list: TimeFilter.values,
+      getValue: (e) => e.value,
+    );
   }
 }

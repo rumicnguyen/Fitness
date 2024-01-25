@@ -3,7 +3,8 @@ import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_sta
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/button/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,10 +37,12 @@ class DropDownDiscipline extends StatelessWidget {
                     .resetDisciplineActivityOnFilter();
               },
               value: state.disciplineActivityOnFilter.value,
-              items: _buildListItem(currentItem: state.disciplineActivity),
+              items: _buildList(value: state.disciplineActivity),
               selectedItems: (context) {
-                return _buildListItem(
-                    check: true, currentItem: state.disciplineActivity);
+                return _buildList(
+                  check: true,
+                  value: state.disciplineActivity,
+                );
               },
               onChanged: (value) {
                 if (value != null) {
@@ -56,22 +59,15 @@ class DropDownDiscipline extends StatelessWidget {
     );
   }
 
-  List<DropdownMenuItem<String>> _buildListItem({
+  List<DropdownMenuItem<String>> _buildList({
+    required DisciplineActivity value,
     bool check = false,
-    required DisciplineActivity currentItem,
   }) {
-    return DisciplineActivity.values.map((e) {
-      return DropdownMenuItem(
-        value: e.value,
-        child: Text(
-          e.value,
-          style: check
-              ? (e == currentItem
-                  ? AppStyles.grayTextLarge
-                  : AppStyles.filterText)
-              : AppStyles.blackTextLarge,
-        ),
-      );
-    }).toList();
+    return DropDownItem.buildItem(
+      check: check,
+      currentItem: value,
+      list: DisciplineActivity.values,
+      getValue: (e) => e.value,
+    );
   }
 }

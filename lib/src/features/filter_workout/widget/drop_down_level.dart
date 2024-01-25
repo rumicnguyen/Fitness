@@ -3,7 +3,8 @@ import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_sta
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/button/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_button.dart';
+import 'package:fitness_app/widgets/dropdown/dropdown_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,9 +32,12 @@ class DropDownLevel extends StatelessWidget {
                 context.read<FilterWorkoutBloc>().resetLevelOnFilter();
               },
               value: state.levelOnFilter.value,
-              items: _buildListItem(currentItem: state.level),
+              items: _buildList(value: state.level),
               selectedItems: (context) {
-                return _buildListItem(check: true, currentItem: state.level);
+                return _buildList(
+                  check: true,
+                  value: state.level,
+                );
               },
               onChanged: (value) {
                 if (value != null) {
@@ -49,22 +53,15 @@ class DropDownLevel extends StatelessWidget {
     );
   }
 
-  List<DropdownMenuItem<String>> _buildListItem({
+  List<DropdownMenuItem<String>> _buildList({
+    required WorkoutLevel value,
     bool check = false,
-    required WorkoutLevel currentItem,
   }) {
-    return WorkoutLevel.values.map((e) {
-      return DropdownMenuItem(
-        value: e.value,
-        child: Text(
-          e.value,
-          style: check
-              ? (e == currentItem
-                  ? AppStyles.grayTextLarge
-                  : AppStyles.filterText)
-              : AppStyles.blackTextLarge,
-        ),
-      );
-    }).toList();
+    return DropDownItem.buildItem(
+      check: check,
+      currentItem: value,
+      list: WorkoutLevel.values,
+      getValue: (e) => e.value,
+    );
   }
 }
