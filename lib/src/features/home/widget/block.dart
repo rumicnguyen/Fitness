@@ -12,27 +12,33 @@ class XBlock extends StatelessWidget {
     this.onPressed,
     required this.header,
     this.type,
+    this.enableActions = true,
+    this.height,
   });
 
   final Widget child;
+  final bool enableActions;
   final void Function()? onPressed;
   final String header;
   final LayoutType? type;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return XHeading(
       header: header,
-      action: type == LayoutType.grid
-          ? const SizedBox()
-          : XTextButton(
-              title: S.of(context).see_all,
-              style: AppStyles.primaryColorText,
-              onPressed: onPressed,
-            ),
+      action: enableActions
+          ? (type == LayoutType.grid
+              ? const SizedBox()
+              : XTextButton(
+                  title: S.of(context).see_all,
+                  style: AppStyles.primaryColorText,
+                  onPressed: onPressed,
+                ))
+          : null,
       child: type == null || type == LayoutType.card
           ? SizedBox(
-              height: 230,
+              height: height ?? 230,
               child: child,
             )
           : child,
