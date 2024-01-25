@@ -1,5 +1,6 @@
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/title/title.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,9 @@ class WorkoutHeader extends StatelessWidget {
           height: 100,
           title: S.of(context).workouts,
           actions: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              AppCoordinator.showFilterWorkoutScreen();
+            },
             icon: const Icon(Icons.search),
           ),
         ),
