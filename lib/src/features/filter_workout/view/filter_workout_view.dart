@@ -1,10 +1,11 @@
 import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_bloc.dart';
 import 'package:fitness_app/src/features/filter_workout/logic/filter_workout_state.dart';
-import 'package:fitness_app/src/features/filter_workout/widget/drop_down_discipline.dart';
-import 'package:fitness_app/src/features/filter_workout/widget/drop_down_entry_fee.dart';
-import 'package:fitness_app/src/features/filter_workout/widget/drop_down_level.dart';
-import 'package:fitness_app/src/features/filter_workout/widget/drop_down_time.dart';
+import 'package:fitness_app/src/features/filter_workout/widget/filter_dropdown.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
+import 'package:fitness_app/src/network/data/enum/entry_fee.dart';
+import 'package:fitness_app/src/network/data/enum/time_filter.dart';
+import 'package:fitness_app/src/network/data/enum/workout_level.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
@@ -35,13 +36,13 @@ class FilterWorkoutView extends StatelessWidget {
                 children: [
                   _buildAppBar(context),
                   _buildSpacing(),
-                  const DropDownDiscipline(),
+                  _buildDiscipline(),
                   _buildSpacing(),
-                  const DropDownEntryFee(),
+                  _buildEntryFee(),
                   _buildSpacing(),
-                  const DropDownTime(),
+                  _buildTime(),
                   _buildSpacing(),
-                  const DropDownLevel(),
+                  _buildLevel(),
                   _buildSpacing(),
                   _buildButtonApply(context),
                 ],
@@ -56,6 +57,120 @@ class FilterWorkoutView extends StatelessWidget {
   Widget _buildSpacing() {
     return const SizedBox(
       height: 20,
+    );
+  }
+
+  Widget _buildDiscipline() {
+    return BlocBuilder<FilterWorkoutBloc, FilterWorkoutState>(
+      buildWhen: (previous, current) {
+        return previous.disciplineActivityOnFilter.value !=
+                current.disciplineActivityOnFilter.value ||
+            previous.disciplineActivity.value !=
+                current.disciplineActivity.value;
+      },
+      builder: (context, state) {
+        return FilterDropdown(
+          header: S.of(context).discipline_activity,
+          list: DisciplineActivity.values,
+          value: state.disciplineActivity,
+          valueOnFilter: state.disciplineActivityOnFilter,
+          onChanged: (value) {
+            if (value != null) {
+              context.read<FilterWorkoutBloc>().setDisciplineActivityOnFilter(
+                  DisciplineActivity.fromValue(value));
+            }
+          },
+          onPressedIcon: () {
+            context.read<FilterWorkoutBloc>().resetDisciplineActivityOnFilter();
+          },
+          getValue: (e) => e.value,
+        );
+      },
+    );
+  }
+
+  Widget _buildEntryFee() {
+    return BlocBuilder<FilterWorkoutBloc, FilterWorkoutState>(
+      buildWhen: (previous, current) {
+        return previous.entryFeeOnFilter.value !=
+                current.entryFeeOnFilter.value ||
+            previous.entryFee.value != current.entryFee.value;
+      },
+      builder: (context, state) {
+        return FilterDropdown(
+          header: S.of(context).entry_fee,
+          list: EntryFee.values,
+          value: state.entryFee,
+          valueOnFilter: state.entryFeeOnFilter,
+          onChanged: (value) {
+            if (value != null) {
+              context
+                  .read<FilterWorkoutBloc>()
+                  .setEntryFeeOnFilter(EntryFee.fromValue(value));
+            }
+          },
+          onPressedIcon: () {
+            context.read<FilterWorkoutBloc>().resetEntryFeeOnFilter();
+          },
+          getValue: (e) => e.value,
+        );
+      },
+    );
+  }
+
+  Widget _buildTime() {
+    return BlocBuilder<FilterWorkoutBloc, FilterWorkoutState>(
+      buildWhen: (previous, current) {
+        return previous.timeOnFilter.value != current.timeOnFilter.value ||
+            previous.time.value != current.time.value;
+      },
+      builder: (context, state) {
+        return FilterDropdown(
+          header: S.of(context).entry_fee,
+          list: TimeFilter.values,
+          value: state.time,
+          valueOnFilter: state.timeOnFilter,
+          onChanged: (value) {
+            if (value != null) {
+              context
+                  .read<FilterWorkoutBloc>()
+                  .setTimeOnFilter(TimeFilter.fromValue(value));
+            }
+          },
+          onPressedIcon: () {
+            context.read<FilterWorkoutBloc>().resetTimeOnFilter();
+          },
+          getValue: (e) => e.value,
+        );
+      },
+    );
+  }
+
+  Widget _buildLevel() {
+    return BlocBuilder<FilterWorkoutBloc, FilterWorkoutState>(
+      buildWhen: (previous, current) {
+        return previous.levelOnFilter.value != current.levelOnFilter.value ||
+            previous.level.value != current.level.value;
+      },
+      builder: (context, state) {
+        return FilterDropdown(
+          header: S.of(context).entry_fee,
+          list: WorkoutLevel.values,
+          value: state.level,
+          valueOnFilter: state.levelOnFilter,
+          onChanged: (value) {
+            if (value != null) {
+              context
+                  .read<FilterWorkoutBloc>()
+                  .setLevelOnFilter(WorkoutLevel.fromValue(value));
+            }
+          },
+          onPressedIcon: () {
+            context.read<FilterWorkoutBloc>().resetLevelOnFilter();
+          },
+          getValue: (e) => e.value,
+        );
+      },
     );
   }
 

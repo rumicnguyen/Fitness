@@ -18,7 +18,6 @@ class FilterWorkoutBloc extends Cubit<FilterWorkoutState> {
   }
 
   void apply() {
-    print(state);
     emit(state.copyWith(
       disciplineActivity: state.disciplineActivityOnFilter,
       entryFee: state.entryFeeOnFilter,
