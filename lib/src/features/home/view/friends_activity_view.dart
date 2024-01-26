@@ -3,6 +3,7 @@ import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/src/utils/string_utils.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
@@ -108,6 +109,15 @@ class FriendsActivityView extends StatelessWidget {
       type: type,
       image: item.workoutImage,
       overload: overload,
+      onTap: () {
+        print(item.idWorkout);
+        if (type != LayoutType.overload && item.idWorkout != null) {
+          AppCoordinator.showWorkoutDetailsScreen(id: item.idWorkout!);
+        }
+        // develop later
+        // if item.idWorkout.isEmpty => show make friend
+        // if overload => show List view
+      },
       width: 340,
       height: 230,
       child: type != LayoutType.none

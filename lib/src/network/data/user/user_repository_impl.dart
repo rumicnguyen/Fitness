@@ -19,20 +19,26 @@ class UserRepositoryImpl extends UserRepository {
       MUserWorkout(
         id: '1',
         userName: 'Guy Hawkins',
-        workoutName: 'jogging workout',
-        workoutImage: Assets.images.item7.path,
+        workoutName: 'Workout with ball',
+        workoutImage: Assets.images.newTransparent.path,
+        idUser: '10',
+        idWorkout: '4',
       ),
       MUserWorkout(
         id: '2',
         userName: 'Alan',
-        workoutName: 'basketball',
+        workoutName: 'Basketball',
         workoutImage: Assets.images.item9.path,
+        idUser: '11',
+        idWorkout: '5',
       ),
       MUserWorkout(
         id: '3',
         userName: 'Olivia',
-        workoutName: 'gym',
+        workoutName: 'Get already to the marathon',
         workoutImage: Assets.images.item5.path,
+        idUser: '12',
+        idWorkout: '1',
       ),
     ];
 
