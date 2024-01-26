@@ -110,7 +110,6 @@ class FriendsActivityView extends StatelessWidget {
       image: item.workoutImage,
       overload: overload,
       onTap: () {
-        print(item.idWorkout);
         if (type != LayoutType.overload && item.idWorkout != null) {
           AppCoordinator.showWorkoutDetailsScreen(id: item.idWorkout!);
         }
