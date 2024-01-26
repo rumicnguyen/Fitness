@@ -5,8 +5,12 @@ import 'package:fitness_app/widgets/title/heading.dart';
 import 'package:flutter/material.dart';
 
 class TodayActivityView extends StatelessWidget {
-  const TodayActivityView(
-      {super.key, required this.hours, required this.kcal, required this.km});
+  const TodayActivityView({
+    super.key,
+    required this.hours,
+    required this.kcal,
+    required this.km,
+  });
 
   final int hours;
   final int kcal;

@@ -1,5 +1,5 @@
-import 'package:fitness_app/src/features/home/logic/next_workout_bloc.dart';
-import 'package:fitness_app/src/features/home/logic/next_workout_state.dart';
+import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
+import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/view/dashboard_view.dart';
 import 'package:fitness_app/src/features/home/view/friends_activity_view.dart';
 import 'package:fitness_app/src/features/workout/widget/workout_card.dart';
@@ -16,21 +16,24 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return XScaffold(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            const DashboardView(),
-            _buildPlace(),
-            const TodayActivityView(
-              hours: 2,
-              kcal: 387,
-              km: 2.6,
-            ),
-            _buildPlace(),
-            _buildNextWorkout(),
-            _buildPlace(),
-            const FriendsActivityView(),
-            _buildPlace(),
-          ],
+        child: BlocProvider<HomeBloc>(
+          create: (context) {
+            return HomeBloc();
+          },
+          child: Column(
+            children: [
+              const DashboardView(),
+              _buildPlace(),
+              _buildTodayActivity(),
+              _buildPlace(),
+              _buildNextWorkout(),
+              _buildPlace(),
+              _buildPodcasts(),
+              _buildPlace(),
+              const FriendsActivityView(),
+              _buildPlace(),
+            ],
+          ),
         ),
       ),
     );
@@ -42,22 +45,46 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _buildNextWorkout() {
-    return BlocProvider<NextWorkoutBloc>(
-      create: (context) {
-        return NextWorkoutBloc();
+  Widget _buildTodayActivity() {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) {
+        return previous.todayActivity != current.todayActivity;
       },
-      child: BlocBuilder<NextWorkoutBloc, NextWorkoutState>(
-        buildWhen: (previous, current) {
-          return previous.workouts != current.workouts;
-        },
-        builder: (context, state) {
-          return WorkoutCard(
-            label: S.of(context).next_workout,
-            item: state.workouts,
-          );
-        },
-      ),
+      builder: (context, state) {
+        return TodayActivityView(
+          hours: state.todayActivity.hours ?? 0,
+          kcal: state.todayActivity.kcal ?? 0,
+          km: state.todayActivity.km ?? 0,
+        );
+      },
+    );
+  }
+
+  Widget _buildNextWorkout() {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) {
+        return previous.nextWorkouts != current.nextWorkouts;
+      },
+      builder: (context, state) {
+        return WorkoutCard(
+          label: S.of(context).next_workout,
+          item: state.nextWorkouts,
+        );
+      },
+    );
+  }
+
+  Widget _buildPodcasts() {
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) {
+        return previous.podcasts != current.podcasts;
+      },
+      builder: (context, state) {
+        return WorkoutCard(
+          label: S.of(context).podcasts,
+          item: state.podcasts,
+        );
+      },
     );
   }
 }

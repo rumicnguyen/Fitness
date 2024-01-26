@@ -1,6 +1,8 @@
 import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/model/user/user.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:fitness_app/widgets/avatar.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/title/title.dart';
@@ -38,10 +40,11 @@ class DashboardView extends StatelessWidget {
   }
 
   Widget _buildResult(BuildContext context) {
+    MUser user = UserPrefs.I.getUser() ?? MUser.empty();
     return RowResult(
-      firstItem: '17',
-      secondItem: '245',
-      thirthItem: '7',
+      firstItem: user.workoutsCompleted.toString(),
+      secondItem: user.hoursTraining.toString(),
+      thirthItem: user.challengeParticipatedIn.toString(),
       firstLabel: S.of(context).workouts_completed,
       secondLabel: S.of(context).hours_spent_on_training,
       thirthLabel: S.of(context).challenge_participated_in,
