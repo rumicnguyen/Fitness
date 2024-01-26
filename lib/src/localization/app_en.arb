@@ -47,6 +47,7 @@
 
   "symbol_space":"•",
   "symbol_add":"+",
+  "symbol_center_line":"-",
 
   "hours_workout":"hours workout",
   "see_all":"See All",
@@ -80,5 +81,12 @@
   "entry_fee":"Entry fee",
   "time":"Time",
   "ability_level":"Ability level",
-  "apply_filters":"Apply filters"
+  "apply_filters":"Apply filters",
+
+  "none":"none",
+  "waiting":"Waiting...",
+  "page_not_found":"Page not found",
+  "exercise_in_detail":"exercises",
+  "minutes":"minutes",
+  "start_workout":"Start workout"
 }

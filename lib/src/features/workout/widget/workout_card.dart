@@ -4,12 +4,17 @@ import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/card_item/card_title.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutCard extends StatelessWidget {
-  const WorkoutCard({super.key, this.item, required this.label});
+  const WorkoutCard({
+    super.key,
+    this.item,
+    required this.label,
+  });
 
   final List<MWorkout>? item;
   final String label;
@@ -58,6 +63,9 @@ class WorkoutCard extends StatelessWidget {
       height: 230,
       tag: item.tag,
       image: item.thumbnail,
+      onTap: () {
+        AppCoordinator.showWorkoutDetailsScreen(id: item.id);
+      },
       child: _buildCartTitle(item),
     );
   }

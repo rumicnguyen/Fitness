@@ -1,18 +1,25 @@
-import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:flutter/material.dart';
 
-class Result extends StatelessWidget {
-  const Result(
-      {super.key,
-      required this.workouts,
-      required this.hours,
-      required this.challenges});
+class RowResult extends StatelessWidget {
+  const RowResult({
+    super.key,
+    required this.firstItem,
+    required this.secondItem,
+    required this.thirthItem,
+    required this.firstLabel,
+    required this.secondLabel,
+    required this.thirthLabel,
+  });
 
-  final int workouts;
-  final int hours;
-  final int challenges;
+  final String firstItem;
+  final String secondItem;
+  final String thirthItem;
+  final String firstLabel;
+  final String secondLabel;
+  final String thirthLabel;
+  
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -20,30 +27,30 @@ class Result extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buildItem(
-          number: workouts,
-          label: S.of(context).workouts_completed,
+          item: firstItem,
+          label: firstLabel,
         ),
         _buildLine(),
         _buildItem(
-          number: hours,
-          label: S.of(context).hours_spent_on_training,
+          item: secondItem,
+          label: secondLabel,
         ),
         _buildLine(),
         _buildItem(
-          number: challenges,
-          label: S.of(context).challenge_participated_in,
+          item: thirthItem,
+          label: thirthLabel,
         ),
       ],
     );
   }
 
-  Widget _buildItem({required int number, required String label}) {
+  Widget _buildItem({required String item, required String label}) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          number.toString(),
+          item,
           style: AppStyles.resultNumber,
           textAlign: TextAlign.center,
         ),

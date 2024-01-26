@@ -11,6 +11,7 @@ _$MWorkoutImpl _$$MWorkoutImplFromJson(Map<String, dynamic> json) =>
       id: json['id'] as String,
       name: json['name'] as String? ?? 'None',
       thumbnail: json['thumbnail'] as String? ?? 'None',
+      backgroundImage: json['backgroundImage'] as String? ?? 'None',
       minimumTime: json['minimumTime'] as int?,
       maximumTime: json['maximumTime'] as int?,
       exercises: json['exercises'] as int? ?? 0,
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$MWorkoutImplToJson(_$MWorkoutImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'thumbnail': instance.thumbnail,
+      'backgroundImage': instance.backgroundImage,
       'minimumTime': instance.minimumTime,
       'maximumTime': instance.maximumTime,
       'exercises': instance.exercises,
@@ -35,6 +37,7 @@ Map<String, dynamic> _$$MWorkoutImplToJson(_$MWorkoutImpl instance) =>
 
 const _$WorkoutLevelEnumMap = {
   WorkoutLevel.none: 'none',
+  WorkoutLevel.any: 'any',
   WorkoutLevel.simple: 'simple',
   WorkoutLevel.medium: 'medium',
   WorkoutLevel.entry: 'entry',

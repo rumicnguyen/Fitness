@@ -1,3 +1,4 @@
+import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 
 class StartWorkoutView extends StatelessWidget {
@@ -7,6 +8,10 @@ class StartWorkoutView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return XScaffold(
+      child: Center(
+        child: Text('Start Workout $id'),
+      ),
+    );
   }
 }
