@@ -2,7 +2,9 @@ import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/authentication/widget/scaffold.dart';
 import 'package:fitness_app/src/features/authentication/widget/sign_title.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
@@ -154,6 +156,16 @@ class SignInView extends StatelessWidget {
             style: AppStyles.blackTextMidium,
           ),
           onPressed: () {
+            if (UserPrefs.I.getUser() == null) {
+              UserPrefs.instance.setUser(MUser(
+                id: '1',
+                avatar: Assets.images.avatar.path,
+                challengeParticipatedIn: 7,
+                hoursTraining: 245,
+                workoutsCompleted: 17,
+                name: 'Mary',
+              ));
+            }
             AppCoordinator.showHomeScreen();
           },
         ),

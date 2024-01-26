@@ -106,4 +106,13 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
 
     return MResult.success(list);
   }
+
+  @override
+  Future<MResult<List<MWorkout>>> getPodcasts() async {
+    MResult<List<MWorkout>> list = await getWorkouts();
+    if (list.isSuccess && list.data != null) {
+      return MResult.success(list.data!.sublist(1, 3));
+    }
+    return MResult.error('error');
+  }
 }

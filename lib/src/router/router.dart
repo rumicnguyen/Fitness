@@ -4,6 +4,7 @@ import 'package:fitness_app/src/features/authentication/view/forgot_view.dart';
 import 'package:fitness_app/src/features/authentication/view/signin_view.dart';
 import 'package:fitness_app/src/features/authentication/view/signup_view.dart';
 import 'package:fitness_app/src/features/challenge/view/challenge_view.dart';
+import 'package:fitness_app/src/features/challenge_detail/view/challenge_detail_view.dart';
 import 'package:fitness_app/src/features/dashboard/view/dashboard_view.dart';
 import 'package:fitness_app/src/features/filter_workout/view/filter_workout_view.dart';
 import 'package:fitness_app/src/features/home/view/home_view.dart';
@@ -76,10 +77,23 @@ class AppRouter {
             ],
           ),
           GoRoute(
-            path: AppRouteNames.challenge.path,
-            name: AppRouteNames.challenge.name,
-            builder: (_, __) => const ChallengeView(),
-          ),
+              path: AppRouteNames.challenge.path,
+              name: AppRouteNames.challenge.name,
+              builder: (_, __) => const ChallengeView(),
+              routes: [
+                GoRoute(
+                  parentNavigatorKey: AppCoordinator.navigatorKey,
+                  path: AppRouteNames.challengeDetails.buildSubPathParam,
+                  name: AppRouteNames.challengeDetails.name,
+                  builder: (context, state) {
+                    final id = state.pathParameters[
+                        AppRouteNames.challengeDetails.paramName]!;
+                    return ChallengeDetailView(
+                      id: id,
+                    );
+                  },
+                ),
+              ]),
           GoRoute(
             path: AppRouteNames.account.path,
             name: AppRouteNames.account.name,

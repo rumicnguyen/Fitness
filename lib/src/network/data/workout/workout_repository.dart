@@ -6,5 +6,6 @@ abstract class WorkoutRepository {
   Future<MResult<List<MWorkout>>> getWorkouts();
   Future<MResult<List<MWorkout>>> getNextWorkoutsUser({required String id});
   Future<MResult<List<MWorkout>>> getNewSessions();
+  Future<MResult<List<MWorkout>>> getPodcasts();
   Future<MResult<MWorkout>> addWorkout({required MWorkout workout});
 }

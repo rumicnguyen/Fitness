@@ -1,8 +1,9 @@
-import 'package:fitness_app/src/features/home/logic/friends_activity_bloc.dart';
-import 'package:fitness_app/src/features/home/logic/friends_activity_state.dart';
+import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
+import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/src/utils/string_utils.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
@@ -15,23 +16,18 @@ class FriendsActivityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FriendsActivityBloc>(
-      create: (BuildContext context) {
-        return FriendsActivityBloc();
-      },
-      child: XBlock(
-        header: S.of(context).friends_activity,
-        type: LayoutType.grid,
-        onPressed: () {},
-        child: BlocBuilder<FriendsActivityBloc, FriendsActivityState>(
-          buildWhen: (previous, current) {
-            return previous.friendsActivity != current.friendsActivity;
-          },
-          builder: (context, state) {
-            List<MUserWorkout> list = List.from(state.friendsActivity);
-            return _builder(context, list);
-          },
-        ),
+    return XBlock(
+      header: S.of(context).friends_activity,
+      type: LayoutType.grid,
+      onPressed: () {},
+      child: BlocBuilder<HomeBloc, HomeState>(
+        buildWhen: (previous, current) {
+          return previous.friendsActivity != current.friendsActivity;
+        },
+        builder: (context, state) {
+          List<MUserWorkout> list = List.from(state.friendsActivity);
+          return _builder(context, list);
+        },
       ),
     );
   }
@@ -113,6 +109,14 @@ class FriendsActivityView extends StatelessWidget {
       type: type,
       image: item.workoutImage,
       overload: overload,
+      onTap: () {
+        if (type != LayoutType.overload && item.idWorkout != null) {
+          AppCoordinator.showWorkoutDetailsScreen(id: item.idWorkout!);
+        }
+        // develop later
+        // if item.idWorkout.isEmpty => show make friend
+        // if overload => show List view
+      },
       width: 340,
       height: 230,
       child: type != LayoutType.none

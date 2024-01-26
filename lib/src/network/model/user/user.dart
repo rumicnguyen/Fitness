@@ -16,6 +16,9 @@ class MUser with _$MUser {
     String? gender,
     int? age,
     List<String>? target,
+    @Default(0) int workoutsCompleted,
+    @Default(0) int hoursTraining,
+    @Default(0) int challengeParticipatedIn,
   }) = _MUser;
 
   factory MUser.empty() {

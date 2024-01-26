@@ -17,6 +17,9 @@ _$MUserImpl _$$MUserImplFromJson(Map<String, dynamic> json) => _$MUserImpl(
       age: json['age'] as int?,
       target:
           (json['target'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      workoutsCompleted: json['workoutsCompleted'] as int? ?? 0,
+      hoursTraining: json['hoursTraining'] as int? ?? 0,
+      challengeParticipatedIn: json['challengeParticipatedIn'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
@@ -30,4 +33,7 @@ Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
       'gender': instance.gender,
       'age': instance.age,
       'target': instance.target,
+      'workoutsCompleted': instance.workoutsCompleted,
+      'hoursTraining': instance.hoursTraining,
+      'challengeParticipatedIn': instance.challengeParticipatedIn,
     };
