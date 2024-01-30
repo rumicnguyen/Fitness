@@ -9,11 +9,11 @@ import 'package:flutter_dotenv/flutter_dotenv.dart' as dot_env;
 
 Future initializeApp({String? name, FirebaseOptions? firebaseOptions}) async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(name: name, options: firebaseOptions);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
   _locator();
+  await Firebase.initializeApp(name: name, options: firebaseOptions);
   await Future.wait([
     UserPrefs.instance.initialize(),
     dot_env.dotenv.load(
