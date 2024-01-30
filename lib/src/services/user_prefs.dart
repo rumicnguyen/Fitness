@@ -33,7 +33,6 @@ class UserPrefs {
 
   // user
   void setUser(MUser? value) {
-    print('set value: $value');
     if (value == null) {
       _prefs.remove(_keys.user);
     } else {
@@ -44,7 +43,6 @@ class UserPrefs {
   MUser? getUser() {
     final value = _prefs.getString(_keys.user);
     try {
-      print('get value: $value');
       if ((value ?? '').isEmpty) {
         return null;
       } else {

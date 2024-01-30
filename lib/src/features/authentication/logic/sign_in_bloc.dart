@@ -34,6 +34,11 @@ class SigninBloc extends Cubit<SigninState> {
     final result =
         await domain.sign.loginWithEmail(email: email, password: password);
 
+    if (result.isSuccess) {
+      // ignore: use_build_context_synchronously
+      return connectBEWithEmail(context, result.data!);
+    }
+
     /// ignore: use_build_context_synchronously
     return loginDecision(context, result);
   }
@@ -60,6 +65,13 @@ class SigninBloc extends Cubit<SigninState> {
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
     }
+  }
+
+  Future connectBEWithEmail(BuildContext context, MUser user) async {
+    final result = await domain.sign.connectBEWithEmail(user);
+
+    /// ignore: use_build_context_synchronously
+    return loginDecision(context, result);
   }
 
   Future connectBEWithGoogle(BuildContext context, MSocialUser user) async {

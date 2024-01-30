@@ -55,11 +55,11 @@ class SignRepositoryImpl extends SignRepository {
     try {
       final result = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-
       if (result.user == null) {
         return MResult.error('User not found');
       }
-      return MResult.success(result.user as MUser);
+      await result.user!.getIdToken();
+      return MResult.success(MUser.fromEmailAccount(result.user!));
     } on FirebaseAuthException catch (e) {
       return MResult.error(e.message);
     } catch (e) {
@@ -96,9 +96,33 @@ class SignRepositoryImpl extends SignRepository {
   }
 
   @override
-  Future<MResult<MUser>> signUpWithEmail(
-      {required String email, required String password, required String name}) {
-    // TODO: implement signUpWithEmail
-    throw UnimplementedError();
+  Future<MResult<MUser>> signUpWithEmail({
+    required String email,
+    required String password,
+    required String name,
+  }) async {
+    try {
+      final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return MResult.success(result.user as MUser);
+    } on FirebaseAuthException catch (e) {
+      return MResult.error(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+  
+  @override
+  Future<MResult<MUser>> connectBEWithEmail(MUser user) async {
+     try {
+      
+      final userResult = await DomainManager().user.getOrAddUser(user);
+
+      return MResult.success(userResult.data ?? user);
+    } catch (e) {
+      return MResult.exception(e);
+    }
   }
 }

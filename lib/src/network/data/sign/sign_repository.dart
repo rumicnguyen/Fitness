@@ -11,6 +11,7 @@ abstract class SignRepository {
 
   // Login via SDK
   Future<MResult<MUser>> connectBEWithGoogle(MSocialUser user);
+  Future<MResult<MUser>> connectBEWithEmail(MUser user);
 
   // Connect after login with SDK Success
   Future<MResult<MSocialUser>> loginWithGoogle();
