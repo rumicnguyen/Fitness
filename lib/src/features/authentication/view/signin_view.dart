@@ -62,7 +62,9 @@ class SignInView extends StatelessWidget {
         const SizedBox(
           height: 80,
         ),
-        _buildForm(context),
+        _inputEmail(context),
+        const SizedBox(height: 16.0),
+        _inputPassword(context),
         const SizedBox(
           height: 20,
         ),
@@ -75,41 +77,45 @@ class SignInView extends StatelessWidget {
     );
   }
 
-  Widget _buildForm(BuildContext context) {
+  Widget _inputEmail(BuildContext context) {
     return BlocBuilder<SigninBloc, SigninState>(
       buildWhen: (previous, current) {
-        return previous.email != current.email ||
-            previous.password != current.password;
+        return previous.email != current.email;
       },
       builder: (context, state) {
-        return Column(
-          children: [
-            XInput(
-              key: Key(S.of(context).sign_in_key_username),
-              value: state.email.value,
-              onChanged: context.read<SigninBloc>().onEmailChanged,
-              style: AppStyles.whiteTextMidium,
-              labelStyle: AppStyles.whiteTextMidium,
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: S.of(context).sign_in_accout_lable,
-                errorText: state.email.errorOf(context),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            XInput(
-              key: Key(S.of(context).sign_in_key_password),
-              value: state.password.value,
-              onChanged: context.read<SigninBloc>().onPasswordChanged,
-              obscureText: true,
-              style: AppStyles.whiteTextMidium,
-              labelStyle: AppStyles.whiteTextMidium,
-              decoration: InputDecoration(
-                labelText: S.of(context).sign_in_password_lable,
-                errorText: state.password.errorOf(context),
-              ),
-            ),
-          ],
+        return XInput(
+          key: Key(S.of(context).sign_in_key_username),
+          value: state.email.value,
+          onChanged: context.read<SigninBloc>().onEmailChanged,
+          style: AppStyles.whiteTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
+          keyboardType: TextInputType.emailAddress,
+          decoration: InputDecoration(
+            labelText: S.of(context).sign_in_accout_lable,
+            errorText: state.email.errorOf(context),
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _inputPassword(BuildContext context) {
+    return BlocBuilder<SigninBloc, SigninState>(
+      buildWhen: (previous, current) {
+        return previous.password != current.password;
+      },
+      builder: (context, state) {
+        return XInput(
+          key: Key(S.of(context).sign_in_key_password),
+          value: state.password.value,
+          onChanged: context.read<SigninBloc>().onPasswordChanged,
+          obscureText: true,
+          style: AppStyles.whiteTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
+          decoration: InputDecoration(
+            labelText: S.of(context).sign_in_password_lable,
+            errorText: state.password.errorOf(context),
+          ),
         );
       },
     );
