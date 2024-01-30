@@ -1,10 +1,9 @@
 import 'package:fitness_app/gen/assets.gen.dart';
+import 'package:fitness_app/src/features/authentication/logic/sign_in_bloc.dart';
 import 'package:fitness_app/src/features/authentication/widget/scaffold.dart';
 import 'package:fitness_app/src/features/authentication/widget/sign_title.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
-import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
@@ -12,6 +11,7 @@ import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:fitness_app/widgets/forms/input.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInView extends StatelessWidget {
@@ -36,7 +36,16 @@ class SignInView extends StatelessWidget {
         bottom: 30.0,
         left: 30.0,
         right: 30.0,
-        child: _buider(context),
+        child: BlocProvider<SigninBloc>(
+          create: (context) {
+            return SigninBloc();
+          },
+          child: BlocBuilder<SigninBloc, SigninState>(
+            builder: (context, state) {
+              return _buider(context);
+            },
+          ),
+        ),
       ),
     );
   }
@@ -67,48 +76,42 @@ class SignInView extends StatelessWidget {
   }
 
   Widget _buildForm(BuildContext context) {
-    return Column(
-      children: [
-        XInput(
-          key: Key(S.of(context).sign_in_key_username),
-          value: '',
-          /*
-          Will be developed in logic task
-          onChanged: context.read<SigninBloc>().onEmailChanged,
-          */
-          onChanged: null,
-          style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.whiteTextMidium,
-          keyboardType: TextInputType.emailAddress,
-          decoration: InputDecoration(
-            labelText: S.of(context).sign_in_accout_lable,
-            /*
-            Will be developed in logic task
-            errorText: 'state.email.errorOf(context)',
-            */
-          ),
-        ),
-        const SizedBox(height: 16.0),
-        XInput(
-          key: Key(S.of(context).sign_in_key_password),
-          value: 'password',
-          /*
-          Will be developed in logic task
-          onChanged: context.read<SigninBloc>().onPasswordChanged,
-          */
-          onChanged: null,
-          obscureText: true,
-          style: AppStyles.whiteTextMidium,
-          labelStyle: AppStyles.whiteTextMidium,
-          decoration: InputDecoration(
-            labelText: S.of(context).sign_in_password_lable,
-            /*
-            Will be developed in logic task
-            errorText: 'state.password.errorOf(context)',
-            */
-          ),
-        ),
-      ],
+    return BlocBuilder<SigninBloc, SigninState>(
+      buildWhen: (previous, current) {
+        return previous.email != current.email ||
+            previous.password != current.password;
+      },
+      builder: (context, state) {
+        return Column(
+          children: [
+            XInput(
+              key: Key(S.of(context).sign_in_key_username),
+              value: state.email.value,
+              onChanged: context.read<SigninBloc>().onEmailChanged,
+              style: AppStyles.whiteTextMidium,
+              labelStyle: AppStyles.whiteTextMidium,
+              keyboardType: TextInputType.emailAddress,
+              decoration: InputDecoration(
+                labelText: S.of(context).sign_in_accout_lable,
+                errorText: state.email.errorOf(context),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            XInput(
+              key: Key(S.of(context).sign_in_key_password),
+              value: state.password.value,
+              onChanged: context.read<SigninBloc>().onPasswordChanged,
+              obscureText: true,
+              style: AppStyles.whiteTextMidium,
+              labelStyle: AppStyles.whiteTextMidium,
+              decoration: InputDecoration(
+                labelText: S.of(context).sign_in_password_lable,
+                errorText: state.password.errorOf(context),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
@@ -156,17 +159,7 @@ class SignInView extends StatelessWidget {
             style: AppStyles.blackTextMidium,
           ),
           onPressed: () {
-            if (UserPrefs.I.getUser() == null) {
-              UserPrefs.instance.setUser(MUser(
-                id: '1',
-                avatar: Assets.images.avatar.path,
-                challengeParticipatedIn: 7,
-                hoursTraining: 245,
-                workoutsCompleted: 17,
-                name: 'Mary',
-              ));
-            }
-            AppCoordinator.showHomeScreen();
+            context.read<SigninBloc>().loginWithEmail(context);
           },
         ),
         _buildLineDivider(context),
@@ -186,7 +179,9 @@ class SignInView extends StatelessWidget {
               style: AppStyles.blackTextMidium,
             ),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            context.read<SigninBloc>().loginWithGoogle(context);
+          },
         ),
       ],
     );

@@ -10,6 +10,7 @@ import 'package:fitness_app/src/features/home/view/today_activity_view.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/card_item/card_title.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
@@ -21,6 +22,8 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('\n\nUser\n\n');
+    print(UserPrefs.I.getUser());
     return XScaffold(
       child: SingleChildScrollView(
         child: BlocProvider<HomeBloc>(
