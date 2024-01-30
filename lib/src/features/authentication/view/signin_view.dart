@@ -1,4 +1,5 @@
 import 'package:fitness_app/gen/assets.gen.dart';
+import 'package:fitness_app/src/features/authentication/logic/sign_in_bloc.dart';
 import 'package:fitness_app/src/features/authentication/widget/scaffold.dart';
 import 'package:fitness_app/src/features/authentication/widget/sign_title.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
@@ -12,6 +13,7 @@ import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:fitness_app/widgets/forms/input.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInView extends StatelessWidget {
@@ -36,7 +38,16 @@ class SignInView extends StatelessWidget {
         bottom: 30.0,
         left: 30.0,
         right: 30.0,
-        child: _buider(context),
+        child: BlocProvider<SigninBloc>(
+          create: (context) {
+            return SigninBloc();
+          },
+          child: BlocBuilder<SigninBloc, SigninState>(
+            builder: (context, state) {
+              return _buider(context);
+            },
+          ),
+        ),
       ),
     );
   }
@@ -186,7 +197,9 @@ class SignInView extends StatelessWidget {
               style: AppStyles.blackTextMidium,
             ),
           ),
-          onPressed: () {},
+          onPressed: () async {
+            context.read<SigninBloc>().loginWithGoogle(context);
+          },
         ),
       ],
     );

@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "819592355905-hg8a35t1u42ul39fjfigdv8jf107hb1e.apps.googleusercontent.com",
+              "client_id": "819592355905-9j7hvald8lga6g7t6534io92eh0t05sj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "dev.flutter.fitnessApp"
+                "bundle_id": "com.pingak9.template.stg"
               }
             }
           ]
