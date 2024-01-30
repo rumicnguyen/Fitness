@@ -33,57 +33,6 @@ class AccountBloc extends Cubit<AccountState> {
     onUserChange(state.login(user));
   }
 
-  // void onEditProfileSuccess({required String name}) {
-  //   onUserChange(
-  //     state.copyWith(user: state.user.copyWith(name: name)),
-  //   );
-  // }
-
-  // Future onLogOut(BuildContext context) async {
-    // will be developed later
-    // final key = await XAlert.show(
-    //   title: 'Logout',
-    //   body: 'Are you sure you would like to logout?',
-    //   actions: [
-    //     XAlertButton(
-    //       title: S.text.common_yes,
-    //       isDestructiveAction: true,
-    //       key: 'yes',
-    //     ),
-    //     XAlertButton(title: S.text.common_no),
-    //   ],
-    // );
-    // if (key == 'yes') {
-    // domain.sign.logOut(state.user);
-    // onUserChange(state.logOut());
-    // return true;
-    // }
-    // return false;
-  // }
-
-  // Future onRemoveAccount(BuildContext context) async {
-    // will be developed later
-    // final key = await XAlert.show(
-    //   title: 'Remove Account',
-    //   body:
-    //       'Are you sure you would like to remove account? Your profile will be cleared',
-    //   actions: [
-    //     XAlertButton(
-    //       title: S.text.common_yes,
-    //       isDestructiveAction: true,
-    //       key: 'yes',
-    //     ),
-    //     XAlertButton(title: S.text.common_no),
-    //   ],
-    // );
-    // if (key == 'yes') {
-    // domain.sign.removeAccount(state.user);
-    // onUserChange(state.logOut());
-    // return true;
-    // }
-    // return false;
-  // }
-
   void onUserChange(AccountState newstate) {
     // setup token and param http
     UserPrefs.instance.setUser(newstate.user);
