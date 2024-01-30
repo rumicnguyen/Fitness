@@ -4,14 +4,14 @@ import 'package:equatable/equatable.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'account_state.dart';
 
 class AccountBloc extends Cubit<AccountState> {
   AccountBloc() : super(AccountState.ds()) {
-    syncUserData();
+    // will be developed later
+    // syncUserData();
   }
 
   StreamController<MUser> statusStream = StreamController.broadcast();
@@ -33,13 +33,13 @@ class AccountBloc extends Cubit<AccountState> {
     onUserChange(state.login(user));
   }
 
-  void onEditProfileSuccess({required String name}) {
-    onUserChange(
-      state.copyWith(user: state.user.copyWith(name: name)),
-    );
-  }
+  // void onEditProfileSuccess({required String name}) {
+  //   onUserChange(
+  //     state.copyWith(user: state.user.copyWith(name: name)),
+  //   );
+  // }
 
-  Future onLogOut(BuildContext context) async {
+  // Future onLogOut(BuildContext context) async {
     // will be developed later
     // final key = await XAlert.show(
     //   title: 'Logout',
@@ -54,14 +54,14 @@ class AccountBloc extends Cubit<AccountState> {
     //   ],
     // );
     // if (key == 'yes') {
-    domain.sign.logOut(state.user);
-    onUserChange(state.logOut());
-    return true;
+    // domain.sign.logOut(state.user);
+    // onUserChange(state.logOut());
+    // return true;
     // }
     // return false;
-  }
+  // }
 
-  Future onRemoveAccount(BuildContext context) async {
+  // Future onRemoveAccount(BuildContext context) async {
     // will be developed later
     // final key = await XAlert.show(
     //   title: 'Remove Account',
@@ -77,12 +77,12 @@ class AccountBloc extends Cubit<AccountState> {
     //   ],
     // );
     // if (key == 'yes') {
-    domain.sign.removeAccount(state.user);
-    onUserChange(state.logOut());
-    return true;
+    // domain.sign.removeAccount(state.user);
+    // onUserChange(state.logOut());
+    // return true;
     // }
     // return false;
-  }
+  // }
 
   void onUserChange(AccountState newstate) {
     // setup token and param http
