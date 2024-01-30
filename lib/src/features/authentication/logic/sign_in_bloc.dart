@@ -34,13 +34,13 @@ class SigninBloc extends Cubit<SigninState> {
     final result =
         await domain.sign.loginWithEmail(email: email, password: password);
 
-    if (result.isSuccess) {
-      // ignore: use_build_context_synchronously
+    if (result.isSuccess && context.mounted) {
       return connectBEWithEmail(context, result.data!);
     }
 
-    /// ignore: use_build_context_synchronously
-    return loginDecision(context, result);
+    if (context.mounted) {
+      return loginDecision(context, result);
+    }
   }
 
   Future loginWithGoogle(BuildContext context) async {
@@ -51,8 +51,9 @@ class SigninBloc extends Cubit<SigninState> {
     ));
     final result = await domain.sign.loginWithGoogle();
 
-    /// ignore: use_build_context_synchronously
-    return loginSocialDecision(context, result, MSocialType.google);
+    if (context.mounted) {
+      return loginSocialDecision(context, result, MSocialType.google);
+    }
   }
 
   Future loginSocialDecision(BuildContext context, MResult<MSocialUser> result,
@@ -70,15 +71,17 @@ class SigninBloc extends Cubit<SigninState> {
   Future connectBEWithEmail(BuildContext context, MUser user) async {
     final result = await domain.sign.connectBEWithEmail(user);
 
-    /// ignore: use_build_context_synchronously
-    return loginDecision(context, result);
+    if (context.mounted) {
+      return loginDecision(context, result);
+    }
   }
 
   Future connectBEWithGoogle(BuildContext context, MSocialUser user) async {
     final result = await domain.sign.connectBEWithGoogle(user);
 
-    /// ignore: use_build_context_synchronously
-    return loginDecision(context, result, socialType: user.type);
+    if (context.mounted) {
+      return loginDecision(context, result, socialType: user.type);
+    }
   }
 
   Future loginDecision(BuildContext context, MResult<MUser> result,
