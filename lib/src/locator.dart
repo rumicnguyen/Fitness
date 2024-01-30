@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
+import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/router/router.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/material.dart';
@@ -22,5 +24,7 @@ Future initializeApp({String? name, FirebaseOptions? firebaseOptions}) async {
 }
 
 void _locator() {
+  GetIt.I.registerLazySingleton(() => DomainManager());
   GetIt.I.registerLazySingleton(() => AppRouter());
+  GetIt.I.registerLazySingleton(() => AccountBloc());
 }

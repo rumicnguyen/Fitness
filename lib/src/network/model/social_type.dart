@@ -1,0 +1,4 @@
+enum MSocialType {
+  google,
+  email,
+}

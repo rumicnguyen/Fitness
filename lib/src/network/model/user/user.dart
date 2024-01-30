@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -26,4 +27,13 @@ class MUser with _$MUser {
   }
 
   factory MUser.fromJson(Map<String, Object?> json) => _$MUserFromJson(json);
+
+  factory MUser.fromEmailAccount(User account) {
+    return MUser(
+      name: account.displayName,
+      email: account.email,
+      avatar: account.photoURL,
+      id: account.uid,
+    );
+  }
 }
