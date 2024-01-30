@@ -19,8 +19,8 @@ class UserReference extends BaseCollectionReference<MUser> {
   Future<MResult<MUser>> getOrAddUser(MUser user) async {
     try {
       final result = await get(user.id);
-      if (result.isError == false) {
-        return result;
+      if (result.isSuccess == true) {
+        return MResult.success(result.data);
       } else {
         final MResult<MUser> result = await set(user);
         return MResult.success(result.data);

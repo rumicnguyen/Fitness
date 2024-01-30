@@ -22,8 +22,6 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('\n\nUser\n\n');
-    print(UserPrefs.I.getUser());
     return XScaffold(
       child: SingleChildScrollView(
         child: BlocProvider<HomeBloc>(
