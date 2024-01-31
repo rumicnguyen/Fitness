@@ -16,6 +16,7 @@
   "failed":"Failed. ",
 
   "success":"Success",
+  "check_email":"Check your mail to set new password",
 
   "sign_in_key_username":"signIn_emailAndUsernameInput_textField",
   "sign_in_key_password":"signIn_passwordInput_textField",
