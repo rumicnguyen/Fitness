@@ -25,6 +25,9 @@ class SignUpView extends StatelessWidget {
             return SignUpBloc();
           },
           child: BlocBuilder<SignUpBloc, SignUpState>(
+            buildWhen: (previous, current) {
+              return false;
+            },
             builder: (context, state) {
               return _buider(context);
             },
