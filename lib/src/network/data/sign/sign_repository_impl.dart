@@ -99,26 +99,38 @@ class SignRepositoryImpl extends SignRepository {
   Future<MResult<MUser>> signUpWithEmail({
     required String email,
     required String password,
-    required String name,
   }) async {
     try {
       final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return MResult.success(result.user as MUser);
+      if (result.user != null) {
+        return MResult.success(MUser.fromEmailAccount(result.user!));
+      }
+      return MResult.error('Failed');
     } on FirebaseAuthException catch (e) {
       return MResult.error(e.message);
     } catch (e) {
       return MResult.exception(e);
     }
   }
-  
+
   @override
   Future<MResult<MUser>> connectBEWithEmail(MUser user) async {
-     try {
-      
+    try {
       final userResult = await DomainManager().user.getOrAddUser(user);
+
+      return MResult.success(userResult.data ?? user);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  @override
+  Future<MResult<MUser>> connectBESignUpWithEmail(MUser user) async {
+    try {
+      final userResult = await DomainManager().user.addUser(user: user);
 
       return MResult.success(userResult.data ?? user);
     } catch (e) {

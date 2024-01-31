@@ -34,7 +34,9 @@ class SignScaffold extends StatelessWidget {
           actions: actions,
           backgroundColor: AppColors.transparent,
         ),
-        body: child,
+        body: SingleChildScrollView(
+          child: child,
+        ),
       ),
     );
   }

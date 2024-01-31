@@ -41,6 +41,9 @@ class SignInView extends StatelessWidget {
             return SigninBloc();
           },
           child: BlocBuilder<SigninBloc, SigninState>(
+            buildWhen: (previous, current) {
+              return false;
+            },
             builder: (context, state) {
               return _buider(context);
             },

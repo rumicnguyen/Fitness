@@ -11,6 +11,11 @@
   "error": "Error",
   "error_fieldRequired": "This field is required",
   "email_invalid": "Email Invalid",
+  "password_invalid":"Password Invalid",
+  "password_not_match":"Password not match",
+  "failed":"Failed. ",
+
+  "success":"Success",
 
   "sign_in_key_username":"signIn_emailAndUsernameInput_textField",
   "sign_in_key_password":"signIn_passwordInput_textField",
