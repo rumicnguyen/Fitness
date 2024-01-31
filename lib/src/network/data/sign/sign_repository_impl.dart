@@ -32,9 +32,15 @@ class SignRepositoryImpl extends SignRepository {
   }
 
   @override
-  Future<MResult<String>> forgotPassword(String email) {
-    // TODO: implement forgotPassword
-    throw UnimplementedError();
+  Future<MResult<String>> forgotPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      return MResult.success(email);
+    } on FirebaseAuthException catch (e) {
+      return MResult.error(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
   }
 
   @override

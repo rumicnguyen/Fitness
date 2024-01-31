@@ -22,7 +22,14 @@ class ForgotView extends StatelessWidget {
         },
         child: XSection(
           all: 30.0,
-          child: _buider(context),
+          child: BlocBuilder<ForgotBloc, ForgotState>(
+            buildWhen: (previous, current) {
+              return false;
+            },
+            builder: (context, state) {
+              return _buider(context);
+            },
+          ),
         ),
       ),
     );
@@ -54,34 +61,37 @@ class ForgotView extends StatelessWidget {
 
   Widget _buildForm(BuildContext context) {
     return BlocBuilder<ForgotBloc, ForgotState>(
+      buildWhen: (previous, current) {
+        return previous.email != current.email;
+      },
       builder: (context, state) {
         return XInput(
           value: state.email.value,
           key: Key(S.of(context).forgot_key_email),
           onChanged: context.read<ForgotBloc>().onEmailChanged,
-          labelText: S.of(context).forgot_email_lable,
-          errorText: state.email.isPure == true ? null : state.error,
           style: AppStyles.whiteTextMidium,
+          labelStyle: AppStyles.whiteTextMidium,
+          decoration: InputDecoration(
+            labelText: S.of(context).forgot_email_lable,
+            errorText: state.email.errorOf(context) ??
+                (state.error.isEmpty ? null : state.error),
+          ),
         );
       },
     );
   }
 
   Widget _buildButton(BuildContext context) {
-    return BlocBuilder<ForgotBloc, ForgotState>(
-      builder: (context, state) {
-        return XButton(
-          width: double.infinity,
-          height: 60.0,
-          backgroundColor: AppColors.white,
-          child: Text(
-            S.of(context).forgot_confirm,
-            style: AppStyles.blackTextMidium,
-          ),
-          onPressed: () {
-            context.read<ForgotBloc>().onEnteredConfirmPassword(context);
-          },
-        );
+    return XButton(
+      width: double.infinity,
+      height: 60.0,
+      backgroundColor: AppColors.white,
+      child: Text(
+        S.of(context).forgot_confirm,
+        style: AppStyles.blackTextMidium,
+      ),
+      onPressed: () {
+        context.read<ForgotBloc>().forgotPassword(context);
       },
     );
   }
