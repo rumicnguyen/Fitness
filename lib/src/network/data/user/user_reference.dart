@@ -16,6 +16,20 @@ class UserReference extends BaseCollectionReference<MUser> {
           setObjectId: (e, id) => e.copyWith(id: id),
         );
 
+  Future<MResult<MUser>> addUser(MUser user) async {
+    try {
+      final result = await get(user.id);
+      if (result.isSuccess == true) {
+        return MResult.error('User already exists');
+      } else {
+        final MResult<MUser> result = await add(user);
+        return MResult.success(result.data);
+      }
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
   Future<MResult<MUser>> getOrAddUser(MUser user) async {
     try {
       final result = await get(user.id);

@@ -1,13 +1,14 @@
+import 'package:fitness_app/src/features/authentication/logic/sign_up_bloc.dart';
 import 'package:fitness_app/src/features/authentication/widget/scaffold.dart';
 import 'package:fitness_app/src/features/authentication/widget/sign_title.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
 import 'package:fitness_app/widgets/forms/input.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignUpView extends StatelessWidget {
   const SignUpView({super.key});
@@ -19,7 +20,16 @@ class SignUpView extends StatelessWidget {
         bottom: 30.0,
         left: 30.0,
         right: 30.0,
-        child: _buider(context),
+        child: BlocProvider<SignUpBloc>(
+          create: (context) {
+            return SignUpBloc();
+          },
+          child: BlocBuilder<SignUpBloc, SignUpState>(
+            builder: (context, state) {
+              return _buider(context);
+            },
+          ),
+        ),
       ),
     );
   }
@@ -51,64 +61,78 @@ class SignUpView extends StatelessWidget {
   Widget _buildForm(BuildContext context) {
     return Column(
       children: [
-        XInput(
+        _inputEmail(),
+        const SizedBox(height: 16.0),
+        _inputPassword(),
+        const SizedBox(height: 16.0),
+        _inputConfirmPassword(),
+      ],
+    );
+  }
+
+  Widget _inputEmail() {
+    return BlocBuilder<SignUpBloc, SignUpState>(
+      buildWhen: (previous, current) {
+        return previous.email != current.email;
+      },
+      builder: (context, state) {
+        return XInput(
           key: Key(S.of(context).sign_up_key_username),
-          value: '',
-          /*
-          Will be developed in logic task
-          onChanged: context.read<SigninBloc>().onEmailChanged,
-          */
-          onChanged: null,
+          value: state.email.value,
+          onChanged: context.read<SignUpBloc>().onEmailChanged,
           style: AppStyles.whiteTextMidium,
           labelStyle: AppStyles.whiteTextMidium,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_accout_lable,
-            /*
-            Will be developed in logic task
-            errorText: 'state.email.errorOf(context)',
-            */
+            errorText: state.email.errorOf(context),
           ),
-        ),
-        const SizedBox(height: 16.0),
-        XInput(
+        );
+      },
+    );
+  }
+
+  Widget _inputPassword() {
+    return BlocBuilder<SignUpBloc, SignUpState>(
+      buildWhen: (previous, current) {
+        return previous.password != current.password;
+      },
+      builder: (context, state) {
+        return XInput(
           key: Key(S.of(context).sign_up_key_password),
-          value: 'password',
-          /*
-          Will be developed in logic task
-          onChanged: context.read<SigninBloc>().onPasswordChanged,
-          */
-          onChanged: null,
+          value: state.password.value,
+          onChanged: context.read<SignUpBloc>().onPasswordChanged,
+          obscureText: true,
           style: AppStyles.whiteTextMidium,
           labelStyle: AppStyles.whiteTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_in_password_lable,
-            /*
-            Will be developed in logic task
-            errorText: 'state.password.errorOf(context)',
-            */
+            errorText: state.password.errorOf(context),
           ),
-        ),
-        const SizedBox(height: 16.0),
-        XInput(
+        );
+      },
+    );
+  }
+
+  Widget _inputConfirmPassword() {
+    return BlocBuilder<SignUpBloc, SignUpState>(
+      buildWhen: (previous, current) {
+        return previous.confirmPassword != current.confirmPassword;
+      },
+      builder: (context, state) {
+        return XInput(
           key: Key(S.of(context).sign_up_key_confirm_password),
-          value: 'password',
-          /*
-          Will be developed in logic task
-          onChanged: context.read<SigninBloc>().onPasswordChanged,
-          */
-          onChanged: null,
+          value: state.confirmPassword.value,
+          onChanged: context.read<SignUpBloc>().onConfirmPasswordChanged,
+          obscureText: true,
           style: AppStyles.whiteTextMidium,
           labelStyle: AppStyles.whiteTextMidium,
           decoration: InputDecoration(
             labelText: S.of(context).sign_up_confirm_password_lable,
-            /*
-            Will be developed in logic task
-            errorText: 'state.password.errorOf(context)',
-            */
+            errorText: state.confirmPassword.errorOf(context),
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
@@ -124,7 +148,7 @@ class SignUpView extends StatelessWidget {
             style: AppStyles.blackTextMidium,
           ),
           onPressed: () {
-            AppCoordinator.pop();
+            context.read<SignUpBloc>().signupWithEmail(context);
           },
         ),
       ],

@@ -10,8 +10,7 @@ class UserRepositoryImpl extends UserRepository {
   final usersRef = UserReference();
   @override
   Future<MResult<MUser>> addUser({required MUser user}) {
-    // TODO: implement addUser
-    throw UnimplementedError();
+    return usersRef.addUser(user);
   }
 
   @override

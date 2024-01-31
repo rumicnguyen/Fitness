@@ -12,6 +12,7 @@ abstract class SignRepository {
   // Login via SDK
   Future<MResult<MUser>> connectBEWithGoogle(MSocialUser user);
   Future<MResult<MUser>> connectBEWithEmail(MUser user);
+  Future<MResult<MUser>> connectBESignUpWithEmail(MUser user);
 
   // Connect after login with SDK Success
   Future<MResult<MSocialUser>> loginWithGoogle();
@@ -20,7 +21,6 @@ abstract class SignRepository {
   Future<MResult<MUser>> signUpWithEmail({
     required String email,
     required String password,
-    required String name,
   });
 
   Future<MResult<String>> forgotPassword(String email);
