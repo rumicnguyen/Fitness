@@ -1,7 +1,5 @@
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/account/widget/button_change_avatar_portals.dart';
-import 'package:fitness_app/src/network/model/user/user.dart';
-import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/widgets/avatar.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +10,6 @@ class AccountView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MUser currentUser = UserPrefs.I.getUser() ?? MUser.empty();
     return BlocProvider<AccountBloc>(
       create: (BuildContext context) {
         return AccountBloc();
@@ -27,10 +24,7 @@ class AccountView extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              XAvatar(
-                avatar: currentUser.avatar,
-                size: 100,
-              ),
+              _buildAvatar(),
               const SizedBox(
                 height: 30,
               ),
@@ -39,6 +33,20 @@ class AccountView extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildAvatar() {
+    return BlocBuilder<AccountBloc, AccountState>(
+      buildWhen: (previous, current) {
+        return previous.user != current.user;
+      },
+      builder: (context, state) {
+        return XAvatar(
+          avatar: state.user.avatar,
+          size: 100,
+        );
+      },
     );
   }
 }

@@ -8,4 +8,16 @@ abstract class UserRepository {
   Future<MResult<List<MUser>>> getFriendsUser({required String id});
   Future<MResult<List<MUserWorkout>>> getFriendsActivity({required String id});
   Future<MResult<MUser>> addUser({required MUser user});
+  Future<MResult<MUser>> update({
+    required MUser user,
+    String? avatar,
+    String? name,
+    String? gender,
+    int? age,
+    int? challengeParticipatedIn,
+    int? hoursTraining,
+    int? workoutsCompleted,
+    double? height,
+    double? weight,
+  });
 }

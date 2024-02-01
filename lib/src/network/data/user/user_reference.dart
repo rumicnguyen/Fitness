@@ -3,7 +3,6 @@ import 'package:fitness_app/src/network/firebase/base_collection.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 
-
 class UserReference extends BaseCollectionReference<MUser> {
   UserReference()
       : super(

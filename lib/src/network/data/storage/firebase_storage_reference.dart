@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_type.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
-import 'package:fitness_app/src/utils/string_utils.dart';
 
 class FirebaseStorageReference {
   final storage = FirebaseStorage.instance;
@@ -13,9 +12,9 @@ class FirebaseStorageReference {
     required StorageType type,
     required StorageFolder folder,
     required File file,
+    required String fileName,
   }) async {
     try {
-      final String fileName = StringUtils.generateIdImageName();
       final folders = storage.ref().child(folder.value);
       final types = folders.child(type.value);
       final files = types.child(fileName);
