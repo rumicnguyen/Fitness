@@ -52,7 +52,6 @@ class ForgotBloc extends Cubit<ForgotState> {
   }
 
   void onEmailChanged(String value) {
-    print(state.email.value);
     final email = state.email.isPure
         ? EmailFormzInput.pure(value)
         : EmailFormzInput.dirty(value);

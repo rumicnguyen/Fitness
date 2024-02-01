@@ -89,6 +89,11 @@
   "ability_level":"Ability level",
   "apply_filters":"Apply filters",
 
+  "user_non_avatar":"user.png",
+  "change_avatar":"Change avatar",
+  "from_gallery":"From gallery",
+  "from_camera":"From camera",
+
   "none":"none",
   "waiting":"Waiting...",
   "page_not_found":"Page not found",

@@ -1,3 +1,4 @@
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
@@ -15,6 +16,9 @@ Future initializeApp({String? name, FirebaseOptions? firebaseOptions}) async {
   ]);
   _locator();
   await Firebase.initializeApp(name: name, options: firebaseOptions);
+  await FirebaseAppCheck.instance.activate(
+    androidProvider: AndroidProvider.debug,
+  );
   await Future.wait([
     UserPrefs.instance.initialize(),
     dot_env.dotenv.load(
