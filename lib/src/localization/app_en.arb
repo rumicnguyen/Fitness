@@ -109,6 +109,7 @@
 
   "none":"none",
   "waiting":"Waiting...",
+  "is_loading":"Is Loading...",
   "page_not_found":"Page not found",
   "exercise_in_detail":"exercises",
   "minutes":"minutes",

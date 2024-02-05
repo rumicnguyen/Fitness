@@ -5,6 +5,7 @@ import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
+import 'package:fitness_app/widgets/is_loading.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:fitness_app/widgets/section.dart';
@@ -35,10 +36,7 @@ class WorkoutDetailView extends StatelessWidget {
             previous.handle != current.handle,
         builder: (context, state) {
           return state.handle.isLoading
-              // Will be developed later
-              ? const Center(
-                  child: Text('Is Loading...'),
-                )
+              ? const IsLoading()
               : _body(
                   context: context,
                   item: state.workout,
@@ -114,10 +112,7 @@ class WorkoutDetailView extends StatelessWidget {
                         state.backgroundImage,
                         fit: BoxFit.fill,
                       )
-                    : const Center(
-                      // TODO: Develop this later
-                        child: Text('Is Loading...'),
-                      ),
+                    : const IsLoading(),
               );
             },
           ),
@@ -163,8 +158,10 @@ class WorkoutDetailView extends StatelessWidget {
       width: double.infinity,
       height: 60,
       title: S.of(context).start_workout,
-      onPressed: () {
-        context.read<WorkoutDetailBloc>().onStartWorkout();
+      onPressed: () async {
+        const IsLoading().load(
+          context.read<WorkoutDetailBloc>().onStartWorkout(),
+        );
       },
       titleStyle: AppStyles.whiteTextSmallB,
       backgroundColor: AppColors.second,

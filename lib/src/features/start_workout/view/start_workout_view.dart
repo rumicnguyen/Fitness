@@ -7,6 +7,7 @@ import 'package:fitness_app/src/network/model/exercise/exercise.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
+import 'package:fitness_app/widgets/is_loading.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -80,9 +81,7 @@ class StartWorkoutView extends StatelessWidget {
             // Will be developed later
             ? const SizedBox(
                 height: 200,
-                child: Center(
-                  child: Text('Video is being Loaded...'),
-                ),
+                child: IsLoading(),
               )
             : XYoutubePlayer(
                 controller: state.controller,
@@ -140,9 +139,7 @@ class StartWorkoutView extends StatelessWidget {
           height: 490,
           child: state.handle.isLoading
               // Will be developed later
-              ? const Center(
-                  child: Text('List is being Loaded...'),
-                )
+              ? const IsLoading()
               : ListView.builder(
                   itemCount: state.workout.exercises,
                   itemBuilder: (BuildContext context, int index) {
@@ -151,7 +148,7 @@ class StartWorkoutView extends StatelessWidget {
                       isDoing: index == state.countTaskDone,
                       context: context,
                       isDone: index < state.countTaskDone,
-                      onTap: () {
+                      onTap: () async {
                         if (index == 0) {
                           state.controller.seekTo(Duration.zero);
                         } else {
@@ -159,7 +156,9 @@ class StartWorkoutView extends StatelessWidget {
                             Duration(seconds: state.exercise[index - 1].endAt),
                           );
                         }
-                        context.read<StartWorkoutBloc>().onChangeCurrent(index);
+                        const IsLoading().load(context
+                            .read<StartWorkoutBloc>()
+                            .onChangeCurrent(index));
                       },
                       isCurrent: state.current == index,
                     );

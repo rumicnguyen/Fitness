@@ -63,7 +63,7 @@ class StartWorkoutBloc extends Cubit<StartWorkoutState> {
     emit(state.copyWith(countTaskDone: index));
   }
 
-  void onChangeCurrent(int current) {
+  Future onChangeCurrent(int current) async {
     emit(state.copyWith(current: current));
   }
 }
