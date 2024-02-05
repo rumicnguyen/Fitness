@@ -1,13 +1,11 @@
-import 'dart:io';
-
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_type.dart';
-import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/src/utils/string_utils.dart';
+import 'package:fitness_app/src/utils/permission_utils.dart';
+import 'package:fitness_app/src/utils/picker_utils.dart';
 import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,7 +22,6 @@ class ButtonChangeAvatarPortals extends StatefulWidget {
 
 class _ButtonChangeAvatarPortalsState extends State<ButtonChangeAvatarPortals> {
   final OverlayPortalController _controller = OverlayPortalController();
-  final ref = FirebaseStorageReference();
 
   @override
   Widget build(BuildContext context) {
@@ -87,39 +84,37 @@ class _ButtonChangeAvatarPortalsState extends State<ButtonChangeAvatarPortals> {
   }
 
   Future _pickImageFromGallery(BuildContext context) async {
-    final PermissionStatus permissionStatus = await Permission.photos.request();
-    if (permissionStatus == PermissionStatus.granted) {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      final String fileName = StringUtils.generateIdImageName();
-      if (image != null) {
-        await ref.add(
-          folder: StorageFolder.users,
-          type: StorageType.image,
-          file: File(image.path),
-          fileName: fileName,
-        );
-        if (context.mounted) {
-          await context.read<AccountBloc>().onUpdateAvatar(fileName);
-        }
+    final permission = await PermissionUtils.requestPermission(
+      permission: Permission.photos,
+      context: context,
+    );
+
+    if (permission.isSuccess) {
+      final result = await PickerUtils.pickImage(
+        source: ImageSource.gallery,
+        type: StorageType.image,
+        folder: StorageFolder.users,
+      );
+
+      if (context.mounted && result.isSuccess) {
+        await context.read<AccountBloc>().onUpdateAvatar(result.data);
       }
     }
   }
 
   Future _pickImageFromCamera(BuildContext context) async {
-    final PermissionStatus permissionStatus = await Permission.camera.request();
-    if (permissionStatus == PermissionStatus.granted) {
-      final image = await ImagePicker().pickImage(source: ImageSource.camera);
-      final String fileName = StringUtils.generateIdImageName();
-      if (image != null) {
-        await ref.add(
-          folder: StorageFolder.users,
-          type: StorageType.image,
-          file: File(image.path),
-          fileName: fileName,
-        );
-        if (context.mounted) {
-          await context.read<AccountBloc>().onUpdateAvatar(fileName);
-        }
+    final permission = await PermissionUtils.requestPermission(
+      permission: Permission.camera,
+      context: context,
+    );
+    if (permission.isSuccess) {
+      final result = await PickerUtils.pickImage(
+        source: ImageSource.camera,
+        type: StorageType.image,
+        folder: StorageFolder.users,
+      );
+      if (context.mounted && result.isSuccess) {
+        await context.read<AccountBloc>().onUpdateAvatar(result.data);
       }
     }
   }
