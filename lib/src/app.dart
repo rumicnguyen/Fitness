@@ -1,3 +1,4 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:fitness_app/gen/fonts.gen.dart';
 import 'package:fitness_app/src/features/setting/logic/setting_bloc.dart';
 import 'package:fitness_app/src/features/setting/logic/setting_state.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
               Locale('vi'),
             ],
             locale: state.locale,
+            builder: BotToastInit(),
             routerConfig: appRouter.router,
           );
         },
