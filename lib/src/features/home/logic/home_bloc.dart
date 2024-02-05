@@ -1,4 +1,5 @@
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
+import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
@@ -14,6 +15,7 @@ class HomeBloc extends Cubit<HomeState> {
   }
 
   DomainManager get domain => DomainManager();
+  FirebaseStorageReference get storageRef => FirebaseStorageReference();
   MUser user = UserPrefs.I.getUser() ?? MUser.empty();
 
   Future syncData() async {

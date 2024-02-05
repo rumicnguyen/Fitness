@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -18,6 +19,9 @@ class MWorkout with _$MWorkout {
     @Default(0) int exercises,
     @Default(WorkoutLevel.none) WorkoutLevel level,
     @Default(0) int members,
+    @Default('') String video,
+    @Default(DisciplineActivity.gym) DisciplineActivity discipline,
+    @Default(0) int entryFee,
     int? tag,
   }) = _MWorkout;
 

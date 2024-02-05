@@ -18,6 +18,11 @@ _$MWorkoutImpl _$$MWorkoutImplFromJson(Map<String, dynamic> json) =>
       level: $enumDecodeNullable(_$WorkoutLevelEnumMap, json['level']) ??
           WorkoutLevel.none,
       members: json['members'] as int? ?? 0,
+      video: json['video'] as String? ?? '',
+      discipline: $enumDecodeNullable(
+              _$DisciplineActivityEnumMap, json['discipline']) ??
+          DisciplineActivity.gym,
+      entryFee: json['entryFee'] as int? ?? 0,
       tag: json['tag'] as int?,
     );
 
@@ -32,6 +37,9 @@ Map<String, dynamic> _$$MWorkoutImplToJson(_$MWorkoutImpl instance) =>
       'exercises': instance.exercises,
       'level': _$WorkoutLevelEnumMap[instance.level]!,
       'members': instance.members,
+      'video': instance.video,
+      'discipline': _$DisciplineActivityEnumMap[instance.discipline]!,
+      'entryFee': instance.entryFee,
       'tag': instance.tag,
     };
 
@@ -41,4 +49,9 @@ const _$WorkoutLevelEnumMap = {
   WorkoutLevel.simple: 'simple',
   WorkoutLevel.medium: 'medium',
   WorkoutLevel.entry: 'entry',
+};
+
+const _$DisciplineActivityEnumMap = {
+  DisciplineActivity.any: 'any',
+  DisciplineActivity.gym: 'gym',
 };

@@ -5,6 +5,7 @@ import 'package:fitness_app/src/network/data/user/user_repository.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final usersRef = UserReference();
@@ -28,8 +29,8 @@ class UserRepositoryImpl extends UserRepository {
         userName: 'Guy Hawkins',
         workoutName: 'Workout with ball',
         workoutImage: Assets.images.newTransparent.path,
-        idUser: '10',
-        idWorkout: '4',
+        idUser: 'cLcCa9CWTISEGm6CKOyvaRsOBD93',
+        idWorkout: 'lM3ZsYp7DuKHuZqxaYUk',
       ),
       MUserWorkout(
         id: '2',
@@ -103,8 +104,35 @@ class UserRepositoryImpl extends UserRepository {
         return MResult.success(updateUser.data);
       }
       return MResult.error('error');
-    } on FirebaseException catch (e) {
-      return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  @override
+  Future<MResult<MUser>> updateFavoriteWorkout({
+    required MUser user,
+    required String workoutId,
+  }) async {
+    try {
+      final updateUser = await getUser(id: user.id);
+      if (updateUser.isSuccess && updateUser.data != null) {
+        final list = List.from(updateUser.data!.favoriteWorkout);
+        if (list.contains(workoutId)) {
+          list.remove(workoutId);
+        } else {
+          list.add(workoutId);
+        }
+        final result = await usersRef.update(user.id, {
+          'favoriteWorkout': list,
+        });
+        if (result.isSuccess) {
+          final resultUser = await getUser(id: user.id);
+          UserPrefs.instance.setUser(result.data);
+          return MResult.success(resultUser.data);
+        }
+      }
+      return MResult.error('error');
     } catch (e) {
       return MResult.exception(e);
     }

@@ -9,11 +9,20 @@ class StringUtils {
     return input;
   }
 
-  static String generateIdImageName() {
+  static String generate({required int length}) {
     const String chars =
         'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     Random random = Random();
 
-    return '${List.generate(10, (index) => chars[random.nextInt(chars.length)]).join()}.png';
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
+  }
+
+  static String generateId() {
+    return generate(length: 20);
+  }
+
+  static String generateIdImageName() {
+    return '${generate(length: 10)}.png';
   }
 }

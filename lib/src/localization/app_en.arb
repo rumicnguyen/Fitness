@@ -93,6 +93,8 @@
   "change_avatar":"Change avatar",
   "from_gallery":"From gallery",
   "from_camera":"From camera",
+  "sets":" sets",
+  "min_rest":" min rest",
 
   "none":"none",
   "waiting":"Waiting...",
