@@ -48,7 +48,7 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
         return MResult.error(workout.error);
       }
       final getResult = await get(userWorkout.id);
-      if (getResult.isSuccess == true) {
+      if (getResult.isSuccess == true && getResult.data != null) {
         if (getResult.data!.isFinished) {
           final result = await update(userWorkout.id, {
             'startAt': DateTime.now(),

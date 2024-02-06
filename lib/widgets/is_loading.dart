@@ -2,8 +2,8 @@ import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:flutter/material.dart';
 
-class IsLoading extends StatelessWidget {
-  const IsLoading({super.key});
+class Loading extends StatelessWidget {
+  const Loading({super.key});
 
   @override
   Widget build(BuildContext context) {

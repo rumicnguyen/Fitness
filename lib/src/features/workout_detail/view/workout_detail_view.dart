@@ -36,7 +36,7 @@ class WorkoutDetailView extends StatelessWidget {
             previous.handle != current.handle,
         builder: (context, state) {
           return state.handle.isLoading
-              ? const IsLoading()
+              ? const Loading()
               : _body(
                   context: context,
                   item: state.workout,
@@ -112,7 +112,7 @@ class WorkoutDetailView extends StatelessWidget {
                         state.backgroundImage,
                         fit: BoxFit.fill,
                       )
-                    : const IsLoading(),
+                    : const Loading(),
               );
             },
           ),
@@ -159,7 +159,7 @@ class WorkoutDetailView extends StatelessWidget {
       height: 60,
       title: S.of(context).start_workout,
       onPressed: () async {
-        const IsLoading().load(
+        const Loading().load(
           context.read<WorkoutDetailBloc>().onStartWorkout(),
         );
       },
