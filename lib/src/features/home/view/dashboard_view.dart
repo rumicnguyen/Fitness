@@ -1,4 +1,3 @@
-import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
@@ -13,10 +12,11 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MUser currentUser = UserPrefs.I.getUser() ?? MUser.empty();
     return Column(
       children: [
-        _buildTitle(context),
-        _buildResult(context),
+        _buildTitle(context, currentUser),
+        _buildResult(context, currentUser),
         const SizedBox(
           height: 20,
         ),
@@ -29,18 +29,18 @@ class DashboardView extends StatelessWidget {
     );
   }
 
-  Widget _buildTitle(BuildContext context) {
+  Widget _buildTitle(BuildContext context, MUser user) {
     return XTitle(
       title: S.of(context).home_dashboard,
       actions: XAvatar(
-        avatar: Assets.images.avatar.path,
+        avatar: user.avatar,
         size: 80,
       ),
     );
   }
 
-  Widget _buildResult(BuildContext context) {
-    MUser user = UserPrefs.I.getUser() ?? MUser.empty();
+  Widget _buildResult(BuildContext context, MUser user) {
+    
     return RowResult(
       firstItem: user.workoutsCompleted.toString(),
       secondItem: user.hoursTraining.toString(),

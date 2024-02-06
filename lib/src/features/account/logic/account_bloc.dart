@@ -10,8 +10,7 @@ part 'account_state.dart';
 
 class AccountBloc extends Cubit<AccountState> {
   AccountBloc() : super(AccountState.ds()) {
-    // will be developed later
-    // syncUserData();
+    syncUserData();
   }
 
   StreamController<MUser> statusStream = StreamController.broadcast();
@@ -37,5 +36,13 @@ class AccountBloc extends Cubit<AccountState> {
     // setup token and param http
     UserPrefs.instance.setUser(newstate.user);
     emit(newstate);
+  }
+
+  Future onUpdateAvatar(String avatar) async {
+    final result = await domain.user.update(user: state.user, avatar: avatar);
+    if (result.isSuccess) {
+      UserPrefs.instance.setUser(result.data);
+      emit(state.copyWith(user: result.data));
+    }
   }
 }
