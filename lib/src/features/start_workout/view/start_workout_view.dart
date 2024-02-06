@@ -6,7 +6,7 @@ import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/is_loading.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

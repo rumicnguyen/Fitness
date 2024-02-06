@@ -5,7 +5,7 @@ import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
-import 'package:fitness_app/widgets/is_loading.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:fitness_app/widgets/section.dart';
