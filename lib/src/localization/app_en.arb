@@ -104,9 +104,12 @@
   "permission_denied":"Permission denied",
   "permission_granted":"Permission granted",
   "message_permission_denied":"Permission denied. Please grant the permission in the app settings.",
+  "sets":" sets",
+  "min_rest":" min rest",
 
   "none":"none",
   "waiting":"Waiting...",
+  "is_loading":"Is Loading...",
   "page_not_found":"Page not found",
   "exercise_in_detail":"exercises",
   "minutes":"minutes",

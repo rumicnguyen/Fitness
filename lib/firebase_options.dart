@@ -17,13 +17,19 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -46,32 +52,11 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBMgMrEkKurvBEh2iaIGCl-mPWAh5rRGtM',
-    appId: '1:819592355905:web:effff25c957f2a099766c0',
-    messagingSenderId: '819592355905',
-    projectId: 'dominic-fitness-app',
-    authDomain: 'dominic-fitness-app.firebaseapp.com',
-    storageBucket: 'dominic-fitness-app.appspot.com',
-    measurementId: 'G-WX2M7WDY2G',
-  );
-
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCwq9KJ6l8X_I-4uUuv0j-KERHymiZbRaA',
     appId: '1:819592355905:android:78fd786cd2d650949766c0',
     messagingSenderId: '819592355905',
     projectId: 'dominic-fitness-app',
     storageBucket: 'dominic-fitness-app.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCS6jsbPzRakoN4m_DxLVuZuC3jgijkAiU',
-    appId: '1:819592355905:ios:56a02e0f6f8b3ccc9766c0',
-    messagingSenderId: '819592355905',
-    projectId: 'dominic-fitness-app',
-    storageBucket: 'dominic-fitness-app.appspot.com',
-    androidClientId: '819592355905-3ul7vj2s09g8pn7b30c8c608lhneqjmp.apps.googleusercontent.com',
-    iosClientId: '819592355905-hg8a35t1u42ul39fjfigdv8jf107hb1e.apps.googleusercontent.com',
-    iosBundleId: 'dev.flutter.fitnessApp',
   );
 }

@@ -29,6 +29,9 @@ mixin _$MWorkout {
   int get exercises => throw _privateConstructorUsedError;
   WorkoutLevel get level => throw _privateConstructorUsedError;
   int get members => throw _privateConstructorUsedError;
+  String get video => throw _privateConstructorUsedError;
+  DisciplineActivity get discipline => throw _privateConstructorUsedError;
+  int get entryFee => throw _privateConstructorUsedError;
   int? get tag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,6 +55,9 @@ abstract class $MWorkoutCopyWith<$Res> {
       int exercises,
       WorkoutLevel level,
       int members,
+      String video,
+      DisciplineActivity discipline,
+      int entryFee,
       int? tag});
 }
 
@@ -77,6 +83,9 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
     Object? exercises = null,
     Object? level = null,
     Object? members = null,
+    Object? video = null,
+    Object? discipline = null,
+    Object? entryFee = null,
     Object? tag = freezed,
   }) {
     return _then(_value.copyWith(
@@ -116,6 +125,18 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
               as int,
+      video: null == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as String,
+      discipline: null == discipline
+          ? _value.discipline
+          : discipline // ignore: cast_nullable_to_non_nullable
+              as DisciplineActivity,
+      entryFee: null == entryFee
+          ? _value.entryFee
+          : entryFee // ignore: cast_nullable_to_non_nullable
+              as int,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -142,6 +163,9 @@ abstract class _$$MWorkoutImplCopyWith<$Res>
       int exercises,
       WorkoutLevel level,
       int members,
+      String video,
+      DisciplineActivity discipline,
+      int entryFee,
       int? tag});
 }
 
@@ -165,6 +189,9 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
     Object? exercises = null,
     Object? level = null,
     Object? members = null,
+    Object? video = null,
+    Object? discipline = null,
+    Object? entryFee = null,
     Object? tag = freezed,
   }) {
     return _then(_$MWorkoutImpl(
@@ -204,6 +231,18 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
           ? _value.members
           : members // ignore: cast_nullable_to_non_nullable
               as int,
+      video: null == video
+          ? _value.video
+          : video // ignore: cast_nullable_to_non_nullable
+              as String,
+      discipline: null == discipline
+          ? _value.discipline
+          : discipline // ignore: cast_nullable_to_non_nullable
+              as DisciplineActivity,
+      entryFee: null == entryFee
+          ? _value.entryFee
+          : entryFee // ignore: cast_nullable_to_non_nullable
+              as int,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -225,6 +264,9 @@ class _$MWorkoutImpl extends _MWorkout {
       this.exercises = 0,
       this.level = WorkoutLevel.none,
       this.members = 0,
+      this.video = '',
+      this.discipline = DisciplineActivity.gym,
+      this.entryFee = 0,
       this.tag})
       : super._();
 
@@ -257,11 +299,20 @@ class _$MWorkoutImpl extends _MWorkout {
   @JsonKey()
   final int members;
   @override
+  @JsonKey()
+  final String video;
+  @override
+  @JsonKey()
+  final DisciplineActivity discipline;
+  @override
+  @JsonKey()
+  final int entryFee;
+  @override
   final int? tag;
 
   @override
   String toString() {
-    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, tag: $tag)';
+    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, video: $video, discipline: $discipline, entryFee: $entryFee, tag: $tag)';
   }
 
   @override
@@ -283,6 +334,11 @@ class _$MWorkoutImpl extends _MWorkout {
                 other.exercises == exercises) &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.members, members) || other.members == members) &&
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.discipline, discipline) ||
+                other.discipline == discipline) &&
+            (identical(other.entryFee, entryFee) ||
+                other.entryFee == entryFee) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
@@ -299,6 +355,9 @@ class _$MWorkoutImpl extends _MWorkout {
       exercises,
       level,
       members,
+      video,
+      discipline,
+      entryFee,
       tag);
 
   @JsonKey(ignore: true)
@@ -326,6 +385,9 @@ abstract class _MWorkout extends MWorkout {
       final int exercises,
       final WorkoutLevel level,
       final int members,
+      final String video,
+      final DisciplineActivity discipline,
+      final int entryFee,
       final int? tag}) = _$MWorkoutImpl;
   const _MWorkout._() : super._();
 
@@ -350,6 +412,12 @@ abstract class _MWorkout extends MWorkout {
   WorkoutLevel get level;
   @override
   int get members;
+  @override
+  String get video;
+  @override
+  DisciplineActivity get discipline;
+  @override
+  int get entryFee;
   @override
   int? get tag;
   @override

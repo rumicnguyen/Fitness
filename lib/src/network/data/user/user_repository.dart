@@ -20,4 +20,8 @@ abstract class UserRepository {
     double? height,
     double? weight,
   });
+  Future<MResult<MUser>> updateFavoriteWorkout({
+    required MUser user,
+    required String workoutId,
+  });
 }

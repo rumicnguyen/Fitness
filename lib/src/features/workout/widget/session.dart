@@ -87,7 +87,7 @@ class Session extends StatelessWidget {
             child: Center(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(15),
-                child: Image.asset(
+                child: Image.network(
                   item.thumbnail,
                   fit: BoxFit.cover,
                   alignment: Alignment.topCenter,

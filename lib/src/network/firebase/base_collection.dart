@@ -4,7 +4,6 @@ import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-
 class BaseCollectionReference<T> {
   BaseCollectionReference(this.ref,
       {required this.setObjectId, required this.getObjectId});
@@ -22,7 +21,10 @@ class BaseCollectionReference<T> {
       } else {
         return MResult.error('Document does not exist');
       }
-    } catch (e) {
+    } on FirebaseException catch (e) {
+      return MResult.exception(e);
+    }
+    catch (e) {
       return MResult.exception(e);
     }
   }

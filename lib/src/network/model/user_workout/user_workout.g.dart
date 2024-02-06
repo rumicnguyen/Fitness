@@ -20,6 +20,8 @@ _$MUserWorkoutImpl _$$MUserWorkoutImplFromJson(Map<String, dynamic> json) =>
       finishAt: json['finishAt'] == null
           ? null
           : DateTime.parse(json['finishAt'] as String),
+      taskDone: json['taskDone'] as int? ?? 0,
+      isFinished: json['isFinished'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$MUserWorkoutImplToJson(_$MUserWorkoutImpl instance) =>
@@ -32,4 +34,6 @@ Map<String, dynamic> _$$MUserWorkoutImplToJson(_$MUserWorkoutImpl instance) =>
       'workoutImage': instance.workoutImage,
       'startAt': instance.startAt?.toIso8601String(),
       'finishAt': instance.finishAt?.toIso8601String(),
+      'taskDone': instance.taskDone,
+      'isFinished': instance.isFinished,
     };

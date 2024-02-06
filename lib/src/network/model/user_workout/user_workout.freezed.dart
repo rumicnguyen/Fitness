@@ -28,6 +28,8 @@ mixin _$MUserWorkout {
   String? get workoutImage => throw _privateConstructorUsedError;
   DateTime? get startAt => throw _privateConstructorUsedError;
   DateTime? get finishAt => throw _privateConstructorUsedError;
+  int get taskDone => throw _privateConstructorUsedError;
+  bool get isFinished => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -49,7 +51,9 @@ abstract class $MUserWorkoutCopyWith<$Res> {
       String? userName,
       String? workoutImage,
       DateTime? startAt,
-      DateTime? finishAt});
+      DateTime? finishAt,
+      int taskDone,
+      bool isFinished});
 }
 
 /// @nodoc
@@ -73,6 +77,8 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
     Object? workoutImage = freezed,
     Object? startAt = freezed,
     Object? finishAt = freezed,
+    Object? taskDone = null,
+    Object? isFinished = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -107,6 +113,14 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
           ? _value.finishAt
           : finishAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      taskDone: null == taskDone
+          ? _value.taskDone
+          : taskDone // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFinished: null == isFinished
+          ? _value.isFinished
+          : isFinished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -127,7 +141,9 @@ abstract class _$$MUserWorkoutImplCopyWith<$Res>
       String? userName,
       String? workoutImage,
       DateTime? startAt,
-      DateTime? finishAt});
+      DateTime? finishAt,
+      int taskDone,
+      bool isFinished});
 }
 
 /// @nodoc
@@ -149,6 +165,8 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
     Object? workoutImage = freezed,
     Object? startAt = freezed,
     Object? finishAt = freezed,
+    Object? taskDone = null,
+    Object? isFinished = null,
   }) {
     return _then(_$MUserWorkoutImpl(
       id: null == id
@@ -183,6 +201,14 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
           ? _value.finishAt
           : finishAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      taskDone: null == taskDone
+          ? _value.taskDone
+          : taskDone // ignore: cast_nullable_to_non_nullable
+              as int,
+      isFinished: null == isFinished
+          ? _value.isFinished
+          : isFinished // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -198,7 +224,9 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
       this.userName,
       this.workoutImage,
       this.startAt,
-      this.finishAt})
+      this.finishAt,
+      this.taskDone = 0,
+      this.isFinished = false})
       : super._();
 
   factory _$MUserWorkoutImpl.fromJson(Map<String, dynamic> json) =>
@@ -220,10 +248,16 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
   final DateTime? startAt;
   @override
   final DateTime? finishAt;
+  @override
+  @JsonKey()
+  final int taskDone;
+  @override
+  @JsonKey()
+  final bool isFinished;
 
   @override
   String toString() {
-    return 'MUserWorkout(id: $id, idUser: $idUser, idWorkout: $idWorkout, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt)';
+    return 'MUserWorkout(id: $id, idUser: $idUser, idWorkout: $idWorkout, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt, taskDone: $taskDone, isFinished: $isFinished)';
   }
 
   @override
@@ -243,13 +277,27 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
                 other.workoutImage == workoutImage) &&
             (identical(other.startAt, startAt) || other.startAt == startAt) &&
             (identical(other.finishAt, finishAt) ||
-                other.finishAt == finishAt));
+                other.finishAt == finishAt) &&
+            (identical(other.taskDone, taskDone) ||
+                other.taskDone == taskDone) &&
+            (identical(other.isFinished, isFinished) ||
+                other.isFinished == isFinished));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, idUser, idWorkout,
-      workoutName, userName, workoutImage, startAt, finishAt);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      idUser,
+      idWorkout,
+      workoutName,
+      userName,
+      workoutImage,
+      startAt,
+      finishAt,
+      taskDone,
+      isFinished);
 
   @JsonKey(ignore: true)
   @override
@@ -274,7 +322,9 @@ abstract class _MUserWorkout extends MUserWorkout {
       final String? userName,
       final String? workoutImage,
       final DateTime? startAt,
-      final DateTime? finishAt}) = _$MUserWorkoutImpl;
+      final DateTime? finishAt,
+      final int taskDone,
+      final bool isFinished}) = _$MUserWorkoutImpl;
   const _MUserWorkout._() : super._();
 
   factory _MUserWorkout.fromJson(Map<String, dynamic> json) =
@@ -296,6 +346,10 @@ abstract class _MUserWorkout extends MUserWorkout {
   DateTime? get startAt;
   @override
   DateTime? get finishAt;
+  @override
+  int get taskDone;
+  @override
+  bool get isFinished;
   @override
   @JsonKey(ignore: true)
   _$$MUserWorkoutImplCopyWith<_$MUserWorkoutImpl> get copyWith =>

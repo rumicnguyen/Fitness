@@ -32,6 +32,7 @@ mixin _$MUser {
   int get workoutsCompleted => throw _privateConstructorUsedError;
   int get hoursTraining => throw _privateConstructorUsedError;
   int get challengeParticipatedIn => throw _privateConstructorUsedError;
+  List<String> get favoriteWorkout => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +56,8 @@ abstract class $MUserCopyWith<$Res> {
       List<String>? target,
       int workoutsCompleted,
       int hoursTraining,
-      int challengeParticipatedIn});
+      int challengeParticipatedIn,
+      List<String> favoriteWorkout});
 }
 
 /// @nodoc
@@ -83,6 +85,7 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
     Object? workoutsCompleted = null,
     Object? hoursTraining = null,
     Object? challengeParticipatedIn = null,
+    Object? favoriteWorkout = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -133,6 +136,10 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
           ? _value.challengeParticipatedIn
           : challengeParticipatedIn // ignore: cast_nullable_to_non_nullable
               as int,
+      favoriteWorkout: null == favoriteWorkout
+          ? _value.favoriteWorkout
+          : favoriteWorkout // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ) as $Val);
   }
 }
@@ -156,7 +163,8 @@ abstract class _$$MUserImplCopyWith<$Res> implements $MUserCopyWith<$Res> {
       List<String>? target,
       int workoutsCompleted,
       int hoursTraining,
-      int challengeParticipatedIn});
+      int challengeParticipatedIn,
+      List<String> favoriteWorkout});
 }
 
 /// @nodoc
@@ -182,6 +190,7 @@ class __$$MUserImplCopyWithImpl<$Res>
     Object? workoutsCompleted = null,
     Object? hoursTraining = null,
     Object? challengeParticipatedIn = null,
+    Object? favoriteWorkout = null,
   }) {
     return _then(_$MUserImpl(
       id: null == id
@@ -232,6 +241,10 @@ class __$$MUserImplCopyWithImpl<$Res>
           ? _value.challengeParticipatedIn
           : challengeParticipatedIn // ignore: cast_nullable_to_non_nullable
               as int,
+      favoriteWorkout: null == favoriteWorkout
+          ? _value._favoriteWorkout
+          : favoriteWorkout // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -251,8 +264,10 @@ class _$MUserImpl extends _MUser {
       final List<String>? target,
       this.workoutsCompleted = 0,
       this.hoursTraining = 0,
-      this.challengeParticipatedIn = 0})
+      this.challengeParticipatedIn = 0,
+      final List<String> favoriteWorkout = const []})
       : _target = target,
+        _favoriteWorkout = favoriteWorkout,
         super._();
 
   factory _$MUserImpl.fromJson(Map<String, dynamic> json) =>
@@ -293,10 +308,18 @@ class _$MUserImpl extends _MUser {
   @override
   @JsonKey()
   final int challengeParticipatedIn;
+  final List<String> _favoriteWorkout;
+  @override
+  @JsonKey()
+  List<String> get favoriteWorkout {
+    if (_favoriteWorkout is EqualUnmodifiableListView) return _favoriteWorkout;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_favoriteWorkout);
+  }
 
   @override
   String toString() {
-    return 'MUser(id: $id, name: $name, avatar: $avatar, email: $email, height: $height, weight: $weight, gender: $gender, age: $age, target: $target, workoutsCompleted: $workoutsCompleted, hoursTraining: $hoursTraining, challengeParticipatedIn: $challengeParticipatedIn)';
+    return 'MUser(id: $id, name: $name, avatar: $avatar, email: $email, height: $height, weight: $weight, gender: $gender, age: $age, target: $target, workoutsCompleted: $workoutsCompleted, hoursTraining: $hoursTraining, challengeParticipatedIn: $challengeParticipatedIn, favoriteWorkout: $favoriteWorkout)';
   }
 
   @override
@@ -319,7 +342,9 @@ class _$MUserImpl extends _MUser {
                 other.hoursTraining == hoursTraining) &&
             (identical(
                     other.challengeParticipatedIn, challengeParticipatedIn) ||
-                other.challengeParticipatedIn == challengeParticipatedIn));
+                other.challengeParticipatedIn == challengeParticipatedIn) &&
+            const DeepCollectionEquality()
+                .equals(other._favoriteWorkout, _favoriteWorkout));
   }
 
   @JsonKey(ignore: true)
@@ -337,7 +362,8 @@ class _$MUserImpl extends _MUser {
       const DeepCollectionEquality().hash(_target),
       workoutsCompleted,
       hoursTraining,
-      challengeParticipatedIn);
+      challengeParticipatedIn,
+      const DeepCollectionEquality().hash(_favoriteWorkout));
 
   @JsonKey(ignore: true)
   @override
@@ -366,7 +392,8 @@ abstract class _MUser extends MUser {
       final List<String>? target,
       final int workoutsCompleted,
       final int hoursTraining,
-      final int challengeParticipatedIn}) = _$MUserImpl;
+      final int challengeParticipatedIn,
+      final List<String> favoriteWorkout}) = _$MUserImpl;
   const _MUser._() : super._();
 
   factory _MUser.fromJson(Map<String, dynamic> json) = _$MUserImpl.fromJson;
@@ -395,6 +422,8 @@ abstract class _MUser extends MUser {
   int get hoursTraining;
   @override
   int get challengeParticipatedIn;
+  @override
+  List<String> get favoriteWorkout;
   @override
   @JsonKey(ignore: true)
   _$$MUserImplCopyWith<_$MUserImpl> get copyWith =>

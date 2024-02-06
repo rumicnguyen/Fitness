@@ -20,6 +20,7 @@ class MUser with _$MUser {
     @Default(0) int workoutsCompleted,
     @Default(0) int hoursTraining,
     @Default(0) int challengeParticipatedIn,
+    @Default([]) List<String> favoriteWorkout
   }) = _MUser;
 
   factory MUser.empty() {

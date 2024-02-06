@@ -1,15 +1,16 @@
-import 'package:fitness_app/src/features/page_not_found/view/page_not_found_view.dart';
+import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_bloc.dart';
+import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
-import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WorkoutDetailView extends StatelessWidget {
   const WorkoutDetailView({
@@ -19,50 +20,72 @@ class WorkoutDetailView extends StatelessWidget {
 
   final String id;
 
-  Future fetchData() async {
-    final result = await DomainManager().workout.getWorkoutById(id: id);
-    if (result.isSuccess) {
-      return result.data;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: fetchData(),
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-            return Text(S.of(context).none);
-          case ConnectionState.active:
-          case ConnectionState.waiting:
-            return Text(S.of(context).waiting);
-          case ConnectionState.done:
-            if (snapshot.hasError) return const PageNotFoundView();
-            return _buildBloc(context: context, item: snapshot.data);
-        }
+    return BlocProvider<WorkoutDetailBloc>(
+      create: (context) => WorkoutDetailBloc(id),
+      child: BlocConsumer<WorkoutDetailBloc, WorkoutDetailState>(
+        listenWhen: (previous, current) => previous.handle != current.handle,
+        listener: (context, state) {
+          if (state.handle.isError) {
+            // TODO: show toast
+          }
+        },
+        buildWhen: (previous, current) =>
+            previous.workout != current.workout ||
+            previous.handle != current.handle,
+        builder: (context, state) {
+          return state.handle.isLoading
+              ? const Loading()
+              : _body(
+                  context: context,
+                  item: state.workout,
+                );
+        },
+      ),
+    );
+  }
+
+  Widget _body({
+    required BuildContext context,
+    required MWorkout item,
+  }) {
+    return BlocProvider<WorkoutDetailBloc>(
+      create: (BuildContext context) {
+        return WorkoutDetailBloc(id);
       },
+      child: BlocBuilder<WorkoutDetailBloc, WorkoutDetailState>(
+        buildWhen: (previous, current) {
+          return previous.isFavorite != current.isFavorite ||
+              previous.handle != current.handle;
+        },
+        builder: (context, state) {
+          return XScaffold(
+            enableAppbar: true,
+            iconColor: AppColors.gray,
+            actions: [
+              XSection(
+                right: 20,
+                child: IconButton(
+                  icon: const Icon(Icons.bookmarks),
+                  color: state.isFavorite ? AppColors.second : AppColors.gray,
+                  onPressed: () {
+                    context.read<WorkoutDetailBloc>().onChangeFavorite();
+                  },
+                ),
+              )
+            ],
+            child: _builder(context: context, item: item),
+          );
+        },
+      ),
     );
   }
 
-  Widget _buildBloc({required BuildContext context, required MWorkout item}) {
-    return XScaffold(
-      enableAppbar: true,
-      iconColor: AppColors.gray,
-      actions: const [
-        XSection(
-          right: 20,
-          child: Icon(
-            Icons.bookmarks,
-            color: AppColors.gray,
-          ),
-        )
-      ],
-      child: _builder(context: context, item: item),
-    );
-  }
-
-  Widget _builder({required BuildContext context, required MWorkout item}) {
+  Widget _builder({
+    required BuildContext context,
+    required MWorkout item,
+  }) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
@@ -76,12 +99,22 @@ class WorkoutDetailView extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(20),
           ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: Image.asset(
-              item.backgroundImage,
-              fit: BoxFit.fill,
-            ),
+          child: BlocBuilder<WorkoutDetailBloc, WorkoutDetailState>(
+            buildWhen: (previous, current) {
+              return previous.backgroundImage != current.backgroundImage ||
+                  previous.handle != current.handle;
+            },
+            builder: (context, state) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: state.backgroundImage.isNotEmpty
+                    ? Image.network(
+                        state.backgroundImage,
+                        fit: BoxFit.fill,
+                      )
+                    : const Loading(),
+              );
+            },
           ),
         ),
         Text(
@@ -102,7 +135,10 @@ class WorkoutDetailView extends StatelessWidget {
     );
   }
 
-  Widget _buildResult({required BuildContext context, required MWorkout item}) {
+  Widget _buildResult({
+    required BuildContext context,
+    required MWorkout item,
+  }) {
     return RowResult(
       firstItem: item.exercises.toString(),
       secondItem: item.level.value,
@@ -114,14 +150,18 @@ class WorkoutDetailView extends StatelessWidget {
     );
   }
 
-  Widget _buildButtonStart(
-      {required BuildContext context, required MWorkout item}) {
+  Widget _buildButtonStart({
+    required BuildContext context,
+    required MWorkout item,
+  }) {
     return XButton(
       width: double.infinity,
       height: 60,
       title: S.of(context).start_workout,
-      onPressed: () {
-        AppCoordinator.showStartWorkoutScreen(id: item.id);
+      onPressed: () async {
+        const Loading().load(
+          context.read<WorkoutDetailBloc>().onStartWorkout(),
+        );
       },
       titleStyle: AppStyles.whiteTextSmallB,
       backgroundColor: AppColors.second,
