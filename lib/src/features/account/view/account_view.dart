@@ -157,38 +157,42 @@ class AccountView extends StatelessWidget {
                         type: ProfileType.target,
                         value: S.of(context).none,
                       )
-                    : Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            S.of(context).profile_target,
-                            style: AppStyles.blackTextSmallB,
-                          ),
-                          ListView.builder(
-                            padding: const EdgeInsets.only(top: 5),
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.user.target.length,
-                            itemBuilder: (context, index) {
-                              return XSection(
-                                bottom: 5,
-                                child: Row(
-                                  children: [
-                                    _buildText('${index + 1}. '),
-                                    _buildText(state.user.target[index]),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
+                    : _buildTarget(context, state.user.target),
               ],
             )
           ],
         );
       },
+    );
+  }
+
+  Widget _buildTarget(BuildContext context, List<String> target) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          S.of(context).profile_target,
+          style: AppStyles.blackTextSmallB,
+        ),
+        ListView.builder(
+          padding: const EdgeInsets.only(top: 5),
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: target.length,
+          itemBuilder: (context, index) {
+            return XSection(
+              bottom: 5,
+              child: Row(
+                children: [
+                  _buildText('${index + 1}. '),
+                  _buildText(target[index]),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
