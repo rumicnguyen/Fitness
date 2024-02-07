@@ -90,11 +90,11 @@ class AccountView extends StatelessWidget {
             ),
             SizedBox(
               width: double.infinity,
-              height: 150,
+              height: 135,
               child: Swiper(
                 scrollDirection: Axis.horizontal,
                 viewportFraction: 0.5,
-                scale: 0.9,
+                scale: 0.5,
                 itemCount: state.friends.length,
                 itemBuilder: (_, index) {
                   return FriendCard(friend: state.friends[index]);

@@ -1,15 +1,12 @@
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
-import 'package:fitness_app/src/network/data/enum/storage/storage_type.dart';
 import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/themes/colors.dart';
-import 'package:fitness_app/src/utils/permission_utils.dart';
 import 'package:fitness_app/src/utils/picker_utils.dart';
 import 'package:fitness_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class XAvatar extends StatefulWidget {
   const XAvatar({
@@ -107,38 +104,23 @@ class _XAvatarState extends State<XAvatar> {
   }
 
   Future _pickImageFromCamera(BuildContext context) async {
-    final permission = await PermissionUtils.requestPermission(
-      permission: Permission.camera,
-      context: context,
+    final result = await PickerUtils.pickImage(
+      source: ImageSource.camera,
+      folder: StorageFolder.users,
     );
-    if (permission.isSuccess) {
-      final result = await PickerUtils.pickImage(
-        source: ImageSource.camera,
-        type: StorageType.image,
-        folder: StorageFolder.users,
-      );
-      if (context.mounted && result.isSuccess) {
-        await context.read<AccountBloc>().onUpdateAvatar(result.data);
-      }
+    if (context.mounted && result.isSuccess && result.data != null) {
+      await context.read<AccountBloc>().onUpdateAvatar(result.data!);
     }
   }
 
   Future _pickImageFromGallery(BuildContext context) async {
-    final permission = await PermissionUtils.requestPermission(
-      permission: Permission.photos,
-      context: context,
+    final result = await PickerUtils.pickImage(
+      source: ImageSource.gallery,
+      folder: StorageFolder.users,
     );
 
-    if (permission.isSuccess) {
-      final result = await PickerUtils.pickImage(
-        source: ImageSource.gallery,
-        type: StorageType.image,
-        folder: StorageFolder.users,
-      );
-
-      if (context.mounted && result.isSuccess) {
-        await context.read<AccountBloc>().onUpdateAvatar(result.data);
-      }
+    if (context.mounted && result.isSuccess && result.data != null) {
+      await context.read<AccountBloc>().onUpdateAvatar(result.data!);
     }
   }
 }
