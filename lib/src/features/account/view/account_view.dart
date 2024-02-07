@@ -39,7 +39,6 @@ class AccountView extends StatelessWidget {
             ),
             XSection(
               vertical: 10,
-              horizontal: 30,
               child: SizedBox(
                 height: screenSize.height - 338,
                 width: double.infinity,
@@ -81,19 +80,22 @@ class AccountView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              S.of(context).profile_friends,
-              style: AppStyles.heading,
+            XSection(
+              left: 30,
+              child: Text(
+                S.of(context).profile_friends,
+                style: AppStyles.heading,
+              ),
             ),
             const SizedBox(
               height: 15,
             ),
             SizedBox(
               width: double.infinity,
-              height: 135,
+              height: 140,
               child: Swiper(
                 scrollDirection: Axis.horizontal,
-                viewportFraction: 0.5,
+                viewportFraction: 0.31,
                 scale: 0.5,
                 itemCount: state.friends.length,
                 itemBuilder: (_, index) {
@@ -111,56 +113,59 @@ class AccountView extends StatelessWidget {
     return BlocBuilder<AccountBloc, AccountState>(
       buildWhen: (previous, current) => previous.user != current.user,
       builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              S.of(context).profile_overview,
-              style: AppStyles.heading,
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Column(
-              children: [
-                _buildInfoItem(
-                  type: ProfileType.gender,
-                  value: state.user.gender ?? '',
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                _buildInfoItem(
-                  type: ProfileType.height,
-                  value: state.user.height.toString(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                _buildInfoItem(
-                  type: ProfileType.weight,
-                  value: state.user.weight.toString(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                _buildInfoItem(
-                  type: ProfileType.age,
-                  value: state.user.age.toString(),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                state.user.target.isEmpty
-                    ? _buildInfoItem(
-                        type: ProfileType.target,
-                        value: S.of(context).none,
-                      )
-                    : _buildTarget(context, state.user.target),
-              ],
-            )
-          ],
+        return XSection(
+          horizontal: 30,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                S.of(context).profile_overview,
+                style: AppStyles.heading,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(
+                children: [
+                  _buildInfoItem(
+                    type: ProfileType.gender,
+                    value: state.user.gender ?? '',
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _buildInfoItem(
+                    type: ProfileType.height,
+                    value: state.user.height.toString(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _buildInfoItem(
+                    type: ProfileType.weight,
+                    value: state.user.weight.toString(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  _buildInfoItem(
+                    type: ProfileType.age,
+                    value: state.user.age.toString(),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  state.user.target.isEmpty
+                      ? _buildInfoItem(
+                          type: ProfileType.target,
+                          value: S.of(context).none,
+                        )
+                      : _buildTarget(context, state.user.target),
+                ],
+              )
+            ],
+          ),
         );
       },
     );

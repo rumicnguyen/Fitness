@@ -12,16 +12,20 @@ class FriendCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         XAvatar(
           avatar: friend.avatar ?? '',
           size: 90,
         ),
-        Text(
-          friend.name ?? '',
-          style: AppStyles.blackTextMidium,
+        Align(
+          alignment: Alignment.topCenter,
+          child: Text(
+            friend.name ?? '',
+            style: AppStyles.blackTextMidium,
+            textAlign: TextAlign.center,
+          ),
         )
       ],
     );
