@@ -9,14 +9,15 @@ class MUser with _$MUser {
   const MUser._();
   const factory MUser({
     required String id,
-    String? name,
-    String? avatar,
+    @Default('user') String? name,
+    @Default('avatar.png') String? avatar,
     String? email,
     double? height,
     double? weight,
     String? gender,
     int? age,
-    List<String>? target,
+    @Default([]) List<String> target,
+    @Default([]) List<String> friends,
     @Default(0) int workoutsCompleted,
     @Default(0) int hoursTraining,
     @Default(0) int challengeParticipatedIn,

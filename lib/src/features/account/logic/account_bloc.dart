@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
+import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +23,15 @@ class AccountBloc extends Cubit<AccountState> {
     if (id.isNotEmpty == true) {
       final result = await domain.user.getUser(id: id);
       if (result.isSuccess) {
-        onUserChange(state.copyWith(user: result.data));
+        final friends = await domain.user.getFriendsUser(id: id);
+        if (friends.isSuccess && friends.data != null) {
+          onUserChange(state.copyWith(
+            user: result.data,
+            friends: friends.data!,
+          ));
+        } else {
+          onUserChange(state.copyWith(user: result.data));
+        }
       } else {
         onUserChange(state.logOut());
       }
@@ -33,9 +43,16 @@ class AccountBloc extends Cubit<AccountState> {
   }
 
   void onUserChange(AccountState newstate) {
-    // setup token and param http
     UserPrefs.instance.setUser(newstate.user);
     emit(newstate);
+  }
+
+  void onFriendChange(List<MUser> friends) {
+    emit(state.copyWith(friends: friends));
+  }
+
+  void onEdit(bool value) {
+    emit(state.copyWith(isChanging: value));
   }
 
   Future onUpdateAvatar(String avatar) async {

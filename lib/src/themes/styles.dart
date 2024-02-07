@@ -46,6 +46,12 @@ class AppStyles {
     fontWeight: FontWeight.w500,
   );
 
+  static const blackTextMidiumB = TextStyle(
+    color: AppColors.black,
+    fontSize: 16,
+    fontFamily: FontFamily.avenirBold,
+  );
+
   static const blackTextLarge = TextStyle(
     color: AppColors.black,
     fontSize: 20,
@@ -95,7 +101,7 @@ class AppStyles {
     fontSize: 16,
     fontWeight: FontWeight.w500,
   );
-  
+
   static const grayTextLarge = TextStyle(
     color: AppColors.gray,
     fontSize: 20,

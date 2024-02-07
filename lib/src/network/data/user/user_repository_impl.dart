@@ -54,9 +54,25 @@ class UserRepositoryImpl extends UserRepository {
   }
 
   @override
-  Future<MResult<List<MUser>>> getFriendsUser({required String id}) {
-    // TODO: implement getFriendsUser
-    throw UnimplementedError();
+  Future<MResult<List<MUser>>> getFriendsUser({required String id}) async {
+    try {
+      final user = await usersRef.get(id);
+      if (user.isSuccess && user.data != null) {
+        List<MUser> friends = [];
+        for (var element in user.data!.friends) {
+          final friend = await usersRef.get(element);
+          if (friend.isSuccess && friend.data != null) {
+            friends.add(friend.data!);
+          } else {
+            return MResult.error('Friend not found');
+          }
+        }
+        return MResult.success(friends);
+      }
+      return MResult.error('error');
+    } catch (e) {
+      return MResult.exception(e);
+    }
   }
 
   @override
