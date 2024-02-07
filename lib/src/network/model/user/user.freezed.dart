@@ -28,7 +28,8 @@ mixin _$MUser {
   double? get weight => throw _privateConstructorUsedError;
   String? get gender => throw _privateConstructorUsedError;
   int? get age => throw _privateConstructorUsedError;
-  List<String>? get target => throw _privateConstructorUsedError;
+  List<String> get target => throw _privateConstructorUsedError;
+  List<String> get friends => throw _privateConstructorUsedError;
   int get workoutsCompleted => throw _privateConstructorUsedError;
   int get hoursTraining => throw _privateConstructorUsedError;
   int get challengeParticipatedIn => throw _privateConstructorUsedError;
@@ -53,7 +54,8 @@ abstract class $MUserCopyWith<$Res> {
       double? weight,
       String? gender,
       int? age,
-      List<String>? target,
+      List<String> target,
+      List<String> friends,
       int workoutsCompleted,
       int hoursTraining,
       int challengeParticipatedIn,
@@ -81,7 +83,8 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
     Object? weight = freezed,
     Object? gender = freezed,
     Object? age = freezed,
-    Object? target = freezed,
+    Object? target = null,
+    Object? friends = null,
     Object? workoutsCompleted = null,
     Object? hoursTraining = null,
     Object? challengeParticipatedIn = null,
@@ -120,10 +123,14 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      target: freezed == target
+      target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
+      friends: null == friends
+          ? _value.friends
+          : friends // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       workoutsCompleted: null == workoutsCompleted
           ? _value.workoutsCompleted
           : workoutsCompleted // ignore: cast_nullable_to_non_nullable
@@ -160,7 +167,8 @@ abstract class _$$MUserImplCopyWith<$Res> implements $MUserCopyWith<$Res> {
       double? weight,
       String? gender,
       int? age,
-      List<String>? target,
+      List<String> target,
+      List<String> friends,
       int workoutsCompleted,
       int hoursTraining,
       int challengeParticipatedIn,
@@ -186,7 +194,8 @@ class __$$MUserImplCopyWithImpl<$Res>
     Object? weight = freezed,
     Object? gender = freezed,
     Object? age = freezed,
-    Object? target = freezed,
+    Object? target = null,
+    Object? friends = null,
     Object? workoutsCompleted = null,
     Object? hoursTraining = null,
     Object? challengeParticipatedIn = null,
@@ -225,10 +234,14 @@ class __$$MUserImplCopyWithImpl<$Res>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      target: freezed == target
+      target: null == target
           ? _value._target
           : target // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
+      friends: null == friends
+          ? _value._friends
+          : friends // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       workoutsCompleted: null == workoutsCompleted
           ? _value.workoutsCompleted
           : workoutsCompleted // ignore: cast_nullable_to_non_nullable
@@ -254,19 +267,21 @@ class __$$MUserImplCopyWithImpl<$Res>
 class _$MUserImpl extends _MUser {
   const _$MUserImpl(
       {required this.id,
-      this.name,
-      this.avatar,
+      this.name = 'user',
+      this.avatar = 'avatar.png',
       this.email,
       this.height,
       this.weight,
       this.gender,
       this.age,
-      final List<String>? target,
+      final List<String> target = const [],
+      final List<String> friends = const [],
       this.workoutsCompleted = 0,
       this.hoursTraining = 0,
       this.challengeParticipatedIn = 0,
       final List<String> favoriteWorkout = const []})
       : _target = target,
+        _friends = friends,
         _favoriteWorkout = favoriteWorkout,
         super._();
 
@@ -276,8 +291,10 @@ class _$MUserImpl extends _MUser {
   @override
   final String id;
   @override
+  @JsonKey()
   final String? name;
   @override
+  @JsonKey()
   final String? avatar;
   @override
   final String? email;
@@ -289,14 +306,22 @@ class _$MUserImpl extends _MUser {
   final String? gender;
   @override
   final int? age;
-  final List<String>? _target;
+  final List<String> _target;
   @override
-  List<String>? get target {
-    final value = _target;
-    if (value == null) return null;
+  @JsonKey()
+  List<String> get target {
     if (_target is EqualUnmodifiableListView) return _target;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
+    return EqualUnmodifiableListView(_target);
+  }
+
+  final List<String> _friends;
+  @override
+  @JsonKey()
+  List<String> get friends {
+    if (_friends is EqualUnmodifiableListView) return _friends;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_friends);
   }
 
   @override
@@ -319,7 +344,7 @@ class _$MUserImpl extends _MUser {
 
   @override
   String toString() {
-    return 'MUser(id: $id, name: $name, avatar: $avatar, email: $email, height: $height, weight: $weight, gender: $gender, age: $age, target: $target, workoutsCompleted: $workoutsCompleted, hoursTraining: $hoursTraining, challengeParticipatedIn: $challengeParticipatedIn, favoriteWorkout: $favoriteWorkout)';
+    return 'MUser(id: $id, name: $name, avatar: $avatar, email: $email, height: $height, weight: $weight, gender: $gender, age: $age, target: $target, friends: $friends, workoutsCompleted: $workoutsCompleted, hoursTraining: $hoursTraining, challengeParticipatedIn: $challengeParticipatedIn, favoriteWorkout: $favoriteWorkout)';
   }
 
   @override
@@ -336,6 +361,7 @@ class _$MUserImpl extends _MUser {
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.age, age) || other.age == age) &&
             const DeepCollectionEquality().equals(other._target, _target) &&
+            const DeepCollectionEquality().equals(other._friends, _friends) &&
             (identical(other.workoutsCompleted, workoutsCompleted) ||
                 other.workoutsCompleted == workoutsCompleted) &&
             (identical(other.hoursTraining, hoursTraining) ||
@@ -360,6 +386,7 @@ class _$MUserImpl extends _MUser {
       gender,
       age,
       const DeepCollectionEquality().hash(_target),
+      const DeepCollectionEquality().hash(_friends),
       workoutsCompleted,
       hoursTraining,
       challengeParticipatedIn,
@@ -389,7 +416,8 @@ abstract class _MUser extends MUser {
       final double? weight,
       final String? gender,
       final int? age,
-      final List<String>? target,
+      final List<String> target,
+      final List<String> friends,
       final int workoutsCompleted,
       final int hoursTraining,
       final int challengeParticipatedIn,
@@ -415,7 +443,9 @@ abstract class _MUser extends MUser {
   @override
   int? get age;
   @override
-  List<String>? get target;
+  List<String> get target;
+  @override
+  List<String> get friends;
   @override
   int get workoutsCompleted;
   @override

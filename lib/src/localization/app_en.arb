@@ -107,6 +107,15 @@
   "sets":" sets",
   "min_rest":" min rest",
 
+  "profile_edit":"Edit profile",
+  "profile_overview":"Overview",
+  "profile_friends":"Friends",
+  "profile_gender":"Gender",
+  "profile_height":"Height",
+  "profile_weight":"Weight",
+  "profile_age":"Age",
+  "profile_target":"Target",
+
   "none":"none",
   "waiting":"Waiting...",
   "is_loading":"Is Loading...",

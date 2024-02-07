@@ -8,15 +8,21 @@ part of 'user.dart';
 
 _$MUserImpl _$$MUserImplFromJson(Map<String, dynamic> json) => _$MUserImpl(
       id: json['id'] as String,
-      name: json['name'] as String?,
-      avatar: json['avatar'] as String?,
+      name: json['name'] as String? ?? 'user',
+      avatar: json['avatar'] as String? ?? 'avatar.png',
       email: json['email'] as String?,
       height: (json['height'] as num?)?.toDouble(),
       weight: (json['weight'] as num?)?.toDouble(),
       gender: json['gender'] as String?,
       age: json['age'] as int?,
-      target:
-          (json['target'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      target: (json['target'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      friends: (json['friends'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       workoutsCompleted: json['workoutsCompleted'] as int? ?? 0,
       hoursTraining: json['hoursTraining'] as int? ?? 0,
       challengeParticipatedIn: json['challengeParticipatedIn'] as int? ?? 0,
@@ -37,6 +43,7 @@ Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
       'gender': instance.gender,
       'age': instance.age,
       'target': instance.target,
+      'friends': instance.friends,
       'workoutsCompleted': instance.workoutsCompleted,
       'hoursTraining': instance.hoursTraining,
       'challengeParticipatedIn': instance.challengeParticipatedIn,
