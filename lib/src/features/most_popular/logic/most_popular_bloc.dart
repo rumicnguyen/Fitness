@@ -16,7 +16,11 @@ class MostPopularBloc extends Cubit<MostPopularState> {
 
   Future syncData() async {
     emit(state.copyWith(handle: MHandle.loading()));
-    final result = await domain.workout.getWorkouts();
+    final update = await domain.workout.updateMostPopular();
+    if (update.isError) {
+      return;
+    }
+    final result = await domain.workout.getMostPopular();
     if (result.isSuccess && result.data != null) {
       changeMostPopular(result.data!);
       List<String> list = [];
@@ -29,14 +33,8 @@ class MostPopularBloc extends Cubit<MostPopularState> {
           list.add(img.data!);
         }
       }
-      changeImages(list);
     }
     emit(state.copyWith(handle: MHandle.result(result)));
-  }
-
-  void changeImages(List<String> list) {
-    List<String> data = List.from(list);
-    emit(state.copyWith(images: data));
   }
 
   void changeMostPopular(List<MWorkout> list) {

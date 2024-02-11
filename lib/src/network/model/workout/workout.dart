@@ -22,6 +22,7 @@ class MWorkout with _$MWorkout {
     @Default('') String video,
     @Default(DisciplineActivity.gym) DisciplineActivity discipline,
     @Default(0) int entryFee,
+    @Default(0.0) double popular,
     int? tag,
   }) = _MWorkout;
 

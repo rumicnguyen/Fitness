@@ -21,8 +21,8 @@ MUserWorkout _$MUserWorkoutFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MUserWorkout {
   String get id => throw _privateConstructorUsedError;
-  String? get idUser => throw _privateConstructorUsedError;
-  String? get idWorkout => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  String? get workoutId => throw _privateConstructorUsedError;
   String? get workoutName => throw _privateConstructorUsedError;
   String? get userName => throw _privateConstructorUsedError;
   String? get workoutImage => throw _privateConstructorUsedError;
@@ -45,8 +45,8 @@ abstract class $MUserWorkoutCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? idUser,
-      String? idWorkout,
+      String? userId,
+      String? workoutId,
       String? workoutName,
       String? userName,
       String? workoutImage,
@@ -70,8 +70,8 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
   @override
   $Res call({
     Object? id = null,
-    Object? idUser = freezed,
-    Object? idWorkout = freezed,
+    Object? userId = freezed,
+    Object? workoutId = freezed,
     Object? workoutName = freezed,
     Object? userName = freezed,
     Object? workoutImage = freezed,
@@ -85,13 +85,13 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      idUser: freezed == idUser
-          ? _value.idUser
-          : idUser // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      idWorkout: freezed == idWorkout
-          ? _value.idWorkout
-          : idWorkout // ignore: cast_nullable_to_non_nullable
+      workoutId: freezed == workoutId
+          ? _value.workoutId
+          : workoutId // ignore: cast_nullable_to_non_nullable
               as String?,
       workoutName: freezed == workoutName
           ? _value.workoutName
@@ -135,8 +135,8 @@ abstract class _$$MUserWorkoutImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String? idUser,
-      String? idWorkout,
+      String? userId,
+      String? workoutId,
       String? workoutName,
       String? userName,
       String? workoutImage,
@@ -158,8 +158,8 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? idUser = freezed,
-    Object? idWorkout = freezed,
+    Object? userId = freezed,
+    Object? workoutId = freezed,
     Object? workoutName = freezed,
     Object? userName = freezed,
     Object? workoutImage = freezed,
@@ -173,13 +173,13 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      idUser: freezed == idUser
-          ? _value.idUser
-          : idUser // ignore: cast_nullable_to_non_nullable
+      userId: freezed == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      idWorkout: freezed == idWorkout
-          ? _value.idWorkout
-          : idWorkout // ignore: cast_nullable_to_non_nullable
+      workoutId: freezed == workoutId
+          ? _value.workoutId
+          : workoutId // ignore: cast_nullable_to_non_nullable
               as String?,
       workoutName: freezed == workoutName
           ? _value.workoutName
@@ -218,8 +218,8 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
 class _$MUserWorkoutImpl extends _MUserWorkout {
   const _$MUserWorkoutImpl(
       {required this.id,
-      this.idUser,
-      this.idWorkout,
+      this.userId,
+      this.workoutId,
       this.workoutName,
       this.userName,
       this.workoutImage,
@@ -235,9 +235,9 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
   @override
   final String id;
   @override
-  final String? idUser;
+  final String? userId;
   @override
-  final String? idWorkout;
+  final String? workoutId;
   @override
   final String? workoutName;
   @override
@@ -257,7 +257,7 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
 
   @override
   String toString() {
-    return 'MUserWorkout(id: $id, idUser: $idUser, idWorkout: $idWorkout, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt, taskDone: $taskDone, isFinished: $isFinished)';
+    return 'MUserWorkout(id: $id, userId: $userId, workoutId: $workoutId, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt, taskDone: $taskDone, isFinished: $isFinished)';
   }
 
   @override
@@ -266,9 +266,9 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
         (other.runtimeType == runtimeType &&
             other is _$MUserWorkoutImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.idUser, idUser) || other.idUser == idUser) &&
-            (identical(other.idWorkout, idWorkout) ||
-                other.idWorkout == idWorkout) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
+            (identical(other.workoutId, workoutId) ||
+                other.workoutId == workoutId) &&
             (identical(other.workoutName, workoutName) ||
                 other.workoutName == workoutName) &&
             (identical(other.userName, userName) ||
@@ -289,8 +289,8 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      idUser,
-      idWorkout,
+      userId,
+      workoutId,
       workoutName,
       userName,
       workoutImage,
@@ -316,8 +316,8 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
 abstract class _MUserWorkout extends MUserWorkout {
   const factory _MUserWorkout(
       {required final String id,
-      final String? idUser,
-      final String? idWorkout,
+      final String? userId,
+      final String? workoutId,
       final String? workoutName,
       final String? userName,
       final String? workoutImage,
@@ -333,9 +333,9 @@ abstract class _MUserWorkout extends MUserWorkout {
   @override
   String get id;
   @override
-  String? get idUser;
+  String? get userId;
   @override
-  String? get idWorkout;
+  String? get workoutId;
   @override
   String? get workoutName;
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fitness_app/src/network/data/user_workout/user_workout_reference.dart';
 import 'package:fitness_app/src/network/data/user_workout/user_workout_repository.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
@@ -39,5 +41,31 @@ class UserWorkoutRepositoryImpl extends UserWorkoutRepository {
   }) {
     // TODO: implement update
     throw UnimplementedError();
+  }
+
+  @override
+  Future<MResult<List<MUserWorkout>>> getUserWorkouts() {
+    return userWorkoutRef.getAll();
+  }
+
+  @override
+  Future<MResult<List<MUserWorkout>>> getUserWorkoutByUserId({
+    required String userId,
+  }) {
+    return userWorkoutRef.getUserWorkoutByUserId(userId: userId);
+  }
+
+  @override
+  Future<MResult<List<MUserWorkout>>> getUserWorkoutByWorkoutId({
+    required String workoutId,
+  }) async {
+    return userWorkoutRef.getUserWorkoutByWorkoutId(workoutId: workoutId);
+  }
+
+  @override
+  Future<MResult<MUserWorkout>> getUserWorkoutById({
+    required String id,
+  }) {
+    return userWorkoutRef.get(id);
   }
 }

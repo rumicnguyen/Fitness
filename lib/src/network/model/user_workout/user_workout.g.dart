@@ -9,8 +9,8 @@ part of 'user_workout.dart';
 _$MUserWorkoutImpl _$$MUserWorkoutImplFromJson(Map<String, dynamic> json) =>
     _$MUserWorkoutImpl(
       id: json['id'] as String,
-      idUser: json['idUser'] as String?,
-      idWorkout: json['idWorkout'] as String?,
+      userId: json['userId'] as String?,
+      workoutId: json['workoutId'] as String?,
       workoutName: json['workoutName'] as String?,
       userName: json['userName'] as String?,
       workoutImage: json['workoutImage'] as String?,
@@ -27,8 +27,8 @@ _$MUserWorkoutImpl _$$MUserWorkoutImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$MUserWorkoutImplToJson(_$MUserWorkoutImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'idUser': instance.idUser,
-      'idWorkout': instance.idWorkout,
+      'userId': instance.userId,
+      'workoutId': instance.workoutId,
       'workoutName': instance.workoutName,
       'userName': instance.userName,
       'workoutImage': instance.workoutImage,
