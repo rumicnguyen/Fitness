@@ -164,4 +164,10 @@ class AppStyles {
     fontSize: 20,
     fontWeight: FontWeight.w500,
   );
+
+  static const mostB = TextStyle(
+    color: AppColors.white,
+    fontSize: 24,
+    fontFamily: FontFamily.avenirBold,
+  );
 }

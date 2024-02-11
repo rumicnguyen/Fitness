@@ -1,4 +1,5 @@
 import 'package:fitness_app/src/features/home/widget/block.dart';
+import 'package:fitness_app/src/features/most_popular/view/most_popular_view.dart';
 import 'package:fitness_app/src/features/workout/logic/workout_bloc.dart';
 import 'package:fitness_app/src/features/workout/logic/workout_state.dart';
 import 'package:fitness_app/src/features/workout/widget/session.dart';
@@ -22,14 +23,12 @@ class WorkoutView extends StatelessWidget {
         create: (BuildContext context) {
           return WorkoutBloc();
         },
-        child: SingleChildScrollView(
-          child: WorkoutHeader(
-            tabBar: const XTabBar(),
-            child: Column(
-              children: [
-                _builder(),
-              ],
-            ),
+        child: WorkoutHeader(
+          tabBar: const XTabBar(),
+          child: Column(
+            children: [
+              _builder(),
+            ],
           ),
         ),
       ),
@@ -46,7 +45,7 @@ class WorkoutView extends StatelessWidget {
           case TabBarWorkout.forYou:
             return _buildForYou();
           case TabBarWorkout.mostPopular:
-            return _buildMostPopular();
+            return const MostPopular();
           default:
             return const SizedBox();
         }
@@ -59,25 +58,6 @@ class WorkoutView extends StatelessWidget {
       children: [
         _buildNewSessions(),
       ],
-    );
-  }
-
-  Widget _buildMostPopular() {
-    return BlocBuilder<WorkoutBloc, WorkoutState>(
-      buildWhen: (previous, current) {
-        return previous.mostPopular != current.mostPopular;
-      },
-      builder: (context, state) {
-        return XBlock(
-          header: S.of(context).most_popular,
-          onPressed: () {},
-          child: Center(
-            child: Text(
-              S.of(context).most_popular,
-            ),
-          ),
-        );
-      },
     );
   }
 
