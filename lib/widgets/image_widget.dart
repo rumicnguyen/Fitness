@@ -1,3 +1,4 @@
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +45,6 @@ class _ImageWidgetState extends State<ImageWidget> {
   @override
   void initState() {
     super.initState();
-    url = '';
     syncData();
   }
 
@@ -59,12 +59,20 @@ class _ImageWidgetState extends State<ImageWidget> {
   }
 
   Widget _buildBody() {
-    return Image.network(
-      url,
-      fit: widget.fit,
-      alignment: widget.alignment,
-      width: widget.width,
-      height: widget.height,
-    );
+    return url == ''
+        ? Image.asset(
+            Assets.images.blankImage.path,
+            fit: widget.fit,
+            alignment: Alignment.center,
+            width: widget.width,
+            height: widget.height,
+          )
+        : Image.network(
+            url,
+            fit: widget.fit,
+            alignment: widget.alignment,
+            width: widget.width,
+            height: widget.height,
+          );
   }
 }

@@ -50,10 +50,12 @@
   "percent_completed":"% Completed",
   "kcal":"kcal",
   "km":"km",
+  "tab":"  ",
 
   "symbol_space":"•",
   "symbol_add":"+",
   "symbol_center_line":"-",
+  "symbol_rank":"#",
 
   "hours_workout":"hours workout",
   "see_all":"See All",
@@ -118,6 +120,16 @@
   "profile_set_goal":"Set Goal",
   "profile_your_goal":"Your Goal",
   "profile_list_goal":"List Goal",
+
+  "read_more":"Read more",
+  "challenges":"Challenges",
+  "points":"pts",
+  "global":"Global",
+  "friends":"Friends",
+  "your_stats":"Your Stats",
+  "hours_left":"hours left",
+  "minutes_left":"minutes left",
+  "overral_stats":"Overral stats",
 
   "none":"none",
   "waiting":"Waiting...",

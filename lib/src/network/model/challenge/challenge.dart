@@ -1,5 +1,4 @@
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
-import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'challenge.freezed.dart';
@@ -11,8 +10,9 @@ class MChallenge with _$MChallenge {
   const factory MChallenge({
     required String id,
     @Default('None') String name,
-    @Default('None') String thumbnail,
-    @Default([]) List<MWorkout> workouts,
+    @Default('coming_soon.png') String thumbnail,
+    @Default('None') String decription,
+    @Default([]) List<String> workouts,
     @Default(WorkoutLevel.none) WorkoutLevel level,
     @Default(0) int members,
     @Default(true) bool isActive,

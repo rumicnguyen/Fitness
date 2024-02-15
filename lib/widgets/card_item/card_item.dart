@@ -28,7 +28,7 @@ class XCardItem extends StatelessWidget {
   final double? height;
   final String? image;
   final EdgeInsetsGeometry? magin;
-  final Image? backgroundImage;
+  final Widget? backgroundImage;
   final LayoutType? type;
   final void Function()? onTap;
   final int? overload;

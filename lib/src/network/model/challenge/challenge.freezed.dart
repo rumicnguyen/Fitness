@@ -23,7 +23,8 @@ mixin _$MChallenge {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
-  List<MWorkout> get workouts => throw _privateConstructorUsedError;
+  String get decription => throw _privateConstructorUsedError;
+  List<String> get workouts => throw _privateConstructorUsedError;
   WorkoutLevel get level => throw _privateConstructorUsedError;
   int get members => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
@@ -45,7 +46,8 @@ abstract class $MChallengeCopyWith<$Res> {
       {String id,
       String name,
       String thumbnail,
-      List<MWorkout> workouts,
+      String decription,
+      List<String> workouts,
       WorkoutLevel level,
       int members,
       bool isActive,
@@ -68,6 +70,7 @@ class _$MChallengeCopyWithImpl<$Res, $Val extends MChallenge>
     Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
+    Object? decription = null,
     Object? workouts = null,
     Object? level = null,
     Object? members = null,
@@ -87,10 +90,14 @@ class _$MChallengeCopyWithImpl<$Res, $Val extends MChallenge>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      decription: null == decription
+          ? _value.decription
+          : decription // ignore: cast_nullable_to_non_nullable
+              as String,
       workouts: null == workouts
           ? _value.workouts
           : workouts // ignore: cast_nullable_to_non_nullable
-              as List<MWorkout>,
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -123,7 +130,8 @@ abstract class _$$MChallengeImplCopyWith<$Res>
       {String id,
       String name,
       String thumbnail,
-      List<MWorkout> workouts,
+      String decription,
+      List<String> workouts,
       WorkoutLevel level,
       int members,
       bool isActive,
@@ -144,6 +152,7 @@ class __$$MChallengeImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? thumbnail = null,
+    Object? decription = null,
     Object? workouts = null,
     Object? level = null,
     Object? members = null,
@@ -163,10 +172,14 @@ class __$$MChallengeImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
+      decription: null == decription
+          ? _value.decription
+          : decription // ignore: cast_nullable_to_non_nullable
+              as String,
       workouts: null == workouts
           ? _value._workouts
           : workouts // ignore: cast_nullable_to_non_nullable
-              as List<MWorkout>,
+              as List<String>,
       level: null == level
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
@@ -193,8 +206,9 @@ class _$MChallengeImpl extends _MChallenge {
   const _$MChallengeImpl(
       {required this.id,
       this.name = 'None',
-      this.thumbnail = 'None',
-      final List<MWorkout> workouts = const [],
+      this.thumbnail = 'coming_soon.png',
+      this.decription = 'None',
+      final List<String> workouts = const [],
       this.level = WorkoutLevel.none,
       this.members = 0,
       this.isActive = true,
@@ -213,10 +227,13 @@ class _$MChallengeImpl extends _MChallenge {
   @override
   @JsonKey()
   final String thumbnail;
-  final List<MWorkout> _workouts;
   @override
   @JsonKey()
-  List<MWorkout> get workouts {
+  final String decription;
+  final List<String> _workouts;
+  @override
+  @JsonKey()
+  List<String> get workouts {
     if (_workouts is EqualUnmodifiableListView) return _workouts;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_workouts);
@@ -236,7 +253,7 @@ class _$MChallengeImpl extends _MChallenge {
 
   @override
   String toString() {
-    return 'MChallenge(id: $id, name: $name, thumbnail: $thumbnail, workouts: $workouts, level: $level, members: $members, isActive: $isActive, tag: $tag)';
+    return 'MChallenge(id: $id, name: $name, thumbnail: $thumbnail, decription: $decription, workouts: $workouts, level: $level, members: $members, isActive: $isActive, tag: $tag)';
   }
 
   @override
@@ -248,6 +265,8 @@ class _$MChallengeImpl extends _MChallenge {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.thumbnail, thumbnail) ||
                 other.thumbnail == thumbnail) &&
+            (identical(other.decription, decription) ||
+                other.decription == decription) &&
             const DeepCollectionEquality().equals(other._workouts, _workouts) &&
             (identical(other.level, level) || other.level == level) &&
             (identical(other.members, members) || other.members == members) &&
@@ -263,6 +282,7 @@ class _$MChallengeImpl extends _MChallenge {
       id,
       name,
       thumbnail,
+      decription,
       const DeepCollectionEquality().hash(_workouts),
       level,
       members,
@@ -288,7 +308,8 @@ abstract class _MChallenge extends MChallenge {
       {required final String id,
       final String name,
       final String thumbnail,
-      final List<MWorkout> workouts,
+      final String decription,
+      final List<String> workouts,
       final WorkoutLevel level,
       final int members,
       final bool isActive,
@@ -305,7 +326,9 @@ abstract class _MChallenge extends MChallenge {
   @override
   String get thumbnail;
   @override
-  List<MWorkout> get workouts;
+  String get decription;
+  @override
+  List<String> get workouts;
   @override
   WorkoutLevel get level;
   @override

@@ -15,6 +15,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/avatar.jpg
   AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.jpg');
 
+  /// File path: assets/images/blank_image.jpg
+  AssetGenImage get blankImage =>
+      const AssetGenImage('assets/images/blank_image.jpg');
+
   /// File path: assets/images/coming_soon.png
   AssetGenImage get comingSoon =>
       const AssetGenImage('assets/images/coming_soon.png');
@@ -63,6 +67,9 @@ class $AssetsImagesGen {
   AssetGenImage get newTransparent =>
       const AssetGenImage('assets/images/new_transparent.png');
 
+  /// File path: assets/images/pulse.png
+  AssetGenImage get pulse => const AssetGenImage('assets/images/pulse.png');
+
   /// File path: assets/images/user.png
   AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
@@ -72,6 +79,7 @@ class $AssetsImagesGen {
   /// List of all assets
   List<AssetGenImage> get values => [
         avatar,
+        blankImage,
         comingSoon,
         eng,
         intro,
@@ -87,6 +95,7 @@ class $AssetsImagesGen {
         item9,
         newBackground,
         newTransparent,
+        pulse,
         user,
         vie
       ];
