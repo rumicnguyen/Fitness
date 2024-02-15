@@ -18,13 +18,8 @@ enum AppRouteNames {
 
   filterWorkout(path: '/filter-workout'),
   // List workout when search, show all
-  workoutList(
+  listWorkout(
     path: '/workout-list',
-    paramName: 'id',
-  ),
-  mostPopular(
-    path: '/most-popular',
-    paramName: 'id',
   ),
   workoutDetails(
     path: '/workout-detail',
@@ -48,7 +43,6 @@ enum AppRouteNames {
   });
 
   String get name => path;
-
   String get subPath {
     if (path == '/') {
       return path;

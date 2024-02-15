@@ -126,7 +126,7 @@ class FilterWorkoutView extends StatelessWidget {
       },
       builder: (context, state) {
         return FilterDropdown(
-          header: S.of(context).entry_fee,
+          header: S.of(context).time,
           list: TimeFilter.values,
           value: state.time,
           valueOnFilter: state.timeOnFilter,
@@ -154,7 +154,7 @@ class FilterWorkoutView extends StatelessWidget {
       },
       builder: (context, state) {
         return FilterDropdown(
-          header: S.of(context).entry_fee,
+          header: S.of(context).level,
           list: WorkoutLevel.values,
           value: state.level,
           valueOnFilter: state.levelOnFilter,

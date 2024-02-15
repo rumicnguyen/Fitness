@@ -20,4 +20,31 @@ enum TimeFilter {
     return values.firstWhere((element) => element.value == value,
         orElse: () => any);
   }
+
+  static bool isTrue(int time, TimeFilter input) {
+    switch (input) {
+      case lt15m:
+        if (time < 15) {
+          return true;
+        }
+        return false;
+      case lt30m:
+        if (time < 30) {
+          return true;
+        }
+        return false;
+      case lt60:
+        if (time < 60) {
+          return true;
+        }
+        return false;
+      case lt120:
+        if (time < 120) {
+          return true;
+        }
+        return false;
+      default:
+        return true;
+    }
+  }
 }

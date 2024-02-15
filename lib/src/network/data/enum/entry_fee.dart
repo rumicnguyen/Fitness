@@ -20,4 +20,31 @@ enum EntryFee {
     return values.firstWhere((element) => element.value == value,
         orElse: () => any);
   }
+
+  static bool isTrue(int fee, EntryFee input) {
+    switch (input) {
+      case lt300:
+        if (fee < 300000) {
+          return true;
+        }
+        return false;
+      case lt500:
+        if (fee < 500000) {
+          return true;
+        }
+        return false;
+      case lt1000:
+        if (fee < 1000000) {
+          return true;
+        }
+        return false;
+      case gt1000:
+        if (fee > 1000000) {
+          return true;
+        }
+        return false;
+      default:
+        return true;
+    }
+  }
 }

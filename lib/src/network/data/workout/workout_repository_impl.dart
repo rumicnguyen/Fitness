@@ -1,7 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
+import 'package:fitness_app/src/network/data/enum/entry_fee.dart';
+import 'package:fitness_app/src/network/data/enum/time_filter.dart';
+import 'package:fitness_app/src/network/data/enum/workout_level.dart';
 import 'package:fitness_app/src/network/data/workout/workout_reference.dart';
 import 'package:fitness_app/src/network/data/workout/workout_repository.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
+import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/utils/popular.dart';
 
@@ -113,6 +118,43 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
       return MResult.error('error');
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  @override
+  Future<MResult<List<MWorkout>>> getFilterWorkout({
+    required MFilterWorkout filterWorkout,
+  }) async {
+    try {
+      MResult<List<MWorkout>> list = await getWorkouts();
+
+      if (list.isError || list.data == null) {
+        return MResult.error('error');
+      }
+
+      final List<MWorkout> result = list.data!
+          .where((element) =>
+              DisciplineActivity.isTrue(
+                element.discipline,
+                filterWorkout.discipline,
+              ) &&
+              EntryFee.isTrue(
+                element.entryFee,
+                filterWorkout.entryFee,
+              ) &&
+              WorkoutLevel.isTrue(
+                element.level,
+                filterWorkout.level,
+              ) &&
+              TimeFilter.isTrue(
+                element.minimumTime ?? 0,
+                filterWorkout.time,
+              ))
+          .toList();
+
+      return MResult.success(result);
     } catch (e) {
       return MResult.exception(e);
     }

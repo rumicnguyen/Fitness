@@ -1,9 +1,9 @@
 import 'dart:math';
 
 class StringUtils {
-  static String shorten(String input) {
-    if (input.length > 20) {
-      String modifiedString = "${input.substring(0, 20)}...";
+  static String shorten(String input, {int length = 20}) {
+    if (input.length > length) {
+      String modifiedString = "${input.substring(0, length)}...";
       return modifiedString;
     }
     return input;

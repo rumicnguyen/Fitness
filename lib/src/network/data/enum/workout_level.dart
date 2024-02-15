@@ -12,4 +12,27 @@ enum WorkoutLevel {
     return values.firstWhere((element) => element.value == value,
         orElse: () => none);
   }
+
+  static bool isTrue(WorkoutLevel level, WorkoutLevel input) {
+    switch (input) {
+      case simple:
+        if (level == simple) {
+          return true;
+        }
+        return false;
+      case medium:
+        if (level == medium) {
+          return true;
+        }
+        return false;
+      case entry:
+        if (level == entry) {
+          return true;
+        }
+        return false;
+
+      default:
+        return true;
+    }
+  }
 }
