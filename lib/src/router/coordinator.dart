@@ -39,14 +39,8 @@ class AppCoordinator {
   static Future<T?> showForgotPasswordScreen<T extends Object?>() =>
       context.pushNamed<T>(AppRouteNames.forgotPassword.name);
 
-  static Future<T?> showFirstCollectInfoScreen<T extends Object?>() =>
-      context.pushNamed<T>(AppRouteNames.firstCollectInfo.name);
-
-  static Future<T?> showSecondCollectInfoScreen<T extends Object?>() =>
-      context.pushNamed<T>(AppRouteNames.secondCollectInfo.name);
-
-  static Future<T?> showThirthCollectInfoScreen<T extends Object?>() =>
-      context.pushNamed<T>(AppRouteNames.thirthCollectInfo.name);
+  static Future<T?> showSetGoalScreen<T extends Object?>() =>
+      context.pushNamed<T>(AppRouteNames.setGoal.name);
 
   static Future<T?> showActivityScreen<T extends Object?>() =>
       context.pushNamed<T>(AppRouteNames.activity.name);

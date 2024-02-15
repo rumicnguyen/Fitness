@@ -115,6 +115,9 @@
   "profile_weight":"Weight",
   "profile_age":"Age",
   "profile_target":"Target",
+  "profile_set_goal":"Set Goal",
+  "profile_your_goal":"Your Goal",
+  "profile_list_goal":"List Goal",
 
   "none":"none",
   "waiting":"Waiting...",

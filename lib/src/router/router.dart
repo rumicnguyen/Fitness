@@ -7,6 +7,7 @@ import 'package:fitness_app/src/features/challenge/view/challenge_view.dart';
 import 'package:fitness_app/src/features/challenge_detail/view/challenge_detail_view.dart';
 import 'package:fitness_app/src/features/dashboard/view/dashboard_view.dart';
 import 'package:fitness_app/src/features/filter_workout/view/filter_workout_view.dart';
+import 'package:fitness_app/src/features/goal/view/goal_view.dart';
 import 'package:fitness_app/src/features/home/view/home_view.dart';
 import 'package:fitness_app/src/features/intro/view/intro_view.dart';
 import 'package:fitness_app/src/features/page_not_found/view/page_not_found_view.dart';
@@ -50,7 +51,11 @@ class AppRouter {
             name: AppRouteNames.forgotPassword.name,
             builder: (_, __) => const ForgotView(),
           ),
-
+          GoRoute(
+            path: AppRouteNames.setGoal.subPath,
+            name: AppRouteNames.setGoal.name,
+            builder: (context, state) => const GoalView(),
+          ),
           // place to insert collect info route
         ],
       ),

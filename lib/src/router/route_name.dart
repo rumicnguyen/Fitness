@@ -12,9 +12,7 @@ enum AppRouteNames {
   signIn(path: '/sign-in'),
   signUp(path: '/sign-up'),
   forgotPassword(path: '/forgot'),
-  firstCollectInfo(path: '/first-ci'),
-  secondCollectInfo(path: '/second-ci'),
-  thirthCollectInfo(path: '/thirth-ci'),
+  setGoal(path: '/set-goal'),
 
   filterWorkout(path: '/filter-workout'),
   // List workout when search, show all
