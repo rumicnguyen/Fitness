@@ -129,7 +129,9 @@
   "your_stats":"Your Stats",
   "hours_left":"hours left",
   "minutes_left":"minutes left",
-  "overral_stats":"Overral stats",
+  "overall_stats":"Overall stats",
+
+  "activity":"Activity",
 
   "none":"none",
   "waiting":"Waiting...",

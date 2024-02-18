@@ -21,11 +21,12 @@ class MUser with _$MUser {
     @Default(0) int workoutsCompleted,
     @Default(0) int hoursTraining,
     @Default(0) int challengeParticipatedIn,
-    @Default([]) List<String> favoriteWorkout
+    @Default([]) List<String> favoriteWorkout,
+    DateTime? createdAt,
   }) = _MUser;
 
   factory MUser.empty() {
-    return const MUser(id: '');
+    return MUser(id: '', createdAt: DateTime.now());
   }
 
   factory MUser.fromJson(Map<String, Object?> json) => _$MUserFromJson(json);

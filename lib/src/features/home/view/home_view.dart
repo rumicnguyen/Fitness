@@ -61,9 +61,9 @@ class HomeView extends StatelessWidget {
       },
       builder: (context, state) {
         return TodayActivityView(
-          hours: state.todayActivity.hours ?? 0,
-          kcal: state.todayActivity.kcal ?? 0,
-          km: state.todayActivity.km ?? 0,
+          hours: state.todayActivity.hours ,
+          kcal: state.todayActivity.kcal,
+          km: state.todayActivity.km,
         );
       },
     );

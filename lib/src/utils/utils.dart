@@ -1,4 +1,50 @@
 class Utils {
+  static bool isToday(DateTime date) {
+    DateTime now = DateTime.now();
+    return date.day == now.day &&
+        date.month == now.month &&
+        date.year == now.year;
+  }
+
+  static bool isInThisWeek(DateTime date) {
+    DateTime now = DateTime.now();
+    return date.day == now.day &&
+        date.month == now.month &&
+        date.year == now.year;
+  }
+
+  static bool isInThisMonth(DateTime date) {
+    DateTime now = DateTime.now();
+    DateTime firstDayOfCurrentWeek = now.subtract(
+      Duration(days: now.weekday - 1),
+    );
+    DateTime lastDayOfCurrentWeek = firstDayOfCurrentWeek.add(
+      const Duration(days: 6),
+    );
+
+    return date.isAfter(
+          firstDayOfCurrentWeek.subtract(
+            const Duration(days: 1),
+          ),
+        ) &&
+        date.isBefore(
+          lastDayOfCurrentWeek.add(
+            const Duration(days: 1),
+          ),
+        );
+  }
+
+  static DateTime firstDayOfCurrentWeek() {
+    DateTime now = DateTime.now();
+    int currentWeekday = now.weekday;
+    return now.subtract(Duration(days: currentWeekday - 1));
+  }
+
+  static DateTime firstDayOfCurrentMonth() {
+    DateTime now = DateTime.now();
+    return DateTime(now.year, now.month, 1);
+  }
+
   int getWeekdayInMonth(DateTime date) {
     DateTime firstDayOfMonth = DateTime(date.year, date.month, 1);
     int daysDifference = date.difference(firstDayOfMonth).inDays;
