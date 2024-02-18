@@ -1,7 +1,7 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:fitness_app/gen/fonts.gen.dart';
-import 'package:fitness_app/src/features/setting/logic/setting_bloc.dart';
-import 'package:fitness_app/src/features/setting/logic/setting_state.dart';
+import 'package:fitness_app/src/features/intro/logic/intro_bloc.dart';
+import 'package:fitness_app/src/features/intro/logic/intro_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/router/router.dart';
 import 'package:fitness_app/src/themes/colors.dart';
@@ -22,11 +22,11 @@ class MyApp extends StatelessWidget {
     ));
 
     final appRouter = GetIt.I<AppRouter>();
-    return BlocProvider<SettingBloc>(
+    return BlocProvider<IntroBloc>(
       create: (BuildContext context) {
-        return SettingBloc();
+        return IntroBloc();
       },
-      child: BlocBuilder<SettingBloc, SettingState>(
+      child: BlocBuilder<IntroBloc, IntroState>(
         buildWhen: (previous, current) {
           return previous.locale != current.locale;
         },

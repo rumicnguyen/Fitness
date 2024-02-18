@@ -2,21 +2,21 @@ import 'package:equatable/equatable.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/material.dart';
 
-class SettingState extends Equatable {
+class IntroState extends Equatable {
   final Locale locale;
 
-  const SettingState({
+  const IntroState({
     required this.locale,
   });
 
-  factory SettingState.ds() => SettingState(
+  factory IntroState.ds() => IntroState(
         locale: UserPrefs.instance.getLocale(),
       );
 
-  SettingState copyWith({
+  IntroState copyWith({
     Locale? locale,
   }) {
-    return SettingState(
+    return IntroState(
       locale: locale ?? this.locale,
     );
   }

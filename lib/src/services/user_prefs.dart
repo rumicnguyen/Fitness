@@ -21,6 +21,11 @@ class UserPrefs {
     _prefs = await SharedPreferences.getInstance();
   }
 
+  void clear() {
+    setUser(MUser.empty());
+    setLocale(const Locale('en'));
+  }
+
   // locale
   Locale getLocale() {
     final value = _prefs.getString(_keys.locale) ?? 'en';
