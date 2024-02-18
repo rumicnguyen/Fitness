@@ -2,12 +2,14 @@ import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/src/utils/string_utils.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/grid.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,14 +21,13 @@ class FriendsActivityView extends StatelessWidget {
     return XBlock(
       header: S.of(context).friends_activity,
       type: LayoutType.grid,
-      onPressed: () {},
+      onPressed: null,
       child: BlocBuilder<HomeBloc, HomeState>(
-        buildWhen: (previous, current) {
-          return previous.friendsActivity != current.friendsActivity;
-        },
+        buildWhen: (previous, current) =>
+            previous.handle != current.handle ||
+            previous.friendsActivity != current.friendsActivity,
         builder: (context, state) {
-          List<MUserWorkout> list = List.from(state.friendsActivity);
-          return _builder(context, list);
+          return _builder(context, state.friendsActivity);
         },
       ),
     );
@@ -65,7 +66,7 @@ class FriendsActivityView extends StatelessWidget {
 
   Widget _buildOverloadItem(BuildContext context, int length) {
     return _buildItem(
-      item: const MUserWorkout(id: ''),
+      item: MUserWorkout.empty(),
       context: context,
       type: LayoutType.overload,
       overload: length - 2,
@@ -74,21 +75,21 @@ class FriendsActivityView extends StatelessWidget {
 
   Widget _buildNoneItem(BuildContext context) {
     return _buildItem(
-      item: const MUserWorkout(id: ''),
+      item: MUserWorkout.empty(),
       context: context,
       type: LayoutType.none,
     );
   }
 
   Widget _buildTitle(MUserWorkout item, BuildContext context) {
-    final String title = StringUtils.shorten(
-        '${S.of(context).completed} ${item.workoutName ?? ''}');
+    final String title =
+        StringUtils.shorten('${S.of(context).completed} ${item.workoutName}');
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          item.userName ?? '',
+          item.userName,
           style: AppStyles.whiteTextSmallB,
         ),
         Text(
@@ -107,11 +108,17 @@ class FriendsActivityView extends StatelessWidget {
   }) {
     return XCardItem(
       type: type,
-      image: item.workoutImage,
+      backgroundImage: ImageWidget(
+        width: double.infinity,
+        height: double.infinity,
+        image: item.workoutImage,
+        folder: StorageFolder.workouts,
+        borderRadius: 0,
+      ),
       overload: overload,
       onTap: () {
-        if (type != LayoutType.overload && item.workoutId != null) {
-          AppCoordinator.showWorkoutDetailsScreen(id: item.workoutId!);
+        if (type != LayoutType.overload) {
+          AppCoordinator.showWorkoutDetailsScreen(id: item.workoutId);
         }
         // develop later
         // if item.idWorkout.isEmpty => show make friend

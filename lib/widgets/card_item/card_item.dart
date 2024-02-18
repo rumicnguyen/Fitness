@@ -1,10 +1,9 @@
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
-import 'package:fitness_app/widgets/card_item/logic/card_item_bloc.dart';
-import 'package:fitness_app/widgets/card_item/logic/card_item_state.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 enum LayoutType { card, grid, overload, none }
 
@@ -12,43 +11,42 @@ class XCardItem extends StatelessWidget {
   const XCardItem({
     super.key,
     this.child,
-    this.width,
-    this.height,
-    this.image,
     this.tag,
     this.magin,
     this.backgroundImage,
     this.type,
     this.onTap,
     this.overload,
+    this.width = 340,
+    this.height = 230,
+    this.image = '',
+    this.folder = StorageFolder.workouts,
   });
   final int? tag;
   final Widget? child;
-  final double? width;
-  final double? height;
-  final String? image;
+  final double width;
+  final double height;
+  final String image;
   final EdgeInsetsGeometry? magin;
   final Widget? backgroundImage;
   final LayoutType? type;
   final void Function()? onTap;
   final int? overload;
+  final StorageFolder folder;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CardItemBloc(image ?? ''),
-      child: GestureDetector(
-        onTap: onTap,
-        child: Container(
-          margin: magin,
-          width: width ?? 340,
-          height: height ?? 230,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            gradient: _generateGradient(),
-          ),
-          child: _builder(context),
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        margin: magin,
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          gradient: _generateGradient(),
         ),
+        child: _builder(context),
       ),
     );
   }
@@ -77,23 +75,17 @@ class XCardItem extends StatelessWidget {
     return Stack(
       children: [
         Center(
-          child: BlocBuilder<CardItemBloc, CardItemState>(
-            buildWhen: (previous, current) =>
-                previous.handle != current.handle ||
-                previous.thumbnail != current.thumbnail,
-            builder: (context, state) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: backgroundImage ??
-                    Image.network(
-                      state.thumbnail,
-                      fit: BoxFit.cover,
-                      alignment: Alignment.topCenter,
-                      width: width ?? 340,
-                      height: height ?? 230,
-                    ),
-              );
-            },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: backgroundImage ??
+                ImageWidget(
+                  width: width,
+                  height: height,
+                  image: image,
+                  fit: BoxFit.cover,
+                  alignment: Alignment.topCenter,
+                  folder: folder,
+                ),
           ),
         ),
         Positioned(

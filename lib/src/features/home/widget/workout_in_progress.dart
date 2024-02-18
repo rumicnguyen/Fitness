@@ -1,4 +1,6 @@
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
@@ -7,15 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WorkoutInProgress extends StatelessWidget {
-  const WorkoutInProgress(
-      {super.key,
-      required this.persentCompleted,
-      this.onPressed,
-      required this.workoutName});
+  const WorkoutInProgress({
+    super.key,
+    required this.userWorkout,
+  });
 
-  final String workoutName;
-  final int persentCompleted;
-  final void Function()? onPressed;
+  final MUserWorkout userWorkout;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,7 @@ class WorkoutInProgress extends StatelessWidget {
               children: [
                 _buildBlock(
                   child: Text(
-                    workoutName,
+                    userWorkout.workoutName,
                     style: AppStyles.whiteTextMidium,
                   ),
                 ),
@@ -58,7 +57,9 @@ class WorkoutInProgress extends StatelessWidget {
               borderRadius: 30,
               title: S.of(context).continue_label,
               titleStyle: AppStyles.primaryColorText,
-              onPressed: onPressed,
+              onPressed: () {
+                AppCoordinator.showWorkoutDetailsScreen(id: userWorkout.workoutId);
+              },
               backgroundColor: AppColors.white,
             )
           ],
@@ -68,14 +69,14 @@ class WorkoutInProgress extends StatelessWidget {
   }
 
   Widget _buildProgressing(BuildContext context) {
-    final percentValue = persentCompleted / 100.0;
+    
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildBlock(
           child: Text(
-            persentCompleted.toString() + S.of(context).percent_completed,
+            userWorkout.percentCompleted.toString() + S.of(context).percent_completed,
             style: AppStyles.whiteTextSmall,
           ),
         ),
@@ -86,7 +87,7 @@ class WorkoutInProgress extends StatelessWidget {
           backgroundColor: AppColors.white,
           progressColor: AppColors.resultNumber,
           barRadius: const Radius.circular(30),
-          percent: percentValue,
+          percent: userWorkout.percentCompleted / 100,
           leading: const SizedBox(
             width: 0,
           ),

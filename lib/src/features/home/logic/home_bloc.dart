@@ -1,8 +1,10 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
+import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
@@ -19,20 +21,34 @@ class HomeBloc extends Cubit<HomeState> {
   MUser user = UserPrefs.I.getUser() ?? MUser.empty();
 
   Future syncData() async {
+    emit(state.copyWith(handle: MHandle.loading()));
+    XToast.showLoading();
+
     if (user.id.isNotEmpty == true) {
       Future.wait([
         syncDataTodayActivity(user.id),
         syncDataNextWorkout(user.id),
         syncDataActiveChallenge(),
         syncDataPodcasts(),
-        syncDataFriendsActivity(user.id)
+        syncDataFriendsActivity(user.id),
+        syncDataCurrentWorkout(user.id),
       ]);
+    }
+
+    emit(state.copyWith(handle: MHandle.completed('')));
+    XToast.hideLoading();
+  }
+
+  Future syncDataCurrentWorkout(String userId) async {
+    final result =
+        await domain.userWorkout.getLastestUserWorkout(userId: userId);
+    if (result.isSuccess && result.data != null) {
+      emit(state.copyWith(continueWorkout: result.data!));
     }
   }
 
   Future syncDataTodayActivity(String userId) async {
-    final result =
-        await domain.activity.getTodayActivityUser(userId: userId);
+    final result = await domain.activity.getTodayActivityUser(userId: userId);
     if (result.isSuccess && result.data != null) {
       changeTodayActivity(result.data!);
     }
@@ -48,7 +64,11 @@ class HomeBloc extends Cubit<HomeState> {
   Future syncDataActiveChallenge() async {
     final result = await domain.challenge.getActiveChallenges();
     if (result.isSuccess && result.data != null) {
-      changeActiveChallenge(result.data!);
+      if (result.data!.isNotEmpty) {
+        emit(state.copyWith(activeChallenge: result.data![0]));
+      } else {
+        emit(state.copyWith(activeChallenge: MChallenge.empty()));
+      }
     }
   }
 
@@ -75,9 +95,8 @@ class HomeBloc extends Cubit<HomeState> {
     emit(state.copyWith(todayActivity: data));
   }
 
-  void changeActiveChallenge(List<MChallenge> list) {
-    List<MChallenge> data = List.from(list);
-    emit(state.copyWith(activeChallenges: data));
+  void changeActiveChallenge(MChallenge challenge) {
+    emit(state.copyWith(activeChallenge: challenge));
   }
 
   void changePodcasts(List<MWorkout> list) {

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/view/dashboard_view.dart';
@@ -8,10 +6,12 @@ import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/features/workout/widget/workout_card.dart';
 import 'package:fitness_app/src/features/home/view/today_activity_view.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/model/challenge/challenge.dart';
+import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/card_item/card_title.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,21 +27,28 @@ class HomeView extends StatelessWidget {
           create: (context) {
             return HomeBloc();
           },
-          child: Column(
-            children: [
-              const DashboardView(),
-              _buildPlace(),
-              _buildTodayActivity(),
-              _buildPlace(),
-              _buildNextWorkout(),
-              _buildPlace(),
-              _buildActiveChallenge(),
-              _buildPlace(),
-              _buildPodcasts(),
-              _buildPlace(),
-              const FriendsActivityView(),
-              _buildPlace(),
-            ],
+          child: BlocBuilder<HomeBloc, HomeState>(
+            buildWhen: (previous, current) => previous.handle != current.handle,
+            builder: (context, state) {
+              return state.handle.isLoading
+                  ? const Loading()
+                  : Column(
+                      children: [
+                        const DashboardView(),
+                        _buildPlace(),
+                        _buildTodayActivity(),
+                        _buildPlace(),
+                        _buildNextWorkout(),
+                        _buildPlace(),
+                        _buildActiveChallenge(),
+                        _buildPlace(),
+                        _buildPodcasts(),
+                        _buildPlace(),
+                        const FriendsActivityView(),
+                        _buildPlace(),
+                      ],
+                    );
+            },
           ),
         ),
       ),
@@ -57,11 +64,12 @@ class HomeView extends StatelessWidget {
   Widget _buildTodayActivity() {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) {
-        return previous.todayActivity != current.todayActivity;
+        return previous.handle != current.handle ||
+            previous.todayActivity != current.todayActivity;
       },
       builder: (context, state) {
         return TodayActivityView(
-          hours: state.todayActivity.hours ,
+          hours: state.todayActivity.hours,
           kcal: state.todayActivity.kcal,
           km: state.todayActivity.km,
         );
@@ -72,12 +80,16 @@ class HomeView extends StatelessWidget {
   Widget _buildNextWorkout() {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) {
-        return previous.nextWorkouts != current.nextWorkouts;
+        return previous.handle != current.handle ||
+            previous.nextWorkouts != current.nextWorkouts;
       },
       builder: (context, state) {
         return WorkoutCard(
           label: S.of(context).next_workout,
           item: state.nextWorkouts,
+          onPressed: () {
+            AppCoordinator.showWorkoutListScreen();
+          },
         );
       },
     );
@@ -86,32 +98,38 @@ class HomeView extends StatelessWidget {
   Widget _buildActiveChallenge() {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) {
-        return previous.activeChallenges != current.activeChallenges;
+        return previous.handle != current.handle ||
+            previous.activeChallenge != current.activeChallenge;
       },
       builder: (context, state) {
-        if (state.activeChallenges.isEmpty) return Container();
-        Random random = Random();
-
-        final MChallenge item = state
-            .activeChallenges[random.nextInt(state.activeChallenges.length)];
-        return XBlock(
-          header: S.of(context).active_challenge,
-          child: XCardItem(
-            magin: const EdgeInsets.symmetric(horizontal: 2.0),
-            width: 340,
-            height: 230,
-            tag: item.tag,
-            image: item.thumbnail,
-            onTap: () {
-              AppCoordinator.showChallengeDetailsScreen(id: item.id);
-            },
-            child: XCartTitle(
-              title: item.name,
-              members: item.members,
-              level: item.level,
-            ),
-          ),
-        );
+        return state.handle.isLoading
+            ? const Loading()
+            : XBlock(
+                header: S.of(context).active_challenge,
+                enableActions: false,
+                child: XCardItem(
+                  magin: const EdgeInsets.symmetric(horizontal: 2.0),
+                  width: 340,
+                  height: 230,
+                  tag: state.activeChallenge.tag,
+                  backgroundImage: ImageWidget(
+                    width: 340,
+                    height: 230,
+                    image: state.activeChallenge.thumbnail,
+                    folder: StorageFolder.challenges,
+                  ),
+                  onTap: () {
+                    AppCoordinator.showChallengeDetailsScreen(
+                      id: state.activeChallenge.id,
+                    );
+                  },
+                  child: XCartTitle(
+                    title: state.activeChallenge.name,
+                    members: state.activeChallenge.members,
+                    level: state.activeChallenge.level,
+                  ),
+                ),
+              );
       },
     );
   }
@@ -119,12 +137,16 @@ class HomeView extends StatelessWidget {
   Widget _buildPodcasts() {
     return BlocBuilder<HomeBloc, HomeState>(
       buildWhen: (previous, current) {
-        return previous.podcasts != current.podcasts;
+        return previous.handle != current.handle ||
+            previous.podcasts != current.podcasts;
       },
       builder: (context, state) {
         return WorkoutCard(
           label: S.of(context).podcasts,
           item: state.podcasts,
+          onPressed: () {
+            AppCoordinator.showWorkoutListScreen();
+          },
         );
       },
     );
