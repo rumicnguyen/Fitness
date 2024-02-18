@@ -13,9 +13,8 @@ class MWorkout with _$MWorkout {
     @Default('None') String name,
     @Default('None') String thumbnail,
     @Default('None') String backgroundImage,
-    // minute
-    int? minimumTime,
-    int? maximumTime,
+    @Default(0) int minimumTime,
+    @Default(0) int maximumTime,
     @Default(0) int exercises,
     @Default(WorkoutLevel.none) WorkoutLevel level,
     @Default(0) int members,
@@ -23,7 +22,9 @@ class MWorkout with _$MWorkout {
     @Default(DisciplineActivity.gym) DisciplineActivity discipline,
     @Default(0) int entryFee,
     @Default(0.0) double popular,
+    @Default([]) List<String> goals,
     int? tag,
+    DateTime? createdAt,
   }) = _MWorkout;
 
   factory MWorkout.empty() {

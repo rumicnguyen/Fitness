@@ -4,6 +4,7 @@ import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:flutter/material.dart';
 
 class Session extends StatelessWidget {
@@ -84,17 +85,13 @@ class Session extends StatelessWidget {
                 ],
               ),
             ),
-            child: Center(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
-                child: Image.network(
-                  item.thumbnail,
-                  fit: BoxFit.cover,
-                  alignment: Alignment.topCenter,
-                  width: width,
-                  height: height,
-                ),
-              ),
+            child: ImageWidget(
+              borderRadius: 15,
+              width: width,
+              height: height,
+              image: item.thumbnail,
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter,
             ),
           ),
           const SizedBox(

@@ -42,4 +42,22 @@ class WorkoutReference extends BaseCollectionReference<MWorkout> {
       return MResult.exception(e);
     }
   }
+
+  Future<MResult<List<MWorkout>>> getRecommendedWorkouts(
+      List<String> goals) async {
+    try {
+      final QuerySnapshot<MWorkout> query = await ref
+          .where(
+            'goals',
+            arrayContainsAny: goals,
+          )
+          .get();
+      final docs = query.docs.map((e) => e.data()).toList();
+      return MResult.success(docs);
+    } on FirebaseException catch (e) {
+      return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
 }
