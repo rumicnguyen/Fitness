@@ -1,140 +1,94 @@
+import 'package:fitness_app/src/network/data/activity/activity_reference.dart';
 import 'package:fitness_app/src/network/data/activity/activity_repository.dart';
-import 'package:fitness_app/src/network/data/enum/date_filter.dart';
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
+import 'package:fitness_app/src/utils/utils.dart';
 
 class ActivityRepositoryImpl extends ActivityRepository {
+  final activityRef = ActivityReference();
+
   @override
   Future<MResult<MActivity>> addActivity({required MActivity activity}) {
-    // TODO: implement addActivity
-    throw UnimplementedError();
+    return activityRef.addActivity(activity);
   }
 
   @override
   Future<MResult<List<MActivity>>> getActivities() async {
-    try {
-      List<MActivity> list = [
-        MActivity(
-          id: '1',
-          userId: '1',
-          workoutCompeleted: 2,
-          challengeParticipatedIn: 1,
-          hours: 3,
-          kcal: 400,
-          km: 3.1,
-          date: DateTime.now(),
-        ),
-        MActivity(
-          id: '2',
-          userId: '2',
-          workoutCompeleted: 2,
-          challengeParticipatedIn: 1,
-          hours: 3,
-          kcal: 400,
-          km: 3.1,
-          date: DateTime.now(),
-        ),
-        MActivity(
-          id: '3',
-          userId: '2',
-          workoutCompeleted: 2,
-          challengeParticipatedIn: 1,
-          hours: 3,
-          kcal: 400,
-          km: 3.1,
-          date: DateTime(2023, DateTime.january, DateTime.monday),
-        ),
-        MActivity(
-          id: '4',
-          userId: '1',
-          workoutCompeleted: 2,
-          challengeParticipatedIn: 1,
-          hours: 3,
-          kcal: 400,
-          km: 3.1,
-          date: DateTime(2023, DateTime.january, DateTime.thursday),
-        ),
-        MActivity(
-          id: '5',
-          userId: '1',
-          workoutCompeleted: 2,
-          challengeParticipatedIn: 1,
-          hours: 3,
-          kcal: 400,
-          km: 3.1,
-          date: DateTime.now(),
-        ),
-      ];
-
-      // check when fetch data
-      // if (list == null) {
-      //   return MResult.error('error');
-      // }
-      return MResult.success(list);
-    } catch (e) {
-      return MResult.exception(e);
-    }
+    return activityRef.getActivitys();
   }
 
   @override
   Future<MResult<MActivity>> getActivityById({required String id}) {
-    // TODO: implement getActivityById
-    throw UnimplementedError();
+    return activityRef.get(id);
   }
 
   @override
   Future<MResult<List<MActivity>>> getActivitiesUser({
     required String userId,
-    DateFilter? filter,
+  }) async {
+    return activityRef.getActivityByUserId(userId: userId);
+  }
+
+  @override
+  Future<MResult<MActivity>> getTodayActivityUser({
+    required String userId,
   }) async {
     try {
-      MResult<List<MActivity>> list = await getActivities();
-      List<MActivity> data = [];
-
-      if (list.isError || list.data == null) {
-        return MResult.error('error');
+      final result = await activityRef.getActivityByUserId(userId: userId);
+      if (result.isSuccess && result.data != null) {
+        if (result.data!.isNotEmpty) {
+          return MResult.success(
+            result.data!.firstWhere(
+              (element) => element.date != null && Utils.isToday(element.date!),
+              orElse: () => MActivity.empty(),
+            ),
+          );
+        }
+        return MResult.success(MActivity.empty());
       }
-
-      switch (filter) {
-        case DateFilter.allTime:
-          for (var element in list.data!) {
-            if (element.userId == userId) {
-              data.add(element);
-            }
-          }
-        // develop later
-        case DateFilter.weekly:
-        // develop later
-        case DateFilter.monthly:
-        default:
-          for (var element in list.data!) {
-            if (element.userId == userId) {
-              data.add(element);
-            }
-          }
-      }
-
-      return MResult.success(data);
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }
   }
 
   @override
-  Future<MResult<MActivity>> getTodayActivityUser(
-      {required String userId}) async {
+  Future<MResult<List<MActivity>>> getMonthlyActivityUser({
+    required String userId,
+  }) async {
     try {
-      MResult<List<MActivity>> list = await getActivities();
-      if (list.isError || list.data == null) {
-        return MResult.error('error');
-      }
-
-      for (var element in list.data!) {
-        if (element.date?.day == DateTime.now().day) {
-          return MResult.success(element);
+      final result = await activityRef.getActivityByUserId(userId: userId);
+      if (result.isSuccess && result.data != null) {
+        var list = <MActivity>[];
+        for (var element in result.data!) {
+          if (element.date != null && Utils.isInThisMonth(element.date!)) {
+            list.add(element);
+          }
         }
+        return MResult.success(list);
       }
-      return MResult.success(MActivity.empty());
+      return MResult.error(result.error);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  @override
+  Future<MResult<List<MActivity>>> getWeeklyActivityUser({
+    required String userId,
+  }) async {
+    try {
+      final result = await activityRef.getActivityByUserId(userId: userId);
+      if (result.isSuccess && result.data != null) {
+        var list = <MActivity>[];
+        for (var element in result.data!) {
+          if (element.date != null && Utils.isInThisWeek(element.date!)) {
+            list.add(element);
+          }
+        }
+        return MResult.success(list);
+      }
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }

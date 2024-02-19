@@ -21,13 +21,16 @@ MActivity _$MActivityFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MActivity {
   String get id => throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
   DateTime? get date => throw _privateConstructorUsedError;
-  int? get workoutCompeleted => throw _privateConstructorUsedError;
-  int? get hours => throw _privateConstructorUsedError;
-  int? get challengeParticipatedIn => throw _privateConstructorUsedError;
-  int? get kcal => throw _privateConstructorUsedError;
-  double? get km => throw _privateConstructorUsedError;
+  int get workoutsCompleted => throw _privateConstructorUsedError;
+  int get hours => throw _privateConstructorUsedError;
+  int get challengeParticipatedIn => throw _privateConstructorUsedError;
+  int get kcal => throw _privateConstructorUsedError;
+  double get km => throw _privateConstructorUsedError;
+  int get averageHeartRate => throw _privateConstructorUsedError;
+  int get kilocaloriesBurned => throw _privateConstructorUsedError;
+  int get kilometresRun => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,13 +45,16 @@ abstract class $MActivityCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? userId,
+      String userId,
       DateTime? date,
-      int? workoutCompeleted,
-      int? hours,
-      int? challengeParticipatedIn,
-      int? kcal,
-      double? km});
+      int workoutsCompleted,
+      int hours,
+      int challengeParticipatedIn,
+      int kcal,
+      double km,
+      int averageHeartRate,
+      int kilocaloriesBurned,
+      int kilometresRun});
 }
 
 /// @nodoc
@@ -65,47 +71,62 @@ class _$MActivityCopyWithImpl<$Res, $Val extends MActivity>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = freezed,
+    Object? userId = null,
     Object? date = freezed,
-    Object? workoutCompeleted = freezed,
-    Object? hours = freezed,
-    Object? challengeParticipatedIn = freezed,
-    Object? kcal = freezed,
-    Object? km = freezed,
+    Object? workoutsCompleted = null,
+    Object? hours = null,
+    Object? challengeParticipatedIn = null,
+    Object? kcal = null,
+    Object? km = null,
+    Object? averageHeartRate = null,
+    Object? kilocaloriesBurned = null,
+    Object? kilometresRun = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      workoutCompeleted: freezed == workoutCompeleted
-          ? _value.workoutCompeleted
-          : workoutCompeleted // ignore: cast_nullable_to_non_nullable
-              as int?,
-      hours: freezed == hours
+      workoutsCompleted: null == workoutsCompleted
+          ? _value.workoutsCompleted
+          : workoutsCompleted // ignore: cast_nullable_to_non_nullable
+              as int,
+      hours: null == hours
           ? _value.hours
           : hours // ignore: cast_nullable_to_non_nullable
-              as int?,
-      challengeParticipatedIn: freezed == challengeParticipatedIn
+              as int,
+      challengeParticipatedIn: null == challengeParticipatedIn
           ? _value.challengeParticipatedIn
           : challengeParticipatedIn // ignore: cast_nullable_to_non_nullable
-              as int?,
-      kcal: freezed == kcal
+              as int,
+      kcal: null == kcal
           ? _value.kcal
           : kcal // ignore: cast_nullable_to_non_nullable
-              as int?,
-      km: freezed == km
+              as int,
+      km: null == km
           ? _value.km
           : km // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
+      averageHeartRate: null == averageHeartRate
+          ? _value.averageHeartRate
+          : averageHeartRate // ignore: cast_nullable_to_non_nullable
+              as int,
+      kilocaloriesBurned: null == kilocaloriesBurned
+          ? _value.kilocaloriesBurned
+          : kilocaloriesBurned // ignore: cast_nullable_to_non_nullable
+              as int,
+      kilometresRun: null == kilometresRun
+          ? _value.kilometresRun
+          : kilometresRun // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -120,13 +141,16 @@ abstract class _$$MActivityImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String? userId,
+      String userId,
       DateTime? date,
-      int? workoutCompeleted,
-      int? hours,
-      int? challengeParticipatedIn,
-      int? kcal,
-      double? km});
+      int workoutsCompleted,
+      int hours,
+      int challengeParticipatedIn,
+      int kcal,
+      double km,
+      int averageHeartRate,
+      int kilocaloriesBurned,
+      int kilometresRun});
 }
 
 /// @nodoc
@@ -141,47 +165,62 @@ class __$$MActivityImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = freezed,
+    Object? userId = null,
     Object? date = freezed,
-    Object? workoutCompeleted = freezed,
-    Object? hours = freezed,
-    Object? challengeParticipatedIn = freezed,
-    Object? kcal = freezed,
-    Object? km = freezed,
+    Object? workoutsCompleted = null,
+    Object? hours = null,
+    Object? challengeParticipatedIn = null,
+    Object? kcal = null,
+    Object? km = null,
+    Object? averageHeartRate = null,
+    Object? kilocaloriesBurned = null,
+    Object? kilometresRun = null,
   }) {
     return _then(_$MActivityImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       date: freezed == date
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      workoutCompeleted: freezed == workoutCompeleted
-          ? _value.workoutCompeleted
-          : workoutCompeleted // ignore: cast_nullable_to_non_nullable
-              as int?,
-      hours: freezed == hours
+      workoutsCompleted: null == workoutsCompleted
+          ? _value.workoutsCompleted
+          : workoutsCompleted // ignore: cast_nullable_to_non_nullable
+              as int,
+      hours: null == hours
           ? _value.hours
           : hours // ignore: cast_nullable_to_non_nullable
-              as int?,
-      challengeParticipatedIn: freezed == challengeParticipatedIn
+              as int,
+      challengeParticipatedIn: null == challengeParticipatedIn
           ? _value.challengeParticipatedIn
           : challengeParticipatedIn // ignore: cast_nullable_to_non_nullable
-              as int?,
-      kcal: freezed == kcal
+              as int,
+      kcal: null == kcal
           ? _value.kcal
           : kcal // ignore: cast_nullable_to_non_nullable
-              as int?,
-      km: freezed == km
+              as int,
+      km: null == km
           ? _value.km
           : km // ignore: cast_nullable_to_non_nullable
-              as double?,
+              as double,
+      averageHeartRate: null == averageHeartRate
+          ? _value.averageHeartRate
+          : averageHeartRate // ignore: cast_nullable_to_non_nullable
+              as int,
+      kilocaloriesBurned: null == kilocaloriesBurned
+          ? _value.kilocaloriesBurned
+          : kilocaloriesBurned // ignore: cast_nullable_to_non_nullable
+              as int,
+      kilometresRun: null == kilometresRun
+          ? _value.kilometresRun
+          : kilometresRun // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -191,13 +230,16 @@ class __$$MActivityImplCopyWithImpl<$Res>
 class _$MActivityImpl extends _MActivity {
   const _$MActivityImpl(
       {required this.id,
-      this.userId,
+      this.userId = '',
       this.date,
-      this.workoutCompeleted,
-      this.hours,
-      this.challengeParticipatedIn,
-      this.kcal,
-      this.km})
+      this.workoutsCompleted = 0,
+      this.hours = 0,
+      this.challengeParticipatedIn = 0,
+      this.kcal = 0,
+      this.km = 0.0,
+      this.averageHeartRate = 0,
+      this.kilocaloriesBurned = 0,
+      this.kilometresRun = 0})
       : super._();
 
   factory _$MActivityImpl.fromJson(Map<String, dynamic> json) =>
@@ -206,23 +248,38 @@ class _$MActivityImpl extends _MActivity {
   @override
   final String id;
   @override
-  final String? userId;
+  @JsonKey()
+  final String userId;
   @override
   final DateTime? date;
   @override
-  final int? workoutCompeleted;
+  @JsonKey()
+  final int workoutsCompleted;
   @override
-  final int? hours;
+  @JsonKey()
+  final int hours;
   @override
-  final int? challengeParticipatedIn;
+  @JsonKey()
+  final int challengeParticipatedIn;
   @override
-  final int? kcal;
+  @JsonKey()
+  final int kcal;
   @override
-  final double? km;
+  @JsonKey()
+  final double km;
+  @override
+  @JsonKey()
+  final int averageHeartRate;
+  @override
+  @JsonKey()
+  final int kilocaloriesBurned;
+  @override
+  @JsonKey()
+  final int kilometresRun;
 
   @override
   String toString() {
-    return 'MActivity(id: $id, userId: $userId, date: $date, workoutCompeleted: $workoutCompeleted, hours: $hours, challengeParticipatedIn: $challengeParticipatedIn, kcal: $kcal, km: $km)';
+    return 'MActivity(id: $id, userId: $userId, date: $date, workoutsCompleted: $workoutsCompleted, hours: $hours, challengeParticipatedIn: $challengeParticipatedIn, kcal: $kcal, km: $km, averageHeartRate: $averageHeartRate, kilocaloriesBurned: $kilocaloriesBurned, kilometresRun: $kilometresRun)';
   }
 
   @override
@@ -233,20 +290,37 @@ class _$MActivityImpl extends _MActivity {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.workoutCompeleted, workoutCompeleted) ||
-                other.workoutCompeleted == workoutCompeleted) &&
+            (identical(other.workoutsCompleted, workoutsCompleted) ||
+                other.workoutsCompleted == workoutsCompleted) &&
             (identical(other.hours, hours) || other.hours == hours) &&
             (identical(
                     other.challengeParticipatedIn, challengeParticipatedIn) ||
                 other.challengeParticipatedIn == challengeParticipatedIn) &&
             (identical(other.kcal, kcal) || other.kcal == kcal) &&
-            (identical(other.km, km) || other.km == km));
+            (identical(other.km, km) || other.km == km) &&
+            (identical(other.averageHeartRate, averageHeartRate) ||
+                other.averageHeartRate == averageHeartRate) &&
+            (identical(other.kilocaloriesBurned, kilocaloriesBurned) ||
+                other.kilocaloriesBurned == kilocaloriesBurned) &&
+            (identical(other.kilometresRun, kilometresRun) ||
+                other.kilometresRun == kilometresRun));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, userId, date,
-      workoutCompeleted, hours, challengeParticipatedIn, kcal, km);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      userId,
+      date,
+      workoutsCompleted,
+      hours,
+      challengeParticipatedIn,
+      kcal,
+      km,
+      averageHeartRate,
+      kilocaloriesBurned,
+      kilometresRun);
 
   @JsonKey(ignore: true)
   @override
@@ -265,13 +339,16 @@ class _$MActivityImpl extends _MActivity {
 abstract class _MActivity extends MActivity {
   const factory _MActivity(
       {required final String id,
-      final String? userId,
+      final String userId,
       final DateTime? date,
-      final int? workoutCompeleted,
-      final int? hours,
-      final int? challengeParticipatedIn,
-      final int? kcal,
-      final double? km}) = _$MActivityImpl;
+      final int workoutsCompleted,
+      final int hours,
+      final int challengeParticipatedIn,
+      final int kcal,
+      final double km,
+      final int averageHeartRate,
+      final int kilocaloriesBurned,
+      final int kilometresRun}) = _$MActivityImpl;
   const _MActivity._() : super._();
 
   factory _MActivity.fromJson(Map<String, dynamic> json) =
@@ -280,19 +357,25 @@ abstract class _MActivity extends MActivity {
   @override
   String get id;
   @override
-  String? get userId;
+  String get userId;
   @override
   DateTime? get date;
   @override
-  int? get workoutCompeleted;
+  int get workoutsCompleted;
   @override
-  int? get hours;
+  int get hours;
   @override
-  int? get challengeParticipatedIn;
+  int get challengeParticipatedIn;
   @override
-  int? get kcal;
+  int get kcal;
   @override
-  double? get km;
+  double get km;
+  @override
+  int get averageHeartRate;
+  @override
+  int get kilocaloriesBurned;
+  @override
+  int get kilometresRun;
   @override
   @JsonKey(ignore: true)
   _$$MActivityImplCopyWith<_$MActivityImpl> get copyWith =>

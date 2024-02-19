@@ -9,14 +9,17 @@ part of 'activity.dart';
 _$MActivityImpl _$$MActivityImplFromJson(Map<String, dynamic> json) =>
     _$MActivityImpl(
       id: json['id'] as String,
-      userId: json['userId'] as String?,
+      userId: json['userId'] as String? ?? '',
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
-      workoutCompeleted: json['workoutCompeleted'] as int?,
-      hours: json['hours'] as int?,
-      challengeParticipatedIn: json['challengeParticipatedIn'] as int?,
-      kcal: json['kcal'] as int?,
-      km: (json['km'] as num?)?.toDouble(),
+      workoutsCompleted: json['workoutsCompleted'] as int? ?? 0,
+      hours: json['hours'] as int? ?? 0,
+      challengeParticipatedIn: json['challengeParticipatedIn'] as int? ?? 0,
+      kcal: json['kcal'] as int? ?? 0,
+      km: (json['km'] as num?)?.toDouble() ?? 0.0,
+      averageHeartRate: json['averageHeartRate'] as int? ?? 0,
+      kilocaloriesBurned: json['kilocaloriesBurned'] as int? ?? 0,
+      kilometresRun: json['kilometresRun'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$MActivityImplToJson(_$MActivityImpl instance) =>
@@ -24,9 +27,12 @@ Map<String, dynamic> _$$MActivityImplToJson(_$MActivityImpl instance) =>
       'id': instance.id,
       'userId': instance.userId,
       'date': instance.date?.toIso8601String(),
-      'workoutCompeleted': instance.workoutCompeleted,
+      'workoutsCompleted': instance.workoutsCompleted,
       'hours': instance.hours,
       'challengeParticipatedIn': instance.challengeParticipatedIn,
       'kcal': instance.kcal,
       'km': instance.km,
+      'averageHeartRate': instance.averageHeartRate,
+      'kilocaloriesBurned': instance.kilocaloriesBurned,
+      'kilometresRun': instance.kilometresRun,
     };

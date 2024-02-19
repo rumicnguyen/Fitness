@@ -30,6 +30,9 @@ _$MUserImpl _$$MUserImplFromJson(Map<String, dynamic> json) => _$MUserImpl(
               ?.map((e) => e as String)
               .toList() ??
           const [],
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
@@ -48,4 +51,5 @@ Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
       'hoursTraining': instance.hoursTraining,
       'challengeParticipatedIn': instance.challengeParticipatedIn,
       'favoriteWorkout': instance.favoriteWorkout,
+      'createdAt': instance.createdAt?.toIso8601String(),
     };

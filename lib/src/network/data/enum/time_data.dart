@@ -29,4 +29,9 @@ enum TimeData {
   final int value;
 
   const TimeData({required this.label, required this.value});
+
+    static TimeData fromValue(int value) {
+    return values.firstWhere((element) => element.value == value,
+        orElse: () => hour_1h);
+  }
 }
