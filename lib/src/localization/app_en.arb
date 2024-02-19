@@ -120,6 +120,10 @@
   "profile_set_goal":"Set Goal",
   "profile_your_goal":"Your Goal",
   "profile_list_goal":"List Goal",
+  
+  "toast_update_success":"Update success",
+  "toast_update_failt":"Update failt",
+  "toast_maximum_goal_is_5":"Maximum goal is 5",
 
   "read_more":"Read more",
   "challenges":"Challenges",
@@ -135,6 +139,7 @@
   "waiting":"Waiting...",
   "is_loading":"Is Loading...",
   "page_not_found":"Page not found",
+  "list_is_empty":"List is empty",
   "exercise_in_detail":"exercises",
   "minutes":"minutes",
   "start_workout":"Start workout"

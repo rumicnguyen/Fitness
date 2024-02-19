@@ -27,7 +27,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
       if (list.isSuccess && list.data != null) {
         return MResult.success(list.data);
       }
-      return MResult.error('error');
+      return MResult.error(list.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -47,7 +47,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
       if (list.isSuccess && list.data != null) {
         return MResult.success(list.data);
       }
-      return MResult.error('error');
+      return MResult.error(list.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -67,7 +67,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
       if (list.isSuccess && list.data != null) {
         return MResult.success(list.data!.sublist(1, 3));
       }
-      return MResult.error('error');
+      return MResult.error(list.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -92,10 +92,11 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
               );
             }
           }
+          return MResult.error(core.error);
         }
-        return MResult.success('success');
+        return MResult.success(listWorkout);
       }
-      return MResult.error('error');
+      return MResult.error(listWorkout.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -115,7 +116,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
         }
         return MResult.success(list.data!.sublist(0, 9));
       }
-      return MResult.error('error');
+      return MResult.error(list.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -131,7 +132,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
       MResult<List<MWorkout>> list = await getWorkouts();
 
       if (list.isError || list.data == null) {
-        return MResult.error('error');
+        return MResult.error(list.error);
       }
 
       final List<MWorkout> result = list.data!

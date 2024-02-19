@@ -2,8 +2,8 @@ import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/enum/stats_type.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
+import 'package:fitness_app/src/utils/date_format.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class Stats<T> extends StatelessWidget {
   const Stats({
@@ -30,13 +30,6 @@ class Stats<T> extends StatelessWidget {
   }
 
   Widget _buildItem() {
-    String startAt = DateFormat('dd MMM').format(time);
-    String now = DateFormat('dd MMM').format(DateTime.now());
-    if (time.year != DateTime.now().year) {
-      startAt = DateFormat('MMM yyyy').format(time);
-      now = DateFormat('MMM yyy').format(DateTime.now());
-    }
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -68,7 +61,7 @@ class Stats<T> extends StatelessWidget {
                   style: AppStyles.blackTextMidiumB,
                 ),
                 Text(
-                  '$startAt - $now',
+                  '${DateFormatUtils.formatDateTimeNow(time)} - ${DateFormatUtils.formatDateTimeNow(DateTime.now())}',
                   style: AppStyles.grayTextMidium,
                 ),
               ],
