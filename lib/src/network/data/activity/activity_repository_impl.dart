@@ -38,13 +38,15 @@ class ActivityRepositoryImpl extends ActivityRepository {
       if (result.isSuccess && result.data != null) {
         if (result.data!.isNotEmpty) {
           return MResult.success(
-            result.data!.firstWhere((element) =>
-                element.date != null && Utils.isToday(element.date!)),
+            result.data!.firstWhere(
+              (element) => element.date != null && Utils.isToday(element.date!),
+              orElse: () => MActivity.empty(),
+            ),
           );
         }
         return MResult.success(MActivity.empty());
       }
-      return MResult.error('error');
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }
@@ -65,7 +67,7 @@ class ActivityRepositoryImpl extends ActivityRepository {
         }
         return MResult.success(list);
       }
-      return MResult.error('error');
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }
@@ -86,7 +88,7 @@ class ActivityRepositoryImpl extends ActivityRepository {
         }
         return MResult.success(list);
       }
-      return MResult.error('error');
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }
