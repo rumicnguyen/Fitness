@@ -72,12 +72,12 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
     final MUserWorkout userWorkout = MUserWorkout(
       id: StringUtils.generateId(),
       startAt: DateTime.now(),
-      idWorkout: state.workout.id,
+      workoutId: state.workout.id,
       taskDone: 0,
       workoutImage: state.workout.thumbnail,
       workoutName: state.workout.name,
       userName: user?.name ?? '',
-      idUser: user?.id ?? '',
+      userId: user?.id ?? '',
     );
     final result =
         await domain.userWorkout.getUpdateOrAddUserWorkout(userWorkout);

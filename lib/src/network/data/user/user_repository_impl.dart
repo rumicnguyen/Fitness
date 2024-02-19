@@ -29,24 +29,24 @@ class UserRepositoryImpl extends UserRepository {
         userName: 'Guy Hawkins',
         workoutName: 'Workout with ball',
         workoutImage: Assets.images.newTransparent.path,
-        idUser: 'cLcCa9CWTISEGm6CKOyvaRsOBD93',
-        idWorkout: 'lM3ZsYp7DuKHuZqxaYUk',
+        userId: 'cLcCa9CWTISEGm6CKOyvaRsOBD93',
+        workoutId: 'lM3ZsYp7DuKHuZqxaYUk',
       ),
       MUserWorkout(
         id: '2',
         userName: 'Alan',
         workoutName: 'Basketball',
         workoutImage: Assets.images.item9.path,
-        idUser: '11',
-        idWorkout: '5',
+        userId: '11',
+        workoutId: '5',
       ),
       MUserWorkout(
         id: '3',
         userName: 'Olivia',
         workoutName: 'Get already to the marathon',
         workoutImage: Assets.images.item5.path,
-        idUser: '12',
-        idWorkout: '1',
+        userId: '12',
+        workoutId: '1',
       ),
     ];
 
@@ -152,5 +152,10 @@ class UserRepositoryImpl extends UserRepository {
     } catch (e) {
       return MResult.exception(e);
     }
+  }
+  
+  @override
+  Future<MResult<List<MUser>>> getUsers() {
+    return usersRef.getAll();
   }
 }

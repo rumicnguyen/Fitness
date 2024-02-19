@@ -32,6 +32,7 @@ mixin _$MWorkout {
   String get video => throw _privateConstructorUsedError;
   DisciplineActivity get discipline => throw _privateConstructorUsedError;
   int get entryFee => throw _privateConstructorUsedError;
+  double get popular => throw _privateConstructorUsedError;
   int? get tag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -58,6 +59,7 @@ abstract class $MWorkoutCopyWith<$Res> {
       String video,
       DisciplineActivity discipline,
       int entryFee,
+      double popular,
       int? tag});
 }
 
@@ -86,6 +88,7 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
     Object? video = null,
     Object? discipline = null,
     Object? entryFee = null,
+    Object? popular = null,
     Object? tag = freezed,
   }) {
     return _then(_value.copyWith(
@@ -137,6 +140,10 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
               as int,
+      popular: null == popular
+          ? _value.popular
+          : popular // ignore: cast_nullable_to_non_nullable
+              as double,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -166,6 +173,7 @@ abstract class _$$MWorkoutImplCopyWith<$Res>
       String video,
       DisciplineActivity discipline,
       int entryFee,
+      double popular,
       int? tag});
 }
 
@@ -192,6 +200,7 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
     Object? video = null,
     Object? discipline = null,
     Object? entryFee = null,
+    Object? popular = null,
     Object? tag = freezed,
   }) {
     return _then(_$MWorkoutImpl(
@@ -243,6 +252,10 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
           ? _value.entryFee
           : entryFee // ignore: cast_nullable_to_non_nullable
               as int,
+      popular: null == popular
+          ? _value.popular
+          : popular // ignore: cast_nullable_to_non_nullable
+              as double,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -267,6 +280,7 @@ class _$MWorkoutImpl extends _MWorkout {
       this.video = '',
       this.discipline = DisciplineActivity.gym,
       this.entryFee = 0,
+      this.popular = 0.0,
       this.tag})
       : super._();
 
@@ -308,11 +322,14 @@ class _$MWorkoutImpl extends _MWorkout {
   @JsonKey()
   final int entryFee;
   @override
+  @JsonKey()
+  final double popular;
+  @override
   final int? tag;
 
   @override
   String toString() {
-    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, video: $video, discipline: $discipline, entryFee: $entryFee, tag: $tag)';
+    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, video: $video, discipline: $discipline, entryFee: $entryFee, popular: $popular, tag: $tag)';
   }
 
   @override
@@ -339,6 +356,7 @@ class _$MWorkoutImpl extends _MWorkout {
                 other.discipline == discipline) &&
             (identical(other.entryFee, entryFee) ||
                 other.entryFee == entryFee) &&
+            (identical(other.popular, popular) || other.popular == popular) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
@@ -358,6 +376,7 @@ class _$MWorkoutImpl extends _MWorkout {
       video,
       discipline,
       entryFee,
+      popular,
       tag);
 
   @JsonKey(ignore: true)
@@ -388,6 +407,7 @@ abstract class _MWorkout extends MWorkout {
       final String video,
       final DisciplineActivity discipline,
       final int entryFee,
+      final double popular,
       final int? tag}) = _$MWorkoutImpl;
   const _MWorkout._() : super._();
 
@@ -418,6 +438,8 @@ abstract class _MWorkout extends MWorkout {
   DisciplineActivity get discipline;
   @override
   int get entryFee;
+  @override
+  double get popular;
   @override
   int? get tag;
   @override

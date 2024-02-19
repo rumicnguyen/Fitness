@@ -10,8 +10,8 @@ class MUserWorkout with _$MUserWorkout {
   const MUserWorkout._();
   const factory MUserWorkout({
     required String id,
-    String? idUser,
-    String? idWorkout,
+    String? userId,
+    String? workoutId,
     String? workoutName,
     String? userName,
     String? workoutImage,

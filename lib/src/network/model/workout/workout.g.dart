@@ -23,6 +23,7 @@ _$MWorkoutImpl _$$MWorkoutImplFromJson(Map<String, dynamic> json) =>
               _$DisciplineActivityEnumMap, json['discipline']) ??
           DisciplineActivity.gym,
       entryFee: json['entryFee'] as int? ?? 0,
+      popular: (json['popular'] as num?)?.toDouble() ?? 0.0,
       tag: json['tag'] as int?,
     );
 
@@ -40,6 +41,7 @@ Map<String, dynamic> _$$MWorkoutImplToJson(_$MWorkoutImpl instance) =>
       'video': instance.video,
       'discipline': _$DisciplineActivityEnumMap[instance.discipline]!,
       'entryFee': instance.entryFee,
+      'popular': instance.popular,
       'tag': instance.tag,
     };
 
