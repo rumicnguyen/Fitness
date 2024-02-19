@@ -49,7 +49,7 @@ class GoalItemWidget extends StatelessWidget {
                 )
               : TextButton(
                   onPressed: () { 
-                    context.read<GoalBloc>().addGoal(goal, context);
+                    context.read<GoalBloc>().addGoal(goal);
                   },
                   child: Text(
                     goal.goal,

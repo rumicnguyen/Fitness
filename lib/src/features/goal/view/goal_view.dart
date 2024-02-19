@@ -154,7 +154,7 @@ class GoalView extends StatelessWidget {
       height: 60,
       title: S.of(context).forgot_confirm,
       onPressed: () async {
-        context.read<GoalBloc>().onConfirm(context);
+        context.read<GoalBloc>().onConfirm();
       },
       titleStyle: AppStyles.whiteTextSmallB,
       backgroundColor: AppColors.second,

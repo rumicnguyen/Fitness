@@ -6,7 +6,6 @@ import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/goal/goal.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GoalBloc extends Cubit<GoalState> {
@@ -37,11 +36,11 @@ class GoalBloc extends Cubit<GoalState> {
     emit(state.copyWith(handle: MHandle.result(listGoal)));
   }
 
-  void addGoal(MGoal goal, BuildContext context) {
+  void addGoal(MGoal goal) {
     List<MGoal> list = List.from(state.goals);
     if (!list.contains(goal)) {
       if (list.length >= 5) {
-        XToast.error(S.of(context).toast_maximum_goal_is_5);
+        XToast.error(S.text.toast_maximum_goal_is_5);
         return;
       }
       list.add(goal);
@@ -57,19 +56,16 @@ class GoalBloc extends Cubit<GoalState> {
     emit(state.copyWith(goals: list));
   }
 
-  Future onConfirm(BuildContext context) async {
+  Future onConfirm() async {
     emit(state.copyWith(handle: MHandle.loading()));
     final list = state.goals.map((e) => e.goal).toList();
     final result = await domain.user.update(user: user, target: list);
 
     if (result.isError || result.data == null) {
-      if (context.mounted) {
-        XToast.error(S.of(context).toast_update_failt);
-      }
+      XToast.error(S.text.toast_update_failt);
     } else {
-      if (context.mounted) {
-        XToast.success(S.of(context).toast_update_failt);
-      }
+      XToast.success(S.text.toast_update_failt);
+
       UserPrefs.instance.setUser(result.data);
       await domain.user.update(user: user, target: result.data!.target);
     }
