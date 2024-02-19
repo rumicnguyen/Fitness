@@ -136,6 +136,10 @@
   "toast_update_success":"Update success",
   "toast_update_failt":"Update failt",
   "toast_maximum_goal_is_5":"Maximum goal is 5",
+  "toast_sign_in_success":"Sign in success",
+  "toast_sign_in_failt":"Sign in failt",
+  "toast_sign_up_success":"Sign up success",
+  "toast_sign_up_failt":"Sign up failt",
 
   "none":"none",
   "waiting":"Waiting...",

@@ -3,6 +3,7 @@ import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
+import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
@@ -16,10 +17,12 @@ class HomeBloc extends Cubit<HomeState> {
 
   DomainManager get domain => DomainManager();
   FirebaseStorageReference get storageRef => FirebaseStorageReference();
-  MUser user = UserPrefs.I.getUser() ?? MUser.empty();
+  final MUser user = UserPrefs.I.getUser() ?? MUser.empty();
 
   Future syncData() async {
-    if (user.id.isNotEmpty == true) {
+    emit(state.copyWith(handle: MHandle.loading()));
+
+    if (user.id.isNotEmpty) {
       Future.wait([
         syncDataTodayActivity(user.id),
         syncDataNextWorkout(user.id),
@@ -28,11 +31,12 @@ class HomeBloc extends Cubit<HomeState> {
         syncDataFriendsActivity(user.id)
       ]);
     }
+
+    emit(state.copyWith(handle: MHandle.completed(user)));
   }
 
   Future syncDataTodayActivity(String userId) async {
-    final result =
-        await domain.activity.getTodayActivityUser(userId: userId);
+    final result = await domain.activity.getTodayActivityUser(userId: userId);
     if (result.isSuccess && result.data != null) {
       changeTodayActivity(result.data!);
     }
