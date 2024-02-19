@@ -50,10 +50,12 @@
   "percent_completed":"% Completed",
   "kcal":"kcal",
   "km":"km",
+  "tab":"  ",
 
   "symbol_space":"•",
   "symbol_add":"+",
   "symbol_center_line":"-",
+  "symbol_rank":"#",
 
   "hours_workout":"hours workout",
   "see_all":"See All",
@@ -122,6 +124,16 @@
   "toast_update_success":"Update success",
   "toast_update_failt":"Update failt",
   "toast_maximum_goal_is_5":"Maximum goal is 5",
+
+  "read_more":"Read more",
+  "challenges":"Challenges",
+  "points":"pts",
+  "global":"Global",
+  "friends":"Friends",
+  "your_stats":"Your Stats",
+  "hours_left":"hours left",
+  "minutes_left":"minutes left",
+  "overral_stats":"Overral stats",
 
   "none":"none",
   "waiting":"Waiting...",

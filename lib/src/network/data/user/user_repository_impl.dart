@@ -2,13 +2,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/user/user_reference.dart';
 import 'package:fitness_app/src/network/data/user/user_repository.dart';
+import 'package:fitness_app/src/network/data/user_challenge/user_challenge_reference.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
+import 'package:fitness_app/src/network/model/user_challenge/user_challenge.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final usersRef = UserReference();
+  final userChallengeRef = UserChallengeReference();
   @override
   Future<MResult<MUser>> addUser({required MUser user}) async {
     return usersRef.addUser(user);
@@ -159,5 +162,16 @@ class UserRepositoryImpl extends UserRepository {
   @override
   Future<MResult<List<MUser>>> getUsers() {
     return usersRef.getAll();
+  }
+
+  @override
+  Future<MResult<MUserChallenge>> getUserChallenge({
+    required String userId,
+    required String challengeId,
+  }) async {
+    return userChallengeRef.getUserChallengeBy(
+      userId: userId,
+      challengeId: challengeId,
+    );
   }
 }

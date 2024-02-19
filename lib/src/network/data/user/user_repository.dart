@@ -1,5 +1,6 @@
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
+import 'package:fitness_app/src/network/model/user_challenge/user_challenge.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 
 abstract class UserRepository {
@@ -24,5 +25,9 @@ abstract class UserRepository {
   Future<MResult<MUser>> updateFavoriteWorkout({
     required MUser user,
     required String workoutId,
+  });
+  Future<MResult<MUserChallenge>> getUserChallenge({
+    required String userId,
+    required String challengeId,
   });
 }
