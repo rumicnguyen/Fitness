@@ -16,12 +16,9 @@ class WorkoutBloc extends Cubit<WorkoutState> {
   DomainManager get domain => DomainManager();
 
   Future syncData() async {
-    const String id = 'userId';
-    if (id.isNotEmpty == true) {
-      final result = await domain.workout.getNewSessions();
-      if (result.isSuccess && result.data != null) {
-        changeNewSessions(result.data!);
-      }
+    final result = await domain.workout.getWorkouts();
+    if (result.isSuccess && result.data != null) {
+      changeNewSessions(result.data!);
     }
   }
 
