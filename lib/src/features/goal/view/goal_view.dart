@@ -1,3 +1,4 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/goal/logic/goal_bloc.dart';
 import 'package:fitness_app/src/features/goal/logic/goal_state.dart';
 import 'package:fitness_app/src/features/goal/widget/goal_item_widget.dart';
@@ -19,7 +20,11 @@ class GoalView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<GoalBloc>(
       create: (context) => GoalBloc(),
-      child: BlocBuilder<GoalBloc, GoalState>(
+      child: BlocConsumer<GoalBloc, GoalState>(
+        listenWhen: (previous, current) => previous.handle != current.handle,
+        listener: (context, state) {
+          XToast.isShowLoading ? XToast.hideLoading() : XToast.showLoading();
+        },
         buildWhen: (previous, current) => previous.handle != current.handle,
         builder: (context, state) {
           return XScaffold(
