@@ -1,12 +1,11 @@
 import 'package:fitness_app/gen/assets.gen.dart';
-import 'package:fitness_app/src/features/intro/logic/intro_bloc.dart';
 import 'package:fitness_app/src/features/intro/widget/locale_dropdown_button.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/text_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class IntroView extends StatelessWidget {
   const IntroView({super.key});
@@ -47,7 +46,7 @@ class IntroView extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                context.read<IntroBloc>().isSignInUser();
+                AppCoordinator.showSignInScreen();
               },
             ),
           ],

@@ -18,7 +18,7 @@ class HomeBloc extends Cubit<HomeState> {
 
   DomainManager get domain => DomainManager();
   FirebaseStorageReference get storageRef => FirebaseStorageReference();
-  MUser user = UserPrefs.I.getUser() ?? MUser.empty();
+  final MUser user = UserPrefs.I.getUser() ?? MUser.empty();
 
   Future syncData() async {
     emit(state.copyWith(handle: MHandle.loading()));
@@ -35,8 +35,8 @@ class HomeBloc extends Cubit<HomeState> {
       ]);
     }
 
-    emit(state.copyWith(handle: MHandle.completed('')));
     XToast.hideLoading();
+    emit(state.copyWith(handle: MHandle.completed('')));
   }
 
   Future syncDataCurrentWorkout(String userId) async {

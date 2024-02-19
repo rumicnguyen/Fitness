@@ -1,4 +1,3 @@
-import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/challenge_detail/logic/challenge_detail_state.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
@@ -14,7 +13,6 @@ class ChallengeDetailBloc extends Cubit<ChallengeDetailState> {
 
   Future syncData(String id) async {
     emit(state.copyWith(handle: MHandle.loading()));
-    XToast.showLoading();
     final challenge = await domain.challenge.getChallengeById(id: id);
     if (challenge.isSuccess && challenge.data != null) {
       emit(state.copyWith(challenge: challenge.data!));
@@ -28,7 +26,6 @@ class ChallengeDetailBloc extends Cubit<ChallengeDetailState> {
       emit(state.copyWith(workouts: workouts));
     }
     emit(state.copyWith(handle: MHandle.result(challenge)));
-    XToast.hideLoading();
   }
 
   void onChangeWorkouts(List<MWorkout> workouts) {
