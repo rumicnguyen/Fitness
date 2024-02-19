@@ -127,6 +127,7 @@
   "waiting":"Waiting...",
   "is_loading":"Is Loading...",
   "page_not_found":"Page not found",
+  "list_is_empty":"List is empty",
   "exercise_in_detail":"exercises",
   "minutes":"minutes",
   "start_workout":"Start workout"
