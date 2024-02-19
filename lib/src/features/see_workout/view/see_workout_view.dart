@@ -1,8 +1,11 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/see_workout/logic/see_workout_bloc.dart';
 import 'package:fitness_app/src/features/see_workout/logic/see_workout_state.dart';
 import 'package:fitness_app/src/features/see_workout/widget/view_item.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/themes/colors.dart';
+import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +26,7 @@ class SeeWorkoutView extends StatelessWidget {
       child: BlocConsumer<SeeWorkoutBloc, SeeWorkoutState>(
         listenWhen: (previous, current) => previous.handle != current.handle,
         listener: (context, state) {
-          // TODO: implement listener
+          XToast.isShowLoading ? XToast.hideLoading() : XToast.showLoading();
         },
         buildWhen: (previous, current) =>
             previous.handle != current.handle ||
@@ -51,8 +54,11 @@ class SeeWorkoutView extends StatelessWidget {
                   return ViewItem(item: state.workouts[index]);
                 },
               )
-            : const Center(
-                child: Text('List is empty'),
+            : Center(
+                child: Text(
+                  S.of(context).list_is_empty,
+                  style: AppStyles.blackTextLarge,
+                ),
               );
       },
     );

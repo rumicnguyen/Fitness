@@ -1,5 +1,6 @@
 import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/goal/logic/goal_state.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/goal/goal.dart';
@@ -39,7 +40,7 @@ class GoalBloc extends Cubit<GoalState> {
     List<MGoal> list = List.from(state.goals);
     if (!list.contains(goal)) {
       if (list.length >= 5) {
-        XToast.error('Maximun goal is 5');
+        XToast.error(S.text.toast_maximum_goal_is_5);
         return;
       }
       list.add(goal);
@@ -56,15 +57,18 @@ class GoalBloc extends Cubit<GoalState> {
   }
 
   Future onConfirm() async {
-    XToast.showLoading();
+    emit(state.copyWith(handle: MHandle.loading()));
     final list = state.goals.map((e) => e.goal).toList();
     final result = await domain.user.update(user: user, target: list);
-    XToast.hideLoading();
+
     if (result.isError || result.data == null) {
-      XToast.error('Update failt');
+      XToast.error(S.text.toast_update_failt);
     } else {
-      XToast.success('Update success');
+      XToast.success(S.text.toast_update_failt);
+
       UserPrefs.instance.setUser(result.data);
+      await domain.user.update(user: user, target: result.data!.target);
     }
+    emit(state.copyWith(handle: MHandle.result(result)));
   }
 }

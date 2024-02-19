@@ -1,3 +1,4 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/challenge_detail/logic/challenge_detail_bloc.dart';
 import 'package:fitness_app/src/features/challenge_detail/logic/challenge_detail_state.dart';
 import 'package:fitness_app/src/features/challenge_detail/widget/challenge_detail_header.dart';
@@ -25,7 +26,7 @@ class ChallengeDetailView extends StatelessWidget {
       child: BlocConsumer<ChallengeDetailBloc, ChallengeDetailState>(
         listenWhen: (previous, current) => previous.handle != current.handle,
         listener: (context, state) {
-          // TODO: implement listener
+          XToast.isShowLoading ? XToast.hideLoading() : XToast.showLoading();
         },
         buildWhen: (previous, current) => previous.handle != current.handle,
         builder: (context, state) {
