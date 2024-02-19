@@ -101,6 +101,7 @@ class UserRepositoryImpl extends UserRepository {
     int? workoutsCompleted,
     double? height,
     double? weight,
+    List<String>? target,
   }) async {
     try {
       final result = await usersRef.update(user.id, {
@@ -114,6 +115,7 @@ class UserRepositoryImpl extends UserRepository {
         'hoursTraining': hoursTraining ?? user.hoursTraining,
         'weight': weight ?? user.weight,
         'workoutsCompleted': workoutsCompleted ?? user.workoutsCompleted,
+        'target': target ?? user.target,
       });
       if (result.isSuccess) {
         final updateUser = await getUser(id: user.id);
@@ -153,7 +155,7 @@ class UserRepositoryImpl extends UserRepository {
       return MResult.exception(e);
     }
   }
-  
+
   @override
   Future<MResult<List<MUser>>> getUsers() {
     return usersRef.getAll();

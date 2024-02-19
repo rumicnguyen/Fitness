@@ -39,12 +39,7 @@ class MostPopular extends StatelessWidget {
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
                     children: state.mostPopular
-                        .asMap()
-                        .entries
-                        .map((e) => MostPopularItem(
-                              item: e.value,
-                              image: state.images[e.key],
-                            ))
+                        .map((e) => MostPopularItem(item: e))
                         .toList(),
                   ),
           );
