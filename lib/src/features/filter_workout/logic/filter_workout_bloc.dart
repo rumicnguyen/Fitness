@@ -3,6 +3,8 @@ import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
 import 'package:fitness_app/src/network/data/enum/entry_fee.dart';
 import 'package:fitness_app/src/network/data/enum/time_filter.dart';
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
+import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterWorkoutBloc extends Cubit<FilterWorkoutState> {
@@ -20,6 +22,14 @@ class FilterWorkoutBloc extends Cubit<FilterWorkoutState> {
   void apply() {
     emit(state.copyWith(
       disciplineActivity: state.disciplineActivityOnFilter,
+      entryFee: state.entryFeeOnFilter,
+      time: state.timeOnFilter,
+      level: state.levelOnFilter,
+    ));
+
+    AppCoordinator.showWorkoutListScreen(
+        filterWorkout: MFilterWorkout(
+      discipline: state.disciplineActivityOnFilter,
       entryFee: state.entryFeeOnFilter,
       time: state.timeOnFilter,
       level: state.levelOnFilter,

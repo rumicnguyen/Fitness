@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/router/route_name.dart';
 import 'package:fitness_app/src/router/router.dart';
 import 'package:flutter/material.dart';
@@ -59,18 +60,12 @@ class AppCoordinator {
   static Future<T?> showChallengeScreen<T extends Object?>() =>
       context.pushNamed<T>(AppRouteNames.challenge.name);
 
-  static Future<T?> showWorkoutListScreen<T extends Object?>(
-          {required String id}) =>
+  static Future<T?> showWorkoutListScreen<T extends Object?>({
+    MFilterWorkout? filterWorkout,
+  }) =>
       context.pushNamed<T>(
-        AppRouteNames.workoutList.name,
-        pathParameters: {AppRouteNames.workoutList.paramName!: id},
-      );
-
-  static Future<T?> showMostPopularScreen<T extends Object?>(
-          {required String id}) =>
-      context.pushNamed<T>(
-        AppRouteNames.mostPopular.name,
-        pathParameters: {AppRouteNames.mostPopular.paramName!: id},
+        AppRouteNames.listWorkout.name,
+        extra: filterWorkout,
       );
 
   static Future<T?> showAccountScreen<T extends Object?>() =>

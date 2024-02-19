@@ -10,9 +10,11 @@ import 'package:fitness_app/src/features/filter_workout/view/filter_workout_view
 import 'package:fitness_app/src/features/home/view/home_view.dart';
 import 'package:fitness_app/src/features/intro/view/intro_view.dart';
 import 'package:fitness_app/src/features/page_not_found/view/page_not_found_view.dart';
+import 'package:fitness_app/src/features/see_workout/view/see_workout_view.dart';
 import 'package:fitness_app/src/features/start_workout/view/start_workout_view.dart';
 import 'package:fitness_app/src/features/workout/view/workout_view.dart';
 import 'package:fitness_app/src/features/workout_detail/view/workout_detail_view.dart';
+import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/router/route_name.dart';
 import 'package:flutter/foundation.dart';
@@ -48,6 +50,7 @@ class AppRouter {
             name: AppRouteNames.forgotPassword.name,
             builder: (_, __) => const ForgotView(),
           ),
+
           // place to insert collect info route
         ],
       ),
@@ -72,6 +75,16 @@ class AppRouter {
                 name: AppRouteNames.filterWorkout.name,
                 builder: (context, state) {
                   return const FilterWorkoutView();
+                },
+              ),
+              GoRoute(
+                parentNavigatorKey: AppCoordinator.navigatorKey,
+                path: AppRouteNames.listWorkout.subPath,
+                name: AppRouteNames.listWorkout.name,
+                builder: (context, state) {
+                  return SeeWorkoutView(
+                    filterWorkout: state.extra as MFilterWorkout?,
+                  );
                 },
               ),
             ],

@@ -3,6 +3,7 @@ import 'package:fitness_app/src/features/most_popular/logic/most_popular_bloc.da
 import 'package:fitness_app/src/features/most_popular/logic/most_popular_state.dart';
 import 'package:fitness_app/src/features/most_popular/widget/most_popupar_item.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,9 @@ class MostPopular extends StatelessWidget {
           return XBlock(
             height: screenSize.height - 400,
             header: S.of(context).most_popular,
-            onPressed: () {},
+            onPressed: () {
+              AppCoordinator.showWorkoutListScreen();
+            },
             child: state.handle.isLoading
                 ? const Loading()
                 : GridView.count(
