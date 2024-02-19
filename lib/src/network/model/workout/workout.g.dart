@@ -64,4 +64,6 @@ const _$WorkoutLevelEnumMap = {
 const _$DisciplineActivityEnumMap = {
   DisciplineActivity.any: 'any',
   DisciplineActivity.gym: 'gym',
+  DisciplineActivity.cardio: 'cardio',
+  DisciplineActivity.pilates: 'pilates',
 };
