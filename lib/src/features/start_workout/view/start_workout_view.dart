@@ -1,3 +1,4 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/start_workout/logic/start_workout_bloc.dart';
 import 'package:fitness_app/src/features/start_workout/logic/start_workout_state.dart';
 import 'package:fitness_app/src/features/start_workout/widget/exercise_item.dart';
@@ -58,7 +59,7 @@ class StartWorkoutView extends StatelessWidget {
     return BlocConsumer<StartWorkoutBloc, StartWorkoutState>(
       listenWhen: (previous, current) => previous.handle != current.handle,
       listener: (context, state) {
-        // TODO: implement listener
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
       },
       buildWhen: (previous, current) =>
           previous.workout != current.workout ||
@@ -125,7 +126,7 @@ class StartWorkoutView extends StatelessWidget {
     return BlocConsumer<StartWorkoutBloc, StartWorkoutState>(
       listenWhen: (previous, current) => previous.handle != current.handle,
       listener: (context, state) {
-        // TODO: implement listener
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
       },
       buildWhen: (previous, current) =>
           previous.exercise != current.exercise ||

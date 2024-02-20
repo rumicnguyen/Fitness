@@ -1,3 +1,4 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_bloc.dart';
 import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
@@ -27,8 +28,9 @@ class WorkoutDetailView extends StatelessWidget {
       child: BlocConsumer<WorkoutDetailBloc, WorkoutDetailState>(
         listenWhen: (previous, current) => previous.handle != current.handle,
         listener: (context, state) {
+          state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
           if (state.handle.isError) {
-            // TODO: show toast
+            XToast.error(state.handle.message);
           }
         },
         buildWhen: (previous, current) =>
@@ -54,7 +56,14 @@ class WorkoutDetailView extends StatelessWidget {
       create: (BuildContext context) {
         return WorkoutDetailBloc(id);
       },
-      child: BlocBuilder<WorkoutDetailBloc, WorkoutDetailState>(
+      child: BlocConsumer<WorkoutDetailBloc, WorkoutDetailState>(
+        listenWhen: (previous, current) => previous.handle != current.handle,
+        listener: (context, state) {
+          state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+          if (state.handle.isError) {
+            XToast.error(state.handle.message);
+          }
+        },
         buildWhen: (previous, current) {
           return previous.isFavorite != current.isFavorite ||
               previous.handle != current.handle;

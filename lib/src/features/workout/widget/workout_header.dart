@@ -1,9 +1,11 @@
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
+import 'package:fitness_app/src/features/workout/logic/workout_bloc.dart';
+import 'package:fitness_app/src/features/workout/logic/workout_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/title/title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WorkoutHeader extends StatelessWidget {
   const WorkoutHeader({
@@ -30,8 +32,13 @@ class WorkoutHeader extends StatelessWidget {
             icon: const Icon(Icons.search),
           ),
         ),
-        WorkoutInProgress(
-          userWorkout: MUserWorkout.empty(),
+        BlocBuilder<WorkoutBloc, WorkoutState>(
+          buildWhen: (previous, current) =>
+              previous.handle != current.handle ||
+              previous.continueWorkout != current.continueWorkout,
+          builder: (context, state) {
+            return WorkoutInProgress(userWorkout: state.continueWorkout);
+          },
         ),
         _buildSpace(),
         tabBar,

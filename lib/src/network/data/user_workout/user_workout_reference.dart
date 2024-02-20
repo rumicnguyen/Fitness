@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/firebase/base_collection.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
@@ -24,7 +25,7 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
     try {
       final result = await get(userWorkout.id);
       if (result.isSuccess == true) {
-        return MResult.error('User Workout already exists');
+        return MResult.error(S.text.error);
       } else {
         final MResult<MUserWorkout> result = await add(userWorkout);
         return MResult.success(result.data);
@@ -47,23 +48,28 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
       if (workout.isError) {
         return MResult.error(workout.error);
       }
-      final getResult = await get(userWorkout.id);
-      if (getResult.isSuccess == true && getResult.data != null) {
-        if (getResult.data!.isFinished) {
-          final result = await update(userWorkout.id, {
-            'startAt': DateTime.now(),
+      final getResult = await isAlready(
+        userId: userWorkout.userId,
+        workoutId: userWorkout.workoutId,
+      );
+      if (getResult.isSuccess && getResult.data != null) {
+        if (getResult.data!.id.isNotEmpty) {
+          final result = await update(getResult.data!.id, {
+            'startAt': DateTime.now().toString(),
           });
+          if (result.isSuccess) {
+            return MResult.success(getResult.data);
+          }
+          return MResult.error(result.error);
+        } else {
+          final MResult<MUserWorkout> result = await set(userWorkout);
           if (result.isSuccess) {
             return MResult.success(result.data);
           }
-        }
-      } else {
-        final MResult<MUserWorkout> result = await set(userWorkout);
-        if (result.isSuccess) {
-          return MResult.success(result.data);
+          return MResult.error(result.error);
         }
       }
-      return MResult.error('error');
+      return MResult.error(S.text.error);
     } catch (e) {
       return MResult.exception(e);
     }
@@ -95,7 +101,7 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
 
       MResult.success(result);
 
-      return MResult.error('error');
+      return MResult.error(S.text.error);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -117,6 +123,38 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
       List<MUserWorkout> result = query.docs.map((e) => e.data()).toList();
 
       return MResult.success(result);
+    } on FirebaseException catch (e) {
+      return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  Future<MResult<MUserWorkout>> isAlready({
+    required String workoutId,
+    required String userId,
+  }) async {
+    try {
+      final query = await ref
+          .where(
+            'workoutId',
+            isEqualTo: workoutId,
+          )
+          .where(
+            'userId',
+            isEqualTo: userId,
+          )
+          .where(
+            'isFinished',
+            isEqualTo: false,
+          )
+          .get();
+
+      List<MUserWorkout> result = query.docs.map((e) => e.data()).toList();
+      if (result.isNotEmpty) {
+        return MResult.success(result.first);
+      }
+      return MResult.success(MUserWorkout.empty());
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {

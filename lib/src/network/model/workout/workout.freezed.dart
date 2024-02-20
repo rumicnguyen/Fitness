@@ -23,9 +23,9 @@ mixin _$MWorkout {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get thumbnail => throw _privateConstructorUsedError;
-  String get backgroundImage => throw _privateConstructorUsedError; // minute
-  int? get minimumTime => throw _privateConstructorUsedError;
-  int? get maximumTime => throw _privateConstructorUsedError;
+  String get backgroundImage => throw _privateConstructorUsedError;
+  int get minimumTime => throw _privateConstructorUsedError;
+  int get maximumTime => throw _privateConstructorUsedError;
   int get exercises => throw _privateConstructorUsedError;
   WorkoutLevel get level => throw _privateConstructorUsedError;
   int get members => throw _privateConstructorUsedError;
@@ -33,7 +33,9 @@ mixin _$MWorkout {
   DisciplineActivity get discipline => throw _privateConstructorUsedError;
   int get entryFee => throw _privateConstructorUsedError;
   double get popular => throw _privateConstructorUsedError;
+  List<String> get goals => throw _privateConstructorUsedError;
   int? get tag => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,8 +53,8 @@ abstract class $MWorkoutCopyWith<$Res> {
       String name,
       String thumbnail,
       String backgroundImage,
-      int? minimumTime,
-      int? maximumTime,
+      int minimumTime,
+      int maximumTime,
       int exercises,
       WorkoutLevel level,
       int members,
@@ -60,7 +62,9 @@ abstract class $MWorkoutCopyWith<$Res> {
       DisciplineActivity discipline,
       int entryFee,
       double popular,
-      int? tag});
+      List<String> goals,
+      int? tag,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -80,8 +84,8 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
     Object? name = null,
     Object? thumbnail = null,
     Object? backgroundImage = null,
-    Object? minimumTime = freezed,
-    Object? maximumTime = freezed,
+    Object? minimumTime = null,
+    Object? maximumTime = null,
     Object? exercises = null,
     Object? level = null,
     Object? members = null,
@@ -89,7 +93,9 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
     Object? discipline = null,
     Object? entryFee = null,
     Object? popular = null,
+    Object? goals = null,
     Object? tag = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,14 +114,14 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
           ? _value.backgroundImage
           : backgroundImage // ignore: cast_nullable_to_non_nullable
               as String,
-      minimumTime: freezed == minimumTime
+      minimumTime: null == minimumTime
           ? _value.minimumTime
           : minimumTime // ignore: cast_nullable_to_non_nullable
-              as int?,
-      maximumTime: freezed == maximumTime
+              as int,
+      maximumTime: null == maximumTime
           ? _value.maximumTime
           : maximumTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       exercises: null == exercises
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -144,10 +150,18 @@ class _$MWorkoutCopyWithImpl<$Res, $Val extends MWorkout>
           ? _value.popular
           : popular // ignore: cast_nullable_to_non_nullable
               as double,
+      goals: null == goals
+          ? _value.goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -165,8 +179,8 @@ abstract class _$$MWorkoutImplCopyWith<$Res>
       String name,
       String thumbnail,
       String backgroundImage,
-      int? minimumTime,
-      int? maximumTime,
+      int minimumTime,
+      int maximumTime,
       int exercises,
       WorkoutLevel level,
       int members,
@@ -174,7 +188,9 @@ abstract class _$$MWorkoutImplCopyWith<$Res>
       DisciplineActivity discipline,
       int entryFee,
       double popular,
-      int? tag});
+      List<String> goals,
+      int? tag,
+      DateTime? createdAt});
 }
 
 /// @nodoc
@@ -192,8 +208,8 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
     Object? name = null,
     Object? thumbnail = null,
     Object? backgroundImage = null,
-    Object? minimumTime = freezed,
-    Object? maximumTime = freezed,
+    Object? minimumTime = null,
+    Object? maximumTime = null,
     Object? exercises = null,
     Object? level = null,
     Object? members = null,
@@ -201,7 +217,9 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
     Object? discipline = null,
     Object? entryFee = null,
     Object? popular = null,
+    Object? goals = null,
     Object? tag = freezed,
+    Object? createdAt = freezed,
   }) {
     return _then(_$MWorkoutImpl(
       id: null == id
@@ -220,14 +238,14 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
           ? _value.backgroundImage
           : backgroundImage // ignore: cast_nullable_to_non_nullable
               as String,
-      minimumTime: freezed == minimumTime
+      minimumTime: null == minimumTime
           ? _value.minimumTime
           : minimumTime // ignore: cast_nullable_to_non_nullable
-              as int?,
-      maximumTime: freezed == maximumTime
+              as int,
+      maximumTime: null == maximumTime
           ? _value.maximumTime
           : maximumTime // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       exercises: null == exercises
           ? _value.exercises
           : exercises // ignore: cast_nullable_to_non_nullable
@@ -256,10 +274,18 @@ class __$$MWorkoutImplCopyWithImpl<$Res>
           ? _value.popular
           : popular // ignore: cast_nullable_to_non_nullable
               as double,
+      goals: null == goals
+          ? _value._goals
+          : goals // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
               as int?,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -272,8 +298,8 @@ class _$MWorkoutImpl extends _MWorkout {
       this.name = 'None',
       this.thumbnail = 'None',
       this.backgroundImage = 'None',
-      this.minimumTime,
-      this.maximumTime,
+      this.minimumTime = 0,
+      this.maximumTime = 0,
       this.exercises = 0,
       this.level = WorkoutLevel.none,
       this.members = 0,
@@ -281,8 +307,11 @@ class _$MWorkoutImpl extends _MWorkout {
       this.discipline = DisciplineActivity.gym,
       this.entryFee = 0,
       this.popular = 0.0,
-      this.tag})
-      : super._();
+      final List<String> goals = const [],
+      this.tag,
+      this.createdAt})
+      : _goals = goals,
+        super._();
 
   factory _$MWorkoutImpl.fromJson(Map<String, dynamic> json) =>
       _$$MWorkoutImplFromJson(json);
@@ -298,11 +327,12 @@ class _$MWorkoutImpl extends _MWorkout {
   @override
   @JsonKey()
   final String backgroundImage;
-// minute
   @override
-  final int? minimumTime;
+  @JsonKey()
+  final int minimumTime;
   @override
-  final int? maximumTime;
+  @JsonKey()
+  final int maximumTime;
   @override
   @JsonKey()
   final int exercises;
@@ -324,12 +354,23 @@ class _$MWorkoutImpl extends _MWorkout {
   @override
   @JsonKey()
   final double popular;
+  final List<String> _goals;
+  @override
+  @JsonKey()
+  List<String> get goals {
+    if (_goals is EqualUnmodifiableListView) return _goals;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_goals);
+  }
+
   @override
   final int? tag;
+  @override
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, video: $video, discipline: $discipline, entryFee: $entryFee, popular: $popular, tag: $tag)';
+    return 'MWorkout(id: $id, name: $name, thumbnail: $thumbnail, backgroundImage: $backgroundImage, minimumTime: $minimumTime, maximumTime: $maximumTime, exercises: $exercises, level: $level, members: $members, video: $video, discipline: $discipline, entryFee: $entryFee, popular: $popular, goals: $goals, tag: $tag, createdAt: $createdAt)';
   }
 
   @override
@@ -357,7 +398,10 @@ class _$MWorkoutImpl extends _MWorkout {
             (identical(other.entryFee, entryFee) ||
                 other.entryFee == entryFee) &&
             (identical(other.popular, popular) || other.popular == popular) &&
-            (identical(other.tag, tag) || other.tag == tag));
+            const DeepCollectionEquality().equals(other._goals, _goals) &&
+            (identical(other.tag, tag) || other.tag == tag) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt));
   }
 
   @JsonKey(ignore: true)
@@ -377,7 +421,9 @@ class _$MWorkoutImpl extends _MWorkout {
       discipline,
       entryFee,
       popular,
-      tag);
+      const DeepCollectionEquality().hash(_goals),
+      tag,
+      createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -399,8 +445,8 @@ abstract class _MWorkout extends MWorkout {
       final String name,
       final String thumbnail,
       final String backgroundImage,
-      final int? minimumTime,
-      final int? maximumTime,
+      final int minimumTime,
+      final int maximumTime,
       final int exercises,
       final WorkoutLevel level,
       final int members,
@@ -408,7 +454,9 @@ abstract class _MWorkout extends MWorkout {
       final DisciplineActivity discipline,
       final int entryFee,
       final double popular,
-      final int? tag}) = _$MWorkoutImpl;
+      final List<String> goals,
+      final int? tag,
+      final DateTime? createdAt}) = _$MWorkoutImpl;
   const _MWorkout._() : super._();
 
   factory _MWorkout.fromJson(Map<String, dynamic> json) =
@@ -422,10 +470,10 @@ abstract class _MWorkout extends MWorkout {
   String get thumbnail;
   @override
   String get backgroundImage;
-  @override // minute
-  int? get minimumTime;
   @override
-  int? get maximumTime;
+  int get minimumTime;
+  @override
+  int get maximumTime;
   @override
   int get exercises;
   @override
@@ -441,7 +489,11 @@ abstract class _MWorkout extends MWorkout {
   @override
   double get popular;
   @override
+  List<String> get goals;
+  @override
   int? get tag;
+  @override
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$MWorkoutImplCopyWith<_$MWorkoutImpl> get copyWith =>

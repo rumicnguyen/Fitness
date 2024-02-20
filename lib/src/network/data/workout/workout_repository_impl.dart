@@ -3,15 +3,19 @@ import 'package:fitness_app/src/network/data/enum/discipline_activity.dart';
 import 'package:fitness_app/src/network/data/enum/entry_fee.dart';
 import 'package:fitness_app/src/network/data/enum/time_filter.dart';
 import 'package:fitness_app/src/network/data/enum/workout_level.dart';
+import 'package:fitness_app/src/network/data/user/user_reference.dart';
 import 'package:fitness_app/src/network/data/workout/workout_reference.dart';
 import 'package:fitness_app/src/network/data/workout/workout_repository.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/utils/popular.dart';
+import 'package:fitness_app/src/utils/utils.dart';
 
 class WorkoutRepositoryImpl extends WorkoutRepository {
   final workoutRef = WorkoutReference();
+  final userRef = UserReference();
+
   @override
   Future<MResult<MWorkout>> addWorkout({required MWorkout workout}) {
     return workoutRef.addWorkout(workout);
@@ -43,10 +47,17 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
   Future<MResult<List<MWorkout>>> getNewSessions() async {
     try {
       MResult<List<MWorkout>> list = await getWorkouts();
-      if (list.isSuccess && list.data != null) {
-        return MResult.success(list.data);
+      if (list.isError || list.data == null) {
+        return MResult.error(list.error);
       }
-      return MResult.error(list.error);
+      var result = <MWorkout>[];
+      for (var element in list.data!) {
+        if (element.createdAt != null &&
+            Utils.isInThisWeek(element.createdAt!)) {
+          result.add(element);
+        }
+      }
+      return MResult.success(result);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);
     } catch (e) {
@@ -139,12 +150,31 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
                 filterWorkout.level,
               ) &&
               TimeFilter.isTrue(
-                element.minimumTime ?? 0,
+                element.minimumTime,
                 filterWorkout.time,
               ))
           .toList();
 
       return MResult.success(result);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  @override
+  Future<MResult<List<MWorkout>>> getRecommendedWorkoutsUser({
+    required String id,
+  }) async {
+    try {
+      final user = await userRef.get(id);
+      if (user.isError || user.data == null) {
+        return MResult.error(user.error);
+      }
+      final result = await workoutRef.getRecommendedWorkouts(user.data!.target);
+      if (result.isError || result.data == null) {
+        return MResult.error(result.error);
+      }
+      return MResult.success(result.data!);
     } catch (e) {
       return MResult.exception(e);
     }

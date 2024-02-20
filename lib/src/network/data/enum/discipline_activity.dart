@@ -1,6 +1,8 @@
-enum DisciplineActivity{
+enum DisciplineActivity {
   any(value: 'Any'),
-  gym(value: 'Gym'),
+  gym(value: 'gym'),
+  cardio(value: 'cardio'),
+  pilates(value: 'pilates'),
   ;
 
   final String value;
@@ -15,6 +17,16 @@ enum DisciplineActivity{
     switch (input) {
       case gym:
         if (discipline == gym) {
+          return true;
+        }
+        return false;
+      case cardio:
+        if (discipline == cardio) {
+          return true;
+        }
+        return false;
+      case pilates:
+        if (discipline == pilates) {
           return true;
         }
         return false;

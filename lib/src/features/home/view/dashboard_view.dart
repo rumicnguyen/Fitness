@@ -29,9 +29,7 @@ class DashboardView extends StatelessWidget {
               previous.handle != current.handle ||
               previous.continueWorkout != current.continueWorkout,
           builder: (context, state) {
-            return WorkoutInProgress(
-              userWorkout: state.continueWorkout
-            );
+            return WorkoutInProgress(userWorkout: state.continueWorkout);
           },
         ),
       ],

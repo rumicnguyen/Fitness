@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/user/user_reference.dart';
 import 'package:fitness_app/src/network/data/user/user_repository.dart';
 import 'package:fitness_app/src/network/data/user_challenge/user_challenge_reference.dart';
@@ -68,7 +69,7 @@ class UserRepositoryImpl extends UserRepository {
         }
         return MResult.success(friends);
       }
-      return MResult.error('error');
+      return MResult.error(user.error);
     } catch (e) {
       return MResult.exception(e);
     }
@@ -79,7 +80,7 @@ class UserRepositoryImpl extends UserRepository {
     try {
       final result = FirebaseAuth.instance.currentUser;
       if (result == null) {
-        return MResult.error('Not user sign in');
+        return MResult.error(S.text.error);
       }
       final user = await usersRef.get(id);
       return MResult.success(user.data);
@@ -120,7 +121,7 @@ class UserRepositoryImpl extends UserRepository {
         final updateUser = await getUser(id: user.id);
         return MResult.success(updateUser.data);
       }
-      return MResult.error('error');
+      return MResult.error(result.error);
     } catch (e) {
       return MResult.exception(e);
     }
@@ -145,11 +146,11 @@ class UserRepositoryImpl extends UserRepository {
         });
         if (result.isSuccess) {
           final resultUser = await getUser(id: user.id);
-          UserPrefs.instance.setUser(result.data);
+          UserPrefs.instance.setUser(resultUser.data);
           return MResult.success(resultUser.data);
         }
       }
-      return MResult.error('error');
+      return MResult.error(updateUser.error);
     } catch (e) {
       return MResult.exception(e);
     }

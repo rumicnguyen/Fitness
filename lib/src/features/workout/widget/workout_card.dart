@@ -14,17 +14,20 @@ class WorkoutCard extends StatelessWidget {
     this.item,
     required this.label,
     this.onPressed,
+    this.enableActions = true,
   });
 
   final List<MWorkout>? item;
   final String label;
   final void Function()? onPressed;
+  final bool enableActions;
 
   @override
   Widget build(BuildContext context) {
     return XBlock(
       header: label,
       onPressed: onPressed,
+      enableActions: enableActions,
       child: item?.isNotEmpty == true
           ? _buildListView(item ?? [])
           : _buildEmptyItem(MWorkout.empty()),
