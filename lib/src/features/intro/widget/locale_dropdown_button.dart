@@ -1,5 +1,5 @@
-import 'package:fitness_app/src/features/setting/logic/setting_bloc.dart';
-import 'package:fitness_app/src/features/setting/logic/setting_state.dart';
+import 'package:fitness_app/src/features/intro/logic/intro_bloc.dart';
+import 'package:fitness_app/src/features/intro/logic/intro_state.dart';
 import 'package:fitness_app/src/network/data/enum/locale_enum.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
@@ -13,7 +13,7 @@ class LocaleDropDownButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return XOutlinedButton(
-      child: BlocBuilder<SettingBloc, SettingState>(
+      child: BlocBuilder<IntroBloc, IntroState>(
         buildWhen: (previous, current) {
           return previous.locale != current.locale;
         },
@@ -29,7 +29,7 @@ class LocaleDropDownButton extends StatelessWidget {
             items: _buildListItem(style: AppStyles.titleButtonShow),
             onChanged: (value) {
               if (value != null) {
-                context.read<SettingBloc>().onChangeLocalizations(value.value);
+                context.read<IntroBloc>().onChangeLocalizations(value.value);
               }
             },
             selectedItemBuilder: (context) {

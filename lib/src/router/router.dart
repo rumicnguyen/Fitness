@@ -16,15 +16,17 @@ import 'package:fitness_app/src/features/start_workout/view/start_workout_view.d
 import 'package:fitness_app/src/features/workout/view/workout_view.dart';
 import 'package:fitness_app/src/features/workout_detail/view/workout_detail_view.dart';
 import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
+import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/router/route_name.dart';
+import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
   final router = GoRouter(
     navigatorKey: AppCoordinator.navigatorKey,
-    initialLocation: AppRouteNames.intro.path,
+    initialLocation: AppRouteNames.home.path,
     debugLogDiagnostics: kDebugMode,
     routes: <RouteBase>[
       GoRoute(
@@ -69,6 +71,13 @@ class AppRouter {
             path: AppRouteNames.home.subPath,
             name: AppRouteNames.home.name,
             builder: (context, state) => const HomeView(),
+            redirect: (context, state) {
+              final MUser user = UserPrefs.I.getUser() ?? MUser.empty();
+              if (user.id.isEmpty) {
+                return AppRouteNames.intro.path;
+              }
+              return null;
+            },
           ),
           GoRoute(
             path: AppRouteNames.workout.path,

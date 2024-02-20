@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
 import 'package:fitness_app/src/features/home/view/dashboard_view.dart';
@@ -27,21 +28,35 @@ class HomeView extends StatelessWidget {
           create: (context) {
             return HomeBloc();
           },
-          child: Column(
-            children: [
-              const DashboardView(),
-              _buildPlace(),
-              _buildTodayActivity(),
-              _buildPlace(),
-              _buildNextWorkout(),
-              _buildPlace(),
-              _buildActiveChallenge(),
-              _buildPlace(),
-              _buildPodcasts(),
-              _buildPlace(),
-              const FriendsActivityView(),
-              _buildPlace(),
-            ],
+          child: BlocConsumer<HomeBloc, HomeState>(
+            listenWhen: (previous, current) =>
+                previous.handle != current.handle,
+            listener: (context, state) {
+              XToast.isShowLoading
+                  ? XToast.hideLoading()
+                  : XToast.showLoading();
+              if (state.handle.isError) {
+                XToast.error(state.handle.message);
+              }
+            },
+            builder: (context, state) {
+              return Column(
+                children: [
+                  const DashboardView(),
+                  _buildPlace(),
+                  _buildTodayActivity(),
+                  _buildPlace(),
+                  _buildNextWorkout(),
+                  _buildPlace(),
+                  _buildActiveChallenge(),
+                  _buildPlace(),
+                  _buildPodcasts(),
+                  _buildPlace(),
+                  const FriendsActivityView(),
+                  _buildPlace(),
+                ],
+              );
+            },
           ),
         ),
       ),
