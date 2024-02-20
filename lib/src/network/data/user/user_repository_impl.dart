@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/user/user_reference.dart';
 import 'package:fitness_app/src/network/data/user/user_repository.dart';
 import 'package:fitness_app/src/network/data/user_challenge/user_challenge_reference.dart';
+import 'package:fitness_app/src/network/data/user_workout/user_workout_reference.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_challenge/user_challenge.dart';
@@ -11,6 +11,7 @@ import 'package:fitness_app/src/services/user_prefs.dart';
 
 class UserRepositoryImpl extends UserRepository {
   final usersRef = UserReference();
+  final userWorkoutRef = UserWorkoutReference();
   final userChallengeRef = UserChallengeReference();
   @override
   Future<MResult<MUser>> addUser({required MUser user}) async {
@@ -26,34 +27,29 @@ class UserRepositoryImpl extends UserRepository {
   Future<MResult<List<MUserWorkout>>> getFriendsActivity({
     required String id,
   }) async {
-    List<MUserWorkout> list = [
-      MUserWorkout(
-        id: '1',
-        userName: 'Guy Hawkins',
-        workoutName: 'Workout with ball',
-        workoutImage: Assets.images.newTransparent.path,
-        userId: 'cLcCa9CWTISEGm6CKOyvaRsOBD93',
-        workoutId: 'lM3ZsYp7DuKHuZqxaYUk',
-      ),
-      MUserWorkout(
-        id: '2',
-        userName: 'Alan',
-        workoutName: 'Basketball',
-        workoutImage: Assets.images.item9.path,
-        userId: '11',
-        workoutId: '5',
-      ),
-      MUserWorkout(
-        id: '3',
-        userName: 'Olivia',
-        workoutName: 'Get already to the marathon',
-        workoutImage: Assets.images.item5.path,
-        userId: '12',
-        workoutId: '1',
-      ),
-    ];
+    try {
+      final user = await getUser(id: id);
+      if (user.isError || user.data == null) {
+        return MResult.error(user.error);
+      }
+      if (user.data!.friends.isEmpty) {
+        return MResult.success([]);
+      }
+      var result = <MUserWorkout>[];
+      for (var element in user.data!.friends) {
+        final data = await userWorkoutRef.getNotOrFinished(
+          userId: element,
+          isFinished: true,
+        );
+        if (data.isSuccess && data.data != null && data.data!.isNotEmpty) {
+          data.data!.map((e) => result.add(e));
+        }
+      }
 
-    return MResult.success(list);
+      return MResult.success(result);
+    } catch (e) {
+      return MResult.exception(e);
+    }
   }
 
   @override

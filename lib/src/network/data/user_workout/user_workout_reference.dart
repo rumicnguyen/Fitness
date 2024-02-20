@@ -38,12 +38,12 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
     MUserWorkout userWorkout,
   ) async {
     try {
-      final user = await domain.user.getUser(id: userWorkout.userId ?? '');
+      final user = await domain.user.getUser(id: userWorkout.userId);
       if (user.isError) {
         return MResult.error(user.error);
       }
       final workout =
-          await domain.workout.getWorkoutById(id: userWorkout.workoutId ?? '');
+          await domain.workout.getWorkoutById(id: userWorkout.workoutId);
       if (workout.isError) {
         return MResult.error(workout.error);
       }
@@ -116,6 +116,31 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
 
       List<MUserWorkout> result = query.docs.map((e) => e.data()).toList();
 
+      return MResult.success(result);
+    } on FirebaseException catch (e) {
+      return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  Future<MResult<List<MUserWorkout>>> getNotOrFinished({
+    required String userId,
+    bool isFinished = false,
+  }) async {
+    try {
+      final query = await ref
+          .where(
+            'userId',
+            isEqualTo: userId,
+          )
+          .where(
+            'isFinished',
+            isEqualTo: isFinished,
+          )
+          .get();
+
+      List<MUserWorkout> result = query.docs.map((e) => e.data()).toList();
       return MResult.success(result);
     } on FirebaseException catch (e) {
       return MResult.exception(e.message);

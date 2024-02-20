@@ -1,3 +1,6 @@
+import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
+import 'package:fitness_app/src/features/home/logic/home_state.dart';
+import 'package:fitness_app/src/features/home/widget/portal.dart';
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
@@ -6,6 +9,7 @@ import 'package:fitness_app/widgets/avatar.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/title/title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -20,22 +24,38 @@ class DashboardView extends StatelessWidget {
         const SizedBox(
           height: 20,
         ),
-        WorkoutInProgress(
-          persentCompleted: 75,
-          workoutName: S.of(context).waist_cinching_workout,
-          onPressed: () {},
+        BlocBuilder<HomeBloc, HomeState>(
+          buildWhen: (previous, current) =>
+              previous.handle != current.handle ||
+              previous.continueWorkout != current.continueWorkout,
+          builder: (context, state) {
+            return WorkoutInProgress(
+              userWorkout: state.continueWorkout
+            );
+          },
         ),
       ],
     );
   }
 
   Widget _buildTitle(BuildContext context, MUser user) {
-    return XTitle(
-      title: S.of(context).home_dashboard,
-      actions: XAvatar(
-        avatar: user.avatar,
-        size: 80,
-      ),
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => previous.handle != current.handle,
+      builder: (context, state) {
+        return XTitle(
+          title: S.of(context).home_dashboard,
+          actions: XPortal(
+            controller: state.portalController,
+            child: XAvatar(
+              avatar: user.avatar,
+              size: 80,
+              onTap: () {
+                state.portalController.toggle();
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 

@@ -21,14 +21,15 @@ MUserWorkout _$MUserWorkoutFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MUserWorkout {
   String get id => throw _privateConstructorUsedError;
-  String? get userId => throw _privateConstructorUsedError;
-  String? get workoutId => throw _privateConstructorUsedError;
-  String? get workoutName => throw _privateConstructorUsedError;
-  String? get userName => throw _privateConstructorUsedError;
-  String? get workoutImage => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  String get workoutId => throw _privateConstructorUsedError;
+  String get workoutName => throw _privateConstructorUsedError;
+  String get userName => throw _privateConstructorUsedError;
+  String get workoutImage => throw _privateConstructorUsedError;
   DateTime? get startAt => throw _privateConstructorUsedError;
   DateTime? get finishAt => throw _privateConstructorUsedError;
   int get taskDone => throw _privateConstructorUsedError;
+  double get percentCompleted => throw _privateConstructorUsedError;
   bool get isFinished => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,14 +46,15 @@ abstract class $MUserWorkoutCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? userId,
-      String? workoutId,
-      String? workoutName,
-      String? userName,
-      String? workoutImage,
+      String userId,
+      String workoutId,
+      String workoutName,
+      String userName,
+      String workoutImage,
       DateTime? startAt,
       DateTime? finishAt,
       int taskDone,
+      double percentCompleted,
       bool isFinished});
 }
 
@@ -70,14 +72,15 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = freezed,
-    Object? workoutId = freezed,
-    Object? workoutName = freezed,
-    Object? userName = freezed,
-    Object? workoutImage = freezed,
+    Object? userId = null,
+    Object? workoutId = null,
+    Object? workoutName = null,
+    Object? userName = null,
+    Object? workoutImage = null,
     Object? startAt = freezed,
     Object? finishAt = freezed,
     Object? taskDone = null,
+    Object? percentCompleted = null,
     Object? isFinished = null,
   }) {
     return _then(_value.copyWith(
@@ -85,26 +88,26 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutId: freezed == workoutId
+              as String,
+      workoutId: null == workoutId
           ? _value.workoutId
           : workoutId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutName: freezed == workoutName
+              as String,
+      workoutName: null == workoutName
           ? _value.workoutName
           : workoutName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userName: freezed == userName
+              as String,
+      userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutImage: freezed == workoutImage
+              as String,
+      workoutImage: null == workoutImage
           ? _value.workoutImage
           : workoutImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
@@ -117,6 +120,10 @@ class _$MUserWorkoutCopyWithImpl<$Res, $Val extends MUserWorkout>
           ? _value.taskDone
           : taskDone // ignore: cast_nullable_to_non_nullable
               as int,
+      percentCompleted: null == percentCompleted
+          ? _value.percentCompleted
+          : percentCompleted // ignore: cast_nullable_to_non_nullable
+              as double,
       isFinished: null == isFinished
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
@@ -135,14 +142,15 @@ abstract class _$$MUserWorkoutImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String? userId,
-      String? workoutId,
-      String? workoutName,
-      String? userName,
-      String? workoutImage,
+      String userId,
+      String workoutId,
+      String workoutName,
+      String userName,
+      String workoutImage,
       DateTime? startAt,
       DateTime? finishAt,
       int taskDone,
+      double percentCompleted,
       bool isFinished});
 }
 
@@ -158,14 +166,15 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? userId = freezed,
-    Object? workoutId = freezed,
-    Object? workoutName = freezed,
-    Object? userName = freezed,
-    Object? workoutImage = freezed,
+    Object? userId = null,
+    Object? workoutId = null,
+    Object? workoutName = null,
+    Object? userName = null,
+    Object? workoutImage = null,
     Object? startAt = freezed,
     Object? finishAt = freezed,
     Object? taskDone = null,
+    Object? percentCompleted = null,
     Object? isFinished = null,
   }) {
     return _then(_$MUserWorkoutImpl(
@@ -173,26 +182,26 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      userId: freezed == userId
+      userId: null == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutId: freezed == workoutId
+              as String,
+      workoutId: null == workoutId
           ? _value.workoutId
           : workoutId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutName: freezed == workoutName
+              as String,
+      workoutName: null == workoutName
           ? _value.workoutName
           : workoutName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userName: freezed == userName
+              as String,
+      userName: null == userName
           ? _value.userName
           : userName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutImage: freezed == workoutImage
+              as String,
+      workoutImage: null == workoutImage
           ? _value.workoutImage
           : workoutImage // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
       startAt: freezed == startAt
           ? _value.startAt
           : startAt // ignore: cast_nullable_to_non_nullable
@@ -205,6 +214,10 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
           ? _value.taskDone
           : taskDone // ignore: cast_nullable_to_non_nullable
               as int,
+      percentCompleted: null == percentCompleted
+          ? _value.percentCompleted
+          : percentCompleted // ignore: cast_nullable_to_non_nullable
+              as double,
       isFinished: null == isFinished
           ? _value.isFinished
           : isFinished // ignore: cast_nullable_to_non_nullable
@@ -218,14 +231,15 @@ class __$$MUserWorkoutImplCopyWithImpl<$Res>
 class _$MUserWorkoutImpl extends _MUserWorkout {
   const _$MUserWorkoutImpl(
       {required this.id,
-      this.userId,
-      this.workoutId,
-      this.workoutName,
-      this.userName,
-      this.workoutImage,
+      this.userId = '',
+      this.workoutId = '',
+      this.workoutName = '',
+      this.userName = '',
+      this.workoutImage = '',
       this.startAt,
       this.finishAt,
       this.taskDone = 0,
+      this.percentCompleted = 0,
       this.isFinished = false})
       : super._();
 
@@ -235,15 +249,20 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
   @override
   final String id;
   @override
-  final String? userId;
+  @JsonKey()
+  final String userId;
   @override
-  final String? workoutId;
+  @JsonKey()
+  final String workoutId;
   @override
-  final String? workoutName;
+  @JsonKey()
+  final String workoutName;
   @override
-  final String? userName;
+  @JsonKey()
+  final String userName;
   @override
-  final String? workoutImage;
+  @JsonKey()
+  final String workoutImage;
   @override
   final DateTime? startAt;
   @override
@@ -253,11 +272,14 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
   final int taskDone;
   @override
   @JsonKey()
+  final double percentCompleted;
+  @override
+  @JsonKey()
   final bool isFinished;
 
   @override
   String toString() {
-    return 'MUserWorkout(id: $id, userId: $userId, workoutId: $workoutId, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt, taskDone: $taskDone, isFinished: $isFinished)';
+    return 'MUserWorkout(id: $id, userId: $userId, workoutId: $workoutId, workoutName: $workoutName, userName: $userName, workoutImage: $workoutImage, startAt: $startAt, finishAt: $finishAt, taskDone: $taskDone, percentCompleted: $percentCompleted, isFinished: $isFinished)';
   }
 
   @override
@@ -280,6 +302,8 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
                 other.finishAt == finishAt) &&
             (identical(other.taskDone, taskDone) ||
                 other.taskDone == taskDone) &&
+            (identical(other.percentCompleted, percentCompleted) ||
+                other.percentCompleted == percentCompleted) &&
             (identical(other.isFinished, isFinished) ||
                 other.isFinished == isFinished));
   }
@@ -297,6 +321,7 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
       startAt,
       finishAt,
       taskDone,
+      percentCompleted,
       isFinished);
 
   @JsonKey(ignore: true)
@@ -316,14 +341,15 @@ class _$MUserWorkoutImpl extends _MUserWorkout {
 abstract class _MUserWorkout extends MUserWorkout {
   const factory _MUserWorkout(
       {required final String id,
-      final String? userId,
-      final String? workoutId,
-      final String? workoutName,
-      final String? userName,
-      final String? workoutImage,
+      final String userId,
+      final String workoutId,
+      final String workoutName,
+      final String userName,
+      final String workoutImage,
       final DateTime? startAt,
       final DateTime? finishAt,
       final int taskDone,
+      final double percentCompleted,
       final bool isFinished}) = _$MUserWorkoutImpl;
   const _MUserWorkout._() : super._();
 
@@ -333,21 +359,23 @@ abstract class _MUserWorkout extends MUserWorkout {
   @override
   String get id;
   @override
-  String? get userId;
+  String get userId;
   @override
-  String? get workoutId;
+  String get workoutId;
   @override
-  String? get workoutName;
+  String get workoutName;
   @override
-  String? get userName;
+  String get userName;
   @override
-  String? get workoutImage;
+  String get workoutImage;
   @override
   DateTime? get startAt;
   @override
   DateTime? get finishAt;
   @override
   int get taskDone;
+  @override
+  double get percentCompleted;
   @override
   bool get isFinished;
   @override

@@ -43,6 +43,7 @@
   "forgot_key_email":"forgot_emailInput_textField",
 
   "home_dashboard":"Dashboard",
+  "home_logout":"Logout",
   "workouts_completed":"workouts\ncompleted",
   "hours_spent_on_training":"hours spent\non training",
   "challenge_participated_in":"challenges\nparticipated in",

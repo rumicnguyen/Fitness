@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
@@ -10,43 +11,53 @@ class HomeState extends Equatable {
   final MHandle handle;
   final MActivity todayActivity;
   final List<MWorkout> nextWorkouts;
-  final List<MChallenge> activeChallenges;
+  final MChallenge activeChallenge;
   final List<MWorkout> podcasts;
   final List<MUserWorkout> friendsActivity;
+  final MUserWorkout continueWorkout;
+  final OverlayPortalController portalController;
 
   const HomeState({
     required this.handle,
     required this.todayActivity,
     required this.nextWorkouts,
-    required this.activeChallenges,
+    required this.activeChallenge,
     required this.podcasts,
     required this.friendsActivity,
+    required this.continueWorkout,
+    required this.portalController,
   });
 
   factory HomeState.ds() => HomeState(
         todayActivity: MActivity.empty(),
         nextWorkouts: const [],
-        activeChallenges: const [],
+        activeChallenge: MChallenge.empty(),
         podcasts: const [],
         friendsActivity: const [],
         handle: MHandle(),
+        continueWorkout: MUserWorkout.empty(),
+        portalController: OverlayPortalController(),
       );
 
   HomeState copyWith({
     MHandle? handle,
     MActivity? todayActivity,
     List<MWorkout>? nextWorkouts,
-    List<MChallenge>? activeChallenges,
+    MChallenge? activeChallenge,
     List<MWorkout>? podcasts,
     List<MUserWorkout>? friendsActivity,
+    MUserWorkout? continueWorkout,
+    OverlayPortalController? portalController,
   }) {
     return HomeState(
       handle: handle ?? this.handle,
       todayActivity: todayActivity ?? this.todayActivity,
       nextWorkouts: nextWorkouts ?? this.nextWorkouts,
-      activeChallenges: activeChallenges ?? this.activeChallenges,
+      activeChallenge: activeChallenge ?? this.activeChallenge,
       podcasts: podcasts ?? this.podcasts,
       friendsActivity: friendsActivity ?? this.friendsActivity,
+      continueWorkout: continueWorkout ?? this.continueWorkout,
+      portalController: portalController ?? this.portalController,
     );
   }
 
@@ -56,9 +67,11 @@ class HomeState extends Equatable {
       handle,
       todayActivity,
       nextWorkouts,
-      activeChallenges,
+      activeChallenge,
       podcasts,
       friendsActivity,
+      continueWorkout,
+      portalController,
     ];
   }
 }

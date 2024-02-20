@@ -14,11 +14,13 @@ class XAvatar extends StatefulWidget {
     this.avatar,
     this.size,
     this.showEdit = false,
+    this.onTap,
   });
 
   final String? avatar;
   final double? size;
   final bool showEdit;
+  final void Function()? onTap;
 
   @override
   State<XAvatar> createState() => _XAvatarState();
@@ -53,11 +55,12 @@ class _XAvatarState extends State<XAvatar> {
     return Stack(
       children: [
         GestureDetector(
-          onTap: () {
-            if (widget.showEdit) {
-              _pickImageFromGallery(context);
-            }
-          },
+          onTap: widget.onTap ??
+              () {
+                if (widget.showEdit) {
+                  _pickImageFromGallery(context);
+                }
+              },
           child: ClipOval(
             child: image.isNotEmpty
                 ? Image.network(

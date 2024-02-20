@@ -1,5 +1,6 @@
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/title/title.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,7 @@ class WorkoutHeader extends StatelessWidget {
           ),
         ),
         WorkoutInProgress(
-          persentCompleted: 75,
-          workoutName: S.of(context).waist_cinching_workout,
-          onPressed: () {},
+          userWorkout: MUserWorkout.empty(),
         ),
         _buildSpace(),
         tabBar,

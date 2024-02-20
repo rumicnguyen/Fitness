@@ -1,12 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
-import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/home/widget/block.dart';
-import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/data/enum/workout_level.dart';
+import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/card_item/card_title.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:flutter/material.dart';
 
 class WorkoutCard extends StatelessWidget {
@@ -14,27 +13,21 @@ class WorkoutCard extends StatelessWidget {
     super.key,
     this.item,
     required this.label,
+    this.onPressed,
   });
 
   final List<MWorkout>? item;
   final String label;
+  final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    MWorkout empty = MWorkout(
-      id: '1',
-      level: WorkoutLevel.none,
-      thumbnail: Assets.images.comingSoon.path,
-      members: 0,
-      name: S.of(context).coming_soon,
-    );
-
     return XBlock(
       header: label,
-      onPressed: () {},
+      onPressed: onPressed,
       child: item?.isNotEmpty == true
           ? _buildListView(item ?? [])
-          : _buildEmptyItem(empty),
+          : _buildEmptyItem(MWorkout.empty()),
     );
   }
 
@@ -62,7 +55,12 @@ class WorkoutCard extends StatelessWidget {
       width: 340,
       height: 230,
       tag: item.tag,
-      image: item.thumbnail,
+      backgroundImage: ImageWidget(
+        width: 340,
+        height: 230,
+        image: item.thumbnail,
+        folder: StorageFolder.workouts,
+      ),
       onTap: () {
         AppCoordinator.showWorkoutDetailsScreen(id: item.id);
       },

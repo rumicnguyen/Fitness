@@ -14,8 +14,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
   final workoutRef = WorkoutReference();
   @override
   Future<MResult<MWorkout>> addWorkout({required MWorkout workout}) {
-    // TODO: implement addWorkout
-    throw UnimplementedError();
+    return workoutRef.addWorkout(workout);
   }
 
   @override
@@ -62,17 +61,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
 
   @override
   Future<MResult<List<MWorkout>>> getPodcasts() async {
-    try {
-      MResult<List<MWorkout>> list = await getWorkouts();
-      if (list.isSuccess && list.data != null) {
-        return MResult.success(list.data!.sublist(1, 3));
-      }
-      return MResult.error(list.error);
-    } on FirebaseException catch (e) {
-      return MResult.exception(e.message);
-    } catch (e) {
-      return MResult.exception(e);
-    }
+    return workoutRef.getWorkouts();
   }
 
   // TODO: Using Cloud Functions
