@@ -60,7 +60,7 @@ class DashboardView extends StatelessWidget {
   }
 
   Widget _buildResult(BuildContext context, MUser user) {
-
+    
     return RowResult(
       firstItem: user.workoutsCompleted.toString(),
       secondItem: user.hoursTraining.toString(),

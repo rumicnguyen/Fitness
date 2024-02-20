@@ -21,7 +21,6 @@ class FriendsActivityView extends StatelessWidget {
     return XBlock(
       header: S.of(context).friends_activity,
       type: LayoutType.grid,
-      onPressed: null,
       child: BlocBuilder<HomeBloc, HomeState>(
         buildWhen: (previous, current) =>
             previous.handle != current.handle ||
