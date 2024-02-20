@@ -24,9 +24,8 @@ class HomeBloc extends Cubit<HomeState> {
 
   Future syncData() async {
     emit(state.copyWith(handle: MHandle.loading()));
-    XToast.showLoading();
 
-    if (user.id.isNotEmpty == true) {
+    if (user.id.isNotEmpty) {
       Future.wait([
         syncDataTodayActivity(user.id),
         syncDataNextWorkout(user.id),
@@ -37,7 +36,6 @@ class HomeBloc extends Cubit<HomeState> {
       ]);
     }
 
-    XToast.hideLoading();
     emit(state.copyWith(handle: MHandle.completed(user)));
   }
 
@@ -47,6 +45,8 @@ class HomeBloc extends Cubit<HomeState> {
     if (result.isSuccess && result.data != null) {
       emit(state.copyWith(continueWorkout: result.data!));
     }
+
+    emit(state.copyWith(handle: MHandle.completed(user)));
   }
 
   Future syncDataTodayActivity(String userId) async {
