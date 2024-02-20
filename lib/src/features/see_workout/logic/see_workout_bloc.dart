@@ -1,4 +1,3 @@
-import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/see_workout/logic/see_workout_state.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
@@ -16,8 +15,6 @@ class SeeWorkoutBloc extends Cubit<SeeWorkoutState> {
 
   Future syncData(MFilterWorkout? filterWorkout) async {
     emit(state.copyWith(handle: MHandle.loading()));
-    XToast.showLoading();
-
     late MResult<List<MWorkout>> workout;
     if (filterWorkout == null) {
       workout = await domain.workout.getWorkouts();
@@ -29,7 +26,6 @@ class SeeWorkoutBloc extends Cubit<SeeWorkoutState> {
     if (workout.isSuccess && workout.data != null) {
       onChangeWorkouts(workout.data!);
     }
-    XToast.hideLoading();
     emit(state.copyWith(handle: MHandle.result(workout)));
   }
 
