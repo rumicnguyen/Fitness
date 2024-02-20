@@ -5,6 +5,8 @@ import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/goal/goal.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/router/route_name.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,11 +66,13 @@ class GoalBloc extends Cubit<GoalState> {
     if (result.isError || result.data == null) {
       XToast.error(S.text.toast_update_failt);
     } else {
-      XToast.success(S.text.toast_update_failt);
+      XToast.success(S.text.toast_update_success);
 
       UserPrefs.instance.setUser(result.data);
       await domain.user.update(user: user, target: result.data!.target);
     }
+
+    AppCoordinator.goNamed(AppRouteNames.account.name);
     emit(state.copyWith(handle: MHandle.result(result)));
   }
 }

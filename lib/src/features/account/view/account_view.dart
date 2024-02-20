@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/account/widget/friend_card.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
@@ -7,6 +8,7 @@ import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/avatar.dart';
 import 'package:fitness_app/widgets/button/button.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,9 +19,13 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider<AccountBloc>(
-      create: (BuildContext context) {
-        return AccountBloc();
+    return BlocListener<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
       },
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -47,6 +53,10 @@ class AccountView extends StatelessWidget {
                     children: [
                       _buildOverview(),
                       _buildFriend(),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      _buildButtonDelete(context),
                     ],
                   ),
                 ),
@@ -73,8 +83,17 @@ class AccountView extends StatelessWidget {
   }
 
   Widget _buildFriend() {
-    return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) => previous.friends != current.friends,
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.handle != current.handle ||
+          previous.friends != current.friends,
       builder: (context, state) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -90,19 +109,21 @@ class AccountView extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            SizedBox(
-              width: double.infinity,
-              height: 140,
-              child: Swiper(
-                scrollDirection: Axis.horizontal,
-                viewportFraction: 0.31,
-                scale: 0.5,
-                itemCount: state.friends.length,
-                itemBuilder: (_, index) {
-                  return FriendCard(friend: state.friends[index]);
-                },
-              ),
-            ),
+            state.handle.isLoading
+                ? const Loading()
+                : SizedBox(
+                    width: double.infinity,
+                    height: 140,
+                    child: Swiper(
+                      scrollDirection: Axis.horizontal,
+                      viewportFraction: 0.31,
+                      scale: 0.5,
+                      itemCount: state.friends.length,
+                      itemBuilder: (_, index) {
+                        return FriendCard(friend: state.friends[index]);
+                      },
+                    ),
+                  ),
           ],
         );
       },
@@ -110,8 +131,16 @@ class AccountView extends StatelessWidget {
   }
 
   Widget _buildOverview() {
-    return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) => previous.user != current.user,
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.handle != current.handle || previous.user != current.user,
       builder: (context, state) {
         return XSection(
           horizontal: 30,
@@ -237,10 +266,38 @@ class AccountView extends StatelessWidget {
     );
   }
 
+  Widget _buildButtonDelete(BuildContext context) {
+    return XSection(
+      horizontal: 20,
+      child: XButton(
+        backgroundColor: AppColors.red_400,
+        width: double.infinity,
+        height: 40,
+        title: S.of(context).profile_delete_account,
+        icon: const Icon(
+          Icons.edit,
+          color: AppColors.white,
+        ),
+        titleStyle: AppStyles.whiteTextSmallB,
+        onPressed: () {
+          context.read<AccountBloc>().onEdit(true);
+        },
+      ),
+    );
+  }
+
   Widget _buildAvatar() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+      },
       buildWhen: (previous, current) {
-        return previous.user != current.user;
+        return previous.handle != current.handle ||
+            previous.user != current.user;
       },
       builder: (context, state) {
         return Column(
