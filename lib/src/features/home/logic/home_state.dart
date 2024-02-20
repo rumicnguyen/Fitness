@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import 'package:fitness_app/src/network/model/activity/activity.dart';
 import 'package:fitness_app/src/network/model/challenge/challenge.dart';
@@ -14,6 +15,7 @@ class HomeState extends Equatable {
   final List<MWorkout> podcasts;
   final List<MUserWorkout> friendsActivity;
   final MUserWorkout continueWorkout;
+  final OverlayPortalController portalController;
 
   const HomeState({
     required this.handle,
@@ -23,6 +25,7 @@ class HomeState extends Equatable {
     required this.podcasts,
     required this.friendsActivity,
     required this.continueWorkout,
+    required this.portalController,
   });
 
   factory HomeState.ds() => HomeState(
@@ -33,6 +36,7 @@ class HomeState extends Equatable {
         friendsActivity: const [],
         handle: MHandle(),
         continueWorkout: MUserWorkout.empty(),
+        portalController: OverlayPortalController(),
       );
 
   HomeState copyWith({
@@ -43,6 +47,7 @@ class HomeState extends Equatable {
     List<MWorkout>? podcasts,
     List<MUserWorkout>? friendsActivity,
     MUserWorkout? continueWorkout,
+    OverlayPortalController? portalController,
   }) {
     return HomeState(
       handle: handle ?? this.handle,
@@ -52,6 +57,7 @@ class HomeState extends Equatable {
       podcasts: podcasts ?? this.podcasts,
       friendsActivity: friendsActivity ?? this.friendsActivity,
       continueWorkout: continueWorkout ?? this.continueWorkout,
+      portalController: portalController ?? this.portalController,
     );
   }
 
@@ -65,6 +71,7 @@ class HomeState extends Equatable {
       podcasts,
       friendsActivity,
       continueWorkout,
+      portalController,
     ];
   }
 }

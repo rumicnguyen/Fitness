@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/authentication/model/email_fromz.dart';
 import 'package:fitness_app/src/features/authentication/model/model_input.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/social_type.dart';
@@ -90,18 +92,10 @@ class SigninBloc extends Cubit<SigninState> {
       emit(state.copyWith(status: FormzSubmissionStatus.success));
       GetIt.I<AccountBloc>().onLoginSuccess(result.data!);
       AppCoordinator.showHomeScreen();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Success"),
-        ),
-      );
+      XToast.success(S.text.toast_sign_in_success);
     } else {
       emit(state.copyWith(status: FormzSubmissionStatus.failure));
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Failed"),
-        ),
-      );
+      XToast.error(S.text.toast_sign_in_failt);
     }
   }
 
