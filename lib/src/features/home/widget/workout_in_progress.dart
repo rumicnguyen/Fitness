@@ -69,7 +69,6 @@ class WorkoutInProgress extends StatelessWidget {
   }
 
   Widget _buildProgressing(BuildContext context) {
-    
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,

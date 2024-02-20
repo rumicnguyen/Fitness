@@ -32,9 +32,9 @@ class HomeView extends StatelessWidget {
             listenWhen: (previous, current) =>
                 previous.handle != current.handle,
             listener: (context, state) {
-              XToast.isShowLoading
-                  ? XToast.hideLoading()
-                  : XToast.showLoading();
+              state.handle.isLoading
+                  ? XToast.showLoading()
+                  : XToast.hideLoading();
               if (state.handle.isError) {
                 XToast.error(state.handle.message);
               }

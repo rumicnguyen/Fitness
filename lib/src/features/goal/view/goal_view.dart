@@ -23,7 +23,7 @@ class GoalView extends StatelessWidget {
       child: BlocConsumer<GoalBloc, GoalState>(
         listenWhen: (previous, current) => previous.handle != current.handle,
         listener: (context, state) {
-          state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+         state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
           if (state.handle.isError) {
             XToast.error(state.handle.message);
           }
