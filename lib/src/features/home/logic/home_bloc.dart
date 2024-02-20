@@ -8,6 +8,8 @@ import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/router/route_name.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +20,7 @@ class HomeBloc extends Cubit<HomeState> {
 
   DomainManager get domain => DomainManager();
   FirebaseStorageReference get storageRef => FirebaseStorageReference();
-  MUser user = UserPrefs.I.getUser() ?? MUser.empty();
+  final MUser user = UserPrefs.I.getUser() ?? MUser.empty();
 
   Future syncData() async {
     emit(state.copyWith(handle: MHandle.loading()));
@@ -35,8 +37,8 @@ class HomeBloc extends Cubit<HomeState> {
       ]);
     }
 
-    emit(state.copyWith(handle: MHandle.completed('')));
     XToast.hideLoading();
+    emit(state.copyWith(handle: MHandle.completed(user)));
   }
 
   Future syncDataCurrentWorkout(String userId) async {
@@ -107,5 +109,16 @@ class HomeBloc extends Cubit<HomeState> {
   void changeFriendsActivity(List<MUserWorkout> list) {
     List<MUserWorkout> data = List.from(list);
     emit(state.copyWith(friendsActivity: data));
+  }
+
+  void onLogout() {
+    emit(state.copyWith(handle: MHandle.loading()));
+    XToast.showLoading();
+
+    UserPrefs.I.clear();
+    AppCoordinator.goNamed(AppRouteNames.signIn.name);
+
+    XToast.hideLoading();
+    emit(state.copyWith(handle: MHandle.completed(user)));
   }
 }

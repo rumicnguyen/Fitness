@@ -1,5 +1,6 @@
 import 'package:fitness_app/src/features/home/logic/home_bloc.dart';
 import 'package:fitness_app/src/features/home/logic/home_state.dart';
+import 'package:fitness_app/src/features/home/widget/portal.dart';
 import 'package:fitness_app/src/features/home/widget/workout_in_progress.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
@@ -38,17 +39,28 @@ class DashboardView extends StatelessWidget {
   }
 
   Widget _buildTitle(BuildContext context, MUser user) {
-    return XTitle(
-      title: S.of(context).home_dashboard,
-      actions: XAvatar(
-        avatar: user.avatar,
-        size: 80,
-      ),
+    return BlocBuilder<HomeBloc, HomeState>(
+      buildWhen: (previous, current) => previous.handle != current.handle,
+      builder: (context, state) {
+        return XTitle(
+          title: S.of(context).home_dashboard,
+          actions: XPortal(
+            controller: state.portalController,
+            child: XAvatar(
+              avatar: user.avatar,
+              size: 80,
+              onTap: () {
+                state.portalController.toggle();
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 
   Widget _buildResult(BuildContext context, MUser user) {
-    
+
     return RowResult(
       firstItem: user.workoutsCompleted.toString(),
       secondItem: user.hoursTraining.toString(),

@@ -56,7 +56,9 @@ class ActivityView extends StatelessWidget {
               height: 20,
             ),
             SizedBox(
-              height: screenSize.height - 240,
+              height: (screenSize.height - 240) <= 0
+                  ? screenSize.height
+                  : screenSize.height - 240,
               width: double.infinity,
               child: const SingleChildScrollView(
                 child: Column(
