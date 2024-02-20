@@ -132,6 +132,7 @@ class AccountView extends StatelessWidget {
                           width: double.infinity,
                           height: 140,
                           child: Swiper(
+                            loop: false,
                             scrollDirection: Axis.horizontal,
                             viewportFraction: 0.31,
                             scale: 0.5,

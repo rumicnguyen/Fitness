@@ -37,6 +37,7 @@ class WorkoutCard extends StatelessWidget {
 
   Widget _buildListView(List<MWorkout> list) {
     return Swiper(
+      loop: false,
       scrollDirection: Axis.horizontal,
       itemCount: list.length,
       itemBuilder: (_, index) {
