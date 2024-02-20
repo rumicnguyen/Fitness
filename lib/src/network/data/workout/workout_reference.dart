@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/firebase/base_collection.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
@@ -21,7 +22,7 @@ class WorkoutReference extends BaseCollectionReference<MWorkout> {
     try {
       final result = await get(workout.id);
       if (result.isSuccess == true) {
-        return MResult.error('Workout already exists');
+        return MResult.error(S.text.error);
       } else {
         final MResult<MWorkout> result = await add(workout);
         return MResult.success(result.data);

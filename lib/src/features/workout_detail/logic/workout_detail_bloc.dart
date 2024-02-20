@@ -1,4 +1,5 @@
 import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_state.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
@@ -68,6 +69,7 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
   }
 
   Future onStartWorkout() async {
+    emit(state.copyWith(handle: MHandle.loading()));
     final user = UserPrefs.I.getUser();
     final MUserWorkout userWorkout = MUserWorkout(
       id: StringUtils.generateId(),
@@ -83,7 +85,10 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
         await domain.userWorkout.getUpdateOrAddUserWorkout(userWorkout);
 
     if (result.isSuccess && result.data != null) {
+      emit(state.copyWith(handle: MHandle.result(result)));
       AppCoordinator.showStartWorkoutScreen(id: state.workout.id);
+    } else {
+      emit(state.copyWith(handle: MHandle.error(S.text.error)));
     }
   }
 }
