@@ -3,6 +3,9 @@ enum DisciplineActivity {
   gym(value: 'gym'),
   cardio(value: 'cardio'),
   pilates(value: 'pilates'),
+  dance(value: 'dance'),
+  yoga(value: 'yoga'),
+  hiit(value: 'hiit'),
   ;
 
   final String value;

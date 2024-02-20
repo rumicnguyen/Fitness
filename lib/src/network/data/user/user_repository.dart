@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/network/data/enum/gender.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/network/model/user_challenge/user_challenge.dart';
@@ -14,7 +15,7 @@ abstract class UserRepository {
     required MUser user,
     String? avatar,
     String? name,
-    String? gender,
+    Gender? gender,
     int? age,
     int? challengeParticipatedIn,
     int? hoursTraining,

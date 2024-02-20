@@ -58,6 +58,7 @@ const _$WorkoutLevelEnumMap = {
   WorkoutLevel.any: 'any',
   WorkoutLevel.simple: 'simple',
   WorkoutLevel.medium: 'medium',
+  WorkoutLevel.hard: 'hard',
   WorkoutLevel.entry: 'entry',
 };
 
@@ -66,4 +67,7 @@ const _$DisciplineActivityEnumMap = {
   DisciplineActivity.gym: 'gym',
   DisciplineActivity.cardio: 'cardio',
   DisciplineActivity.pilates: 'pilates',
+  DisciplineActivity.dance: 'dance',
+  DisciplineActivity.yoga: 'yoga',
+  DisciplineActivity.hiit: 'hiit',
 };

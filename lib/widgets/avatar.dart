@@ -1,75 +1,75 @@
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
+import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
-import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/utils/picker_utils.dart';
-import 'package:fitness_app/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
-class XAvatar extends StatefulWidget {
+class XAvatar extends StatelessWidget {
   const XAvatar({
     super.key,
-    this.avatar,
+    this.avatar = '',
     this.size,
     this.showEdit = false,
     this.onTap,
+    this.showToast = false,
   });
 
-  final String? avatar;
+  final String avatar;
   final double? size;
   final bool showEdit;
   final void Function()? onTap;
-
-  @override
-  State<XAvatar> createState() => _XAvatarState();
-}
-
-class _XAvatarState extends State<XAvatar> {
-  final ref = FirebaseStorageReference();
-  String image = '';
-  @override
-  void initState() {
-    super.initState();
-    image = '';
-    getImageUrl();
-  }
-
-  Future getImageUrl() async {
-    if (widget.avatar != null) {
-      final result = await ref.get(
-        data: widget.avatar!,
-        folder: StorageFolder.users,
-      );
-      if (result.isSuccess) {
-        setState(() {
-          image = result.data!;
-        });
-      }
-    }
-  }
+  final bool showToast;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         GestureDetector(
-          onTap: widget.onTap ??
+          onTap: onTap ??
               () {
-                if (widget.showEdit) {
+                if (showEdit) {
                   _pickImageFromGallery(context);
                 }
               },
           child: ClipOval(
-            child: image.isNotEmpty
-                ? Image.network(
-                    image,
-                    width: widget.size ?? 55,
-                    height: widget.size ?? 55,
-                    fit: BoxFit.cover,
-                  )
-                : const Loading(),
+            child: Image.network(
+              avatar,
+              width: size ?? 55,
+              height: size ?? 55,
+              fit: BoxFit.cover,
+              loadingBuilder: (
+                BuildContext context,
+                Widget child,
+                ImageChunkEvent? loadingProgress,
+              ) {
+                if (loadingProgress == null) {
+                  return child;
+                } else {
+                  return CircularProgressIndicator(
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  );
+                }
+              },
+              errorBuilder: (context, error, stackTrace) {
+                if (showToast) {
+                  XToast.error(S.text.avatar_loading_failed);
+                }
+                return Image.asset(
+                  Assets.images.defaultAvatar.path,
+                  width: size ?? 55,
+                  height: size ?? 55,
+                  fit: BoxFit.cover,
+                );
+              },
+            ),
           ),
         ),
         _buildButtonCamera(context),
@@ -78,7 +78,7 @@ class _XAvatarState extends State<XAvatar> {
   }
 
   Widget _buildButtonCamera(BuildContext context) {
-    return widget.showEdit
+    return showEdit
         ? Positioned(
             bottom: 0,
             right: 0,

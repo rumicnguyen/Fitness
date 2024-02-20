@@ -12,9 +12,6 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/avatar.jpg
-  AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.jpg');
-
   /// File path: assets/images/blank_image.jpg
   AssetGenImage get blankImage =>
       const AssetGenImage('assets/images/blank_image.jpg');
@@ -23,82 +20,25 @@ class $AssetsImagesGen {
   AssetGenImage get comingSoon =>
       const AssetGenImage('assets/images/coming_soon.png');
 
+  /// File path: assets/images/default_avatar.jpg
+  AssetGenImage get defaultAvatar =>
+      const AssetGenImage('assets/images/default_avatar.jpg');
+
   /// File path: assets/images/eng.png
   AssetGenImage get eng => const AssetGenImage('assets/images/eng.png');
 
   /// File path: assets/images/intro.png
   AssetGenImage get intro => const AssetGenImage('assets/images/intro.png');
 
-  /// File path: assets/images/item_1.png
-  AssetGenImage get item1 => const AssetGenImage('assets/images/item_1.png');
-
-  /// File path: assets/images/item_10.jpg
-  AssetGenImage get item10 => const AssetGenImage('assets/images/item_10.jpg');
-
-  /// File path: assets/images/item_2.png
-  AssetGenImage get item2 => const AssetGenImage('assets/images/item_2.png');
-
-  /// File path: assets/images/item_3.png
-  AssetGenImage get item3 => const AssetGenImage('assets/images/item_3.png');
-
-  /// File path: assets/images/item_4.jpg
-  AssetGenImage get item4 => const AssetGenImage('assets/images/item_4.jpg');
-
-  /// File path: assets/images/item_5.png
-  AssetGenImage get item5 => const AssetGenImage('assets/images/item_5.png');
-
-  /// File path: assets/images/item_6.jpg
-  AssetGenImage get item6 => const AssetGenImage('assets/images/item_6.jpg');
-
-  /// File path: assets/images/item_7.png
-  AssetGenImage get item7 => const AssetGenImage('assets/images/item_7.png');
-
-  /// File path: assets/images/item_8.jpg
-  AssetGenImage get item8 => const AssetGenImage('assets/images/item_8.jpg');
-
-  /// File path: assets/images/item_9.png
-  AssetGenImage get item9 => const AssetGenImage('assets/images/item_9.png');
-
-  /// File path: assets/images/new_background.jpg
-  AssetGenImage get newBackground =>
-      const AssetGenImage('assets/images/new_background.jpg');
-
-  /// File path: assets/images/new_transparent.png
-  AssetGenImage get newTransparent =>
-      const AssetGenImage('assets/images/new_transparent.png');
-
   /// File path: assets/images/pulse.png
   AssetGenImage get pulse => const AssetGenImage('assets/images/pulse.png');
-
-  /// File path: assets/images/user.png
-  AssetGenImage get user => const AssetGenImage('assets/images/user.png');
 
   /// File path: assets/images/vie.png
   AssetGenImage get vie => const AssetGenImage('assets/images/vie.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [
-        avatar,
-        blankImage,
-        comingSoon,
-        eng,
-        intro,
-        item1,
-        item10,
-        item2,
-        item3,
-        item4,
-        item5,
-        item6,
-        item7,
-        item8,
-        item9,
-        newBackground,
-        newTransparent,
-        pulse,
-        user,
-        vie
-      ];
+  List<AssetGenImage> get values =>
+      [blankImage, comingSoon, defaultAvatar, eng, intro, pulse, vie];
 }
 
 class $AssetsSvgsGen {

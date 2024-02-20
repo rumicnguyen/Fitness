@@ -60,6 +60,12 @@ class StartWorkoutView extends StatelessWidget {
       listenWhen: (previous, current) => previous.handle != current.handle,
       listener: (context, state) {
         state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
       },
       buildWhen: (previous, current) =>
           previous.workout != current.workout ||
@@ -127,6 +133,12 @@ class StartWorkoutView extends StatelessWidget {
       listenWhen: (previous, current) => previous.handle != current.handle,
       listener: (context, state) {
         state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
       },
       buildWhen: (previous, current) =>
           previous.exercise != current.exercise ||
@@ -140,6 +152,7 @@ class StartWorkoutView extends StatelessWidget {
               // Will be developed later
               ? const Loading()
               : ListView.builder(
+                  padding: EdgeInsets.zero,
                   itemCount: state.workout.exercises,
                   itemBuilder: (BuildContext context, int index) {
                     return ExerciseItem(

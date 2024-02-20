@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/account/view/account_view.dart';
 import 'package:fitness_app/src/features/activity/view/activity_view.dart';
 import 'package:fitness_app/src/features/authentication/view/forgot_view.dart';
@@ -15,12 +16,14 @@ import 'package:fitness_app/src/features/see_workout/view/see_workout_view.dart'
 import 'package:fitness_app/src/features/start_workout/view/start_workout_view.dart';
 import 'package:fitness_app/src/features/workout/view/workout_view.dart';
 import 'package:fitness_app/src/features/workout_detail/view/workout_detail_view.dart';
+import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/filter_workout/filter_workout.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/router/route_name.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRouter {
@@ -71,10 +74,19 @@ class AppRouter {
             path: AppRouteNames.home.subPath,
             name: AppRouteNames.home.name,
             builder: (context, state) => const HomeView(),
-            redirect: (context, state) {
+            redirect: (context, state) async {
               final MUser user = UserPrefs.I.getUser() ?? MUser.empty();
               if (user.id.isEmpty) {
                 return AppRouteNames.intro.path;
+              }
+              final DomainManager domain = DomainManager();
+              final result = await domain.user.getUser(id: user.id);
+              if (result.isError || result.data == null) {
+                UserPrefs.I.clear();
+                return AppRouteNames.intro.path;
+              }
+              if (context.mounted) {
+                context.read<AccountBloc>().onUpdateUser(result.data!);
               }
               return null;
             },

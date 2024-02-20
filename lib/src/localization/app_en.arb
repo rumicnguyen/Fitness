@@ -122,6 +122,12 @@
   "profile_set_goal":"Set Goal",
   "profile_your_goal":"Your Goal",
   "profile_list_goal":"List Goal",
+  "profile_delete_account":"Delete acoount",
+  "profile_make_friend":"Make friend",
+  "profile_make_friend_description":"Don't have friend. Go to ",
+
+  "avatar_loading_success":"Loading avatar success",
+  "avatar_loading_failed":"Loading avatar failed",
 
   "read_more":"Read more",
   "challenges":"Challenges",

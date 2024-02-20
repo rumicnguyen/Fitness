@@ -8,13 +8,15 @@ part of 'user.dart';
 
 _$MUserImpl _$$MUserImplFromJson(Map<String, dynamic> json) => _$MUserImpl(
       id: json['id'] as String,
-      name: json['name'] as String? ?? 'user',
-      avatar: json['avatar'] as String? ?? 'avatar.png',
-      email: json['email'] as String?,
-      height: (json['height'] as num?)?.toDouble(),
-      weight: (json['weight'] as num?)?.toDouble(),
-      gender: json['gender'] as String?,
-      age: json['age'] as int?,
+      name: json['name'] as String? ?? 'User',
+      avatar: json['avatar'] as String? ??
+          'https://firebasestorage.googleapis.com/v0/b/dominic-fitness-app.appspot.com/o/users%2Fimages%2Fdefault_avatar.jpg?alt=media&token=c18f091a-8d2d-4565-a84f-9e936e495ab2',
+      email: json['email'] as String? ?? '',
+      height: (json['height'] as num?)?.toDouble() ?? 150,
+      weight: (json['weight'] as num?)?.toDouble() ?? 50,
+      gender:
+          $enumDecodeNullable(_$GenderEnumMap, json['gender']) ?? Gender.male,
+      age: json['age'] as int? ?? 18,
       target: (json['target'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
@@ -43,7 +45,7 @@ Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
       'email': instance.email,
       'height': instance.height,
       'weight': instance.weight,
-      'gender': instance.gender,
+      'gender': _$GenderEnumMap[instance.gender]!,
       'age': instance.age,
       'target': instance.target,
       'friends': instance.friends,
@@ -53,3 +55,8 @@ Map<String, dynamic> _$$MUserImplToJson(_$MUserImpl instance) =>
       'favoriteWorkout': instance.favoriteWorkout,
       'createdAt': instance.createdAt?.toIso8601String(),
     };
+
+const _$GenderEnumMap = {
+  Gender.male: 'male',
+  Gender.female: 'female',
+};

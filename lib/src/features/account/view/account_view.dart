@@ -1,13 +1,17 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/account/widget/friend_card.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/profile_type.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/avatar.dart';
 import 'package:fitness_app/widgets/button/button.dart';
+import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/section.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,9 +21,16 @@ class AccountView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-    return BlocProvider<AccountBloc>(
-      create: (BuildContext context) {
-        return AccountBloc();
+    return BlocListener<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
       },
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -40,13 +51,22 @@ class AccountView extends StatelessWidget {
             XSection(
               vertical: 10,
               child: SizedBox(
-                height: screenSize.height - 338,
+                height: screenSize.height > 338
+                    ? screenSize.height - 338
+                    : screenSize.height,
                 width: double.infinity,
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
                       _buildOverview(),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       _buildFriend(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      _buildButtonDelete(context),
                     ],
                   ),
                 ),
@@ -73,45 +93,94 @@ class AccountView extends StatelessWidget {
   }
 
   Widget _buildFriend() {
-    return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) => previous.friends != current.friends,
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.handle != current.handle ||
+          previous.friends != current.friends,
       builder: (context, state) {
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            XSection(
-              left: 30,
-              child: Text(
-                S.of(context).profile_friends,
-                style: AppStyles.heading,
+        Size screenSize = MediaQuery.of(context).size;
+        return SizedBox(
+          width: screenSize.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              XSection(
+                left: 30,
+                child: Text(
+                  S.of(context).profile_friends,
+                  style: AppStyles.heading,
+                ),
               ),
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: 140,
-              child: Swiper(
-                scrollDirection: Axis.horizontal,
-                viewportFraction: 0.31,
-                scale: 0.5,
-                itemCount: state.friends.length,
-                itemBuilder: (_, index) {
-                  return FriendCard(friend: state.friends[index]);
-                },
+              const SizedBox(
+                height: 15,
               ),
-            ),
-          ],
+              state.handle.isLoading
+                  ? const Loading()
+                  : state.friends.isNotEmpty
+                      ? SizedBox(
+                          width: double.infinity,
+                          height: 140,
+                          child: Swiper(
+                            scrollDirection: Axis.horizontal,
+                            viewportFraction: 0.31,
+                            scale: 0.5,
+                            itemCount: state.friends.length,
+                            itemBuilder: (_, index) {
+                              return FriendCard(friend: state.friends[index]);
+                            },
+                          ),
+                        )
+                      : XSection(
+                          horizontal: 30,
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: S.text.profile_make_friend_description,
+                                  style: AppStyles.grayTextSmallThin,
+                                ),
+                                TextSpan(
+                                  text: S.text.profile_make_friend,
+                                  style: AppStyles.hyperLink,
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {},
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+            ],
+          ),
         );
       },
     );
   }
 
   Widget _buildOverview() {
-    return BlocBuilder<AccountBloc, AccountState>(
-      buildWhen: (previous, current) => previous.user != current.user,
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
+      },
+      buildWhen: (previous, current) =>
+          previous.handle != current.handle || previous.user != current.user,
       builder: (context, state) {
         return XSection(
           horizontal: 30,
@@ -130,7 +199,7 @@ class AccountView extends StatelessWidget {
                 children: [
                   _buildInfoItem(
                     type: ProfileType.gender,
-                    value: state.user.gender ?? '',
+                    value: state.user.gender.value,
                   ),
                   const SizedBox(
                     height: 10,
@@ -232,15 +301,46 @@ class AccountView extends StatelessWidget {
       ),
       titleStyle: AppStyles.hyperLink,
       onPressed: () {
-        context.read<AccountBloc>().onEdit(true);
+        AppCoordinator.showSetGoalScreen();
       },
     );
   }
 
+  Widget _buildButtonDelete(BuildContext context) {
+    return XSection(
+      horizontal: 20,
+      child: XButton(
+        backgroundColor: AppColors.red_400,
+        width: double.infinity,
+        height: 40,
+        title: S.of(context).profile_delete_account,
+        icon: const Icon(
+          Icons.delete,
+          color: AppColors.white,
+        ),
+        titleStyle: AppStyles.whiteTextSmallB,
+        onPressed: () {
+          context.read<AccountBloc>().onEdit(true);
+        },
+      ),
+    );
+  }
+
   Widget _buildAvatar() {
-    return BlocBuilder<AccountBloc, AccountState>(
+    return BlocConsumer<AccountBloc, AccountState>(
+      listenWhen: (previous, current) => previous.handle != current.handle,
+      listener: (context, state) {
+        state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
+        if (state.handle.isError) {
+          XToast.error(state.handle.message);
+        }
+        if (!state.handle.isLoading && XToast.isShowLoading) {
+          XToast.hideLoading();
+        }
+      },
       buildWhen: (previous, current) {
-        return previous.user != current.user;
+        return previous.handle != current.handle ||
+            previous.user != current.user;
       },
       builder: (context, state) {
         return Column(
@@ -248,6 +348,7 @@ class AccountView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             XAvatar(
+              showToast: true,
               avatar: state.user.avatar,
               size: 80,
               showEdit: true,
@@ -256,10 +357,10 @@ class AccountView extends StatelessWidget {
               height: 20,
             ),
             Text(
-              state.user.name ?? '',
+              state.user.name,
               style: AppStyles.heading,
             ),
-            _buildText(state.user.email ?? ''),
+            _buildText(state.user.email),
           ],
         );
       },

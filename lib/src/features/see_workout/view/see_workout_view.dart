@@ -30,6 +30,9 @@ class SeeWorkoutView extends StatelessWidget {
           if (state.handle.isError) {
             XToast.error(state.handle.message);
           }
+          if (!state.handle.isLoading && XToast.isShowLoading) {
+            XToast.hideLoading();
+          }
         },
         buildWhen: (previous, current) =>
             previous.handle != current.handle ||

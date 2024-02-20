@@ -16,13 +16,13 @@ class FriendCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         XAvatar(
-          avatar: friend.avatar ?? '',
+          avatar: friend.avatar,
           size: 90,
         ),
         Align(
           alignment: Alignment.topCenter,
           child: Text(
-            friend.name ?? '',
+            friend.name,
             style: AppStyles.blackTextMidium,
             textAlign: TextAlign.center,
           ),
