@@ -1,7 +1,5 @@
 import 'package:fitness_app/src/features/workout_detail/logic/workout_detail_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
-import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
-import 'package:fitness_app/src/network/data/storage/firebase_storage_reference.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/user_workout/user_workout.dart';
@@ -15,7 +13,6 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
   WorkoutDetailBloc(String id) : super(WorkoutDetailState.ds()) {
     syncData(id);
   }
-  final ref = FirebaseStorageReference();
   DomainManager get domain => DomainManager();
 
   Future syncData(String id) async {
@@ -23,13 +20,6 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
     final workout = await domain.workout.getWorkoutById(id: id);
     if (workout.isSuccess && workout.data != null) {
       emit(state.copyWith(workout: workout.data));
-      final result = await ref.get(
-        data: workout.data!.backgroundImage,
-        folder: StorageFolder.workouts,
-      );
-      if (result.isSuccess && result.data != null) {
-        onChangeBackgroundImage(result.data!);
-      }
 
       final user = UserPrefs.I.getUser();
       if (user != null && user.favoriteWorkout.contains(workout.data!.id)) {
@@ -62,10 +52,6 @@ class WorkoutDetailBloc extends Cubit<WorkoutDetailState> {
     } else {
       emit(state.copyWith(handle: MHandle.error('User not found')));
     }
-  }
-
-  void onChangeBackgroundImage(String image) {
-    emit(state.copyWith(backgroundImage: image));
   }
 
   Future onStartWorkout() async {

@@ -21,13 +21,13 @@ MUser _$MUserFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MUser {
   String get id => throw _privateConstructorUsedError;
-  String? get name => throw _privateConstructorUsedError;
-  String? get avatar => throw _privateConstructorUsedError;
-  String? get email => throw _privateConstructorUsedError;
-  double? get height => throw _privateConstructorUsedError;
-  double? get weight => throw _privateConstructorUsedError;
-  String? get gender => throw _privateConstructorUsedError;
-  int? get age => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get avatar => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+  double get height => throw _privateConstructorUsedError;
+  double get weight => throw _privateConstructorUsedError;
+  Gender get gender => throw _privateConstructorUsedError;
+  int get age => throw _privateConstructorUsedError;
   List<String> get target => throw _privateConstructorUsedError;
   List<String> get friends => throw _privateConstructorUsedError;
   int get workoutsCompleted => throw _privateConstructorUsedError;
@@ -48,13 +48,13 @@ abstract class $MUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? name,
-      String? avatar,
-      String? email,
-      double? height,
-      double? weight,
-      String? gender,
-      int? age,
+      String name,
+      String avatar,
+      String email,
+      double height,
+      double weight,
+      Gender gender,
+      int age,
       List<String> target,
       List<String> friends,
       int workoutsCompleted,
@@ -78,13 +78,13 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
   @override
   $Res call({
     Object? id = null,
-    Object? name = freezed,
-    Object? avatar = freezed,
-    Object? email = freezed,
-    Object? height = freezed,
-    Object? weight = freezed,
-    Object? gender = freezed,
-    Object? age = freezed,
+    Object? name = null,
+    Object? avatar = null,
+    Object? email = null,
+    Object? height = null,
+    Object? weight = null,
+    Object? gender = null,
+    Object? age = null,
     Object? target = null,
     Object? friends = null,
     Object? workoutsCompleted = null,
@@ -98,34 +98,34 @@ class _$MUserCopyWithImpl<$Res, $Val extends MUser>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatar: freezed == avatar
+              as String,
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      height: freezed == height
+              as String,
+      height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as double?,
-      weight: freezed == weight
+              as double,
+      weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as double?,
-      gender: freezed == gender
+              as double,
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
+              as Gender,
+      age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       target: null == target
           ? _value.target
           : target // ignore: cast_nullable_to_non_nullable
@@ -167,13 +167,13 @@ abstract class _$$MUserImplCopyWith<$Res> implements $MUserCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? name,
-      String? avatar,
-      String? email,
-      double? height,
-      double? weight,
-      String? gender,
-      int? age,
+      String name,
+      String avatar,
+      String email,
+      double height,
+      double weight,
+      Gender gender,
+      int age,
       List<String> target,
       List<String> friends,
       int workoutsCompleted,
@@ -195,13 +195,13 @@ class __$$MUserImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? name = freezed,
-    Object? avatar = freezed,
-    Object? email = freezed,
-    Object? height = freezed,
-    Object? weight = freezed,
-    Object? gender = freezed,
-    Object? age = freezed,
+    Object? name = null,
+    Object? avatar = null,
+    Object? email = null,
+    Object? height = null,
+    Object? weight = null,
+    Object? gender = null,
+    Object? age = null,
     Object? target = null,
     Object? friends = null,
     Object? workoutsCompleted = null,
@@ -215,34 +215,34 @@ class __$$MUserImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      name: freezed == name
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      avatar: freezed == avatar
+              as String,
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
-              as String?,
-      email: freezed == email
+              as String,
+      email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      height: freezed == height
+              as String,
+      height: null == height
           ? _value.height
           : height // ignore: cast_nullable_to_non_nullable
-              as double?,
-      weight: freezed == weight
+              as double,
+      weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
-              as double?,
-      gender: freezed == gender
+              as double,
+      gender: null == gender
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
-              as String?,
-      age: freezed == age
+              as Gender,
+      age: null == age
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as int,
       target: null == target
           ? _value._target
           : target // ignore: cast_nullable_to_non_nullable
@@ -280,13 +280,14 @@ class __$$MUserImplCopyWithImpl<$Res>
 class _$MUserImpl extends _MUser {
   const _$MUserImpl(
       {required this.id,
-      this.name = 'user',
-      this.avatar = 'avatar.png',
-      this.email,
-      this.height,
-      this.weight,
-      this.gender,
-      this.age,
+      this.name = 'User',
+      this.avatar =
+          'https://firebasestorage.googleapis.com/v0/b/dominic-fitness-app.appspot.com/o/users%2Fimages%2Fdefault_avatar.jpg?alt=media&token=c18f091a-8d2d-4565-a84f-9e936e495ab2',
+      this.email = '',
+      this.height = 150,
+      this.weight = 50,
+      this.gender = Gender.male,
+      this.age = 18,
       final List<String> target = const [],
       final List<String> friends = const [],
       this.workoutsCompleted = 0,
@@ -306,20 +307,25 @@ class _$MUserImpl extends _MUser {
   final String id;
   @override
   @JsonKey()
-  final String? name;
+  final String name;
   @override
   @JsonKey()
-  final String? avatar;
+  final String avatar;
   @override
-  final String? email;
+  @JsonKey()
+  final String email;
   @override
-  final double? height;
+  @JsonKey()
+  final double height;
   @override
-  final double? weight;
+  @JsonKey()
+  final double weight;
   @override
-  final String? gender;
+  @JsonKey()
+  final Gender gender;
   @override
-  final int? age;
+  @JsonKey()
+  final int age;
   final List<String> _target;
   @override
   @JsonKey()
@@ -429,13 +435,13 @@ class _$MUserImpl extends _MUser {
 abstract class _MUser extends MUser {
   const factory _MUser(
       {required final String id,
-      final String? name,
-      final String? avatar,
-      final String? email,
-      final double? height,
-      final double? weight,
-      final String? gender,
-      final int? age,
+      final String name,
+      final String avatar,
+      final String email,
+      final double height,
+      final double weight,
+      final Gender gender,
+      final int age,
       final List<String> target,
       final List<String> friends,
       final int workoutsCompleted,
@@ -450,19 +456,19 @@ abstract class _MUser extends MUser {
   @override
   String get id;
   @override
-  String? get name;
+  String get name;
   @override
-  String? get avatar;
+  String get avatar;
   @override
-  String? get email;
+  String get email;
   @override
-  double? get height;
+  double get height;
   @override
-  double? get weight;
+  double get weight;
   @override
-  String? get gender;
+  Gender get gender;
   @override
-  int? get age;
+  int get age;
   @override
   List<String> get target;
   @override

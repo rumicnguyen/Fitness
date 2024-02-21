@@ -1,3 +1,4 @@
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +39,30 @@ class ImageWidget extends StatelessWidget {
       alignment: alignment,
       width: width,
       height: height,
+      loadingBuilder: (
+        BuildContext context,
+        Widget child,
+        ImageChunkEvent? loadingProgress,
+      ) {
+        if (loadingProgress == null) {
+          return child;
+        } else {
+          return CircularProgressIndicator(
+            value: loadingProgress.expectedTotalBytes != null
+                ? loadingProgress.cumulativeBytesLoaded /
+                    loadingProgress.expectedTotalBytes!
+                : null,
+          );
+        }
+      },
+      errorBuilder: (context, error, stackTrace) {
+        return Image.asset(
+          Assets.images.blankImage.path,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+        );
+      },
     );
   }
 }

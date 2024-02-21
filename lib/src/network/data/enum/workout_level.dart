@@ -3,6 +3,7 @@ enum WorkoutLevel {
   any(value: 'Any'),
   simple(value: 'Simple'),
   medium(value: 'Medium'),
+  hard(value: 'Hard'),
   entry(value: 'Entry');
 
   final String value;

@@ -20,8 +20,8 @@ class SignRepositoryImpl extends SignRepository {
       final firebaseUser = result.user;
       final newUser = MUser(
         id: firebaseUser?.uid ?? '',
-        email: user.email,
-        name: user.fullName,
+        email: user.email ?? '',
+        name: user.fullName ?? '',
       );
       final userResult = await DomainManager().user.getOrAddUser(newUser);
 

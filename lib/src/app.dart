@@ -1,5 +1,6 @@
 import 'package:bot_toast/bot_toast.dart';
 import 'package:fitness_app/gen/fonts.gen.dart';
+import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/intro/logic/intro_bloc.dart';
 import 'package:fitness_app/src/features/intro/logic/intro_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
@@ -31,22 +32,25 @@ class MyApp extends StatelessWidget {
           return previous.locale != current.locale;
         },
         builder: (context, state) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(fontFamily: FontFamily.avenir),
-            localizationsDelegates: [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: const [
-              Locale('en'),
-              Locale('vi'),
-            ],
-            locale: state.locale,
-            builder: BotToastInit(),
-            routerConfig: appRouter.router,
+          return BlocProvider<AccountBloc>(
+            create: (context) => AccountBloc(),
+            child: MaterialApp.router(
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(fontFamily: FontFamily.avenir),
+              localizationsDelegates: [
+                S.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('vi'),
+              ],
+              locale: state.locale,
+              builder: BotToastInit(),
+              routerConfig: appRouter.router,
+            ),
           );
         },
       ),

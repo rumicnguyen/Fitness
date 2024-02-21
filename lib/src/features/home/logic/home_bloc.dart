@@ -45,8 +45,6 @@ class HomeBloc extends Cubit<HomeState> {
     if (result.isSuccess && result.data != null) {
       emit(state.copyWith(continueWorkout: result.data!));
     }
-
-    emit(state.copyWith(handle: MHandle.completed(user)));
   }
 
   Future syncDataTodayActivity(String userId) async {

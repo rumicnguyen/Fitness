@@ -9,12 +9,14 @@ import 'package:fitness_app/src/features/home/view/today_activity_view.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/widgets/card_item/card_item.dart';
 import 'package:fitness_app/widgets/card_item/card_title.dart';
 import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeView extends StatelessWidget {
@@ -22,6 +24,11 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+      statusBarColor: AppColors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
+
     return XScaffold(
       child: SingleChildScrollView(
         child: BlocProvider<HomeBloc>(
@@ -37,6 +44,9 @@ class HomeView extends StatelessWidget {
                   : XToast.hideLoading();
               if (state.handle.isError) {
                 XToast.error(state.handle.message);
+              }
+              if (!state.handle.isLoading && XToast.isShowLoading) {
+                XToast.hideLoading();
               }
             },
             builder: (context, state) {

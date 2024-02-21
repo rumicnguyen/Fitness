@@ -1,11 +1,15 @@
 import 'package:fitness_app/dialogs/toast_wrapper.dart';
+import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/goal/logic/goal_state.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/model/common/handle.dart';
 import 'package:fitness_app/src/network/model/goal/goal.dart';
 import 'package:fitness_app/src/network/model/user/user.dart';
+import 'package:fitness_app/src/router/coordinator.dart';
+import 'package:fitness_app/src/router/route_name.dart';
 import 'package:fitness_app/src/services/user_prefs.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GoalBloc extends Cubit<GoalState> {
@@ -56,7 +60,7 @@ class GoalBloc extends Cubit<GoalState> {
     emit(state.copyWith(goals: list));
   }
 
-  Future onConfirm() async {
+  Future onConfirm(BuildContext context) async {
     emit(state.copyWith(handle: MHandle.loading()));
     final list = state.goals.map((e) => e.goal).toList();
     final result = await domain.user.update(user: user, target: list);
@@ -64,11 +68,14 @@ class GoalBloc extends Cubit<GoalState> {
     if (result.isError || result.data == null) {
       XToast.error(S.text.toast_update_failt);
     } else {
-      XToast.success(S.text.toast_update_failt);
-
-      UserPrefs.instance.setUser(result.data);
+      XToast.success(S.text.toast_update_success);
+      if (context.mounted) {
+        context.read<AccountBloc>().onUpdateUser(result.data!);
+      }
       await domain.user.update(user: user, target: result.data!.target);
     }
+
+    AppCoordinator.goNamed(AppRouteNames.account.name);
     emit(state.copyWith(handle: MHandle.result(result)));
   }
 }

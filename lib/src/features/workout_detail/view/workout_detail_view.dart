@@ -6,6 +6,7 @@ import 'package:fitness_app/src/network/model/workout/workout.dart';
 import 'package:fitness_app/src/themes/colors.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/button/button.dart';
+import 'package:fitness_app/widgets/image_widget.dart';
 import 'package:fitness_app/widgets/loading.dart';
 import 'package:fitness_app/widgets/row_result.dart';
 import 'package:fitness_app/widgets/scaffold.dart';
@@ -31,6 +32,9 @@ class WorkoutDetailView extends StatelessWidget {
           state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
           if (state.handle.isError) {
             XToast.error(state.handle.message);
+          }
+          if (!state.handle.isLoading && XToast.isShowLoading) {
+            XToast.hideLoading();
           }
         },
         buildWhen: (previous, current) =>
@@ -62,6 +66,9 @@ class WorkoutDetailView extends StatelessWidget {
           state.handle.isLoading ? XToast.showLoading() : XToast.hideLoading();
           if (state.handle.isError) {
             XToast.error(state.handle.message);
+          }
+          if (!state.handle.isLoading && XToast.isShowLoading) {
+            XToast.hideLoading();
           }
         },
         buildWhen: (previous, current) {
@@ -110,19 +117,17 @@ class WorkoutDetailView extends StatelessWidget {
           ),
           child: BlocBuilder<WorkoutDetailBloc, WorkoutDetailState>(
             buildWhen: (previous, current) {
-              return previous.backgroundImage != current.backgroundImage ||
+              return previous.workout != current.workout ||
                   previous.handle != current.handle;
             },
             builder: (context, state) {
-              return ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: state.backgroundImage.isNotEmpty
-                    ? Image.network(
-                        state.backgroundImage,
-                        fit: BoxFit.fill,
-                      )
-                    : const Loading(),
-              );
+              return state.handle.isLoading
+                  ? const Loading()
+                  : ImageWidget(
+                      image: state.workout.backgroundImage,
+                      fit: BoxFit.fill,
+                      borderRadius: 20,
+                    );
             },
           ),
         ),

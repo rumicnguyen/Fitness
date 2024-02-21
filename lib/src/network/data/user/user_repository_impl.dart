@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/data/enum/gender.dart';
 import 'package:fitness_app/src/network/data/user/user_reference.dart';
 import 'package:fitness_app/src/network/data/user/user_repository.dart';
 import 'package:fitness_app/src/network/data/user_challenge/user_challenge_reference.dart';
@@ -94,7 +95,7 @@ class UserRepositoryImpl extends UserRepository {
     required MUser user,
     String? avatar,
     String? name,
-    String? gender,
+    Gender? gender,
     int? age,
     int? challengeParticipatedIn,
     int? hoursTraining,
@@ -110,7 +111,7 @@ class UserRepositoryImpl extends UserRepository {
         'age': age ?? user.age,
         'challengeParticipatedIn':
             challengeParticipatedIn ?? user.challengeParticipatedIn,
-        'gender': gender ?? user.gender,
+        'gender': gender?.value ?? user.gender.value,
         'height': height ?? user.height,
         'hoursTraining': hoursTraining ?? user.hoursTraining,
         'weight': weight ?? user.weight,

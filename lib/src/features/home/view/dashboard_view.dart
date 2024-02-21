@@ -29,7 +29,9 @@ class DashboardView extends StatelessWidget {
               previous.handle != current.handle ||
               previous.continueWorkout != current.continueWorkout,
           builder: (context, state) {
-            return WorkoutInProgress(userWorkout: state.continueWorkout);
+            return state.continueWorkout.id.isNotEmpty
+                ? WorkoutInProgress(userWorkout: state.continueWorkout)
+                : const SizedBox();
           },
         ),
       ],
@@ -45,6 +47,7 @@ class DashboardView extends StatelessWidget {
           actions: XPortal(
             controller: state.portalController,
             child: XAvatar(
+              showToast: true,
               avatar: user.avatar,
               size: 80,
               onTap: () {

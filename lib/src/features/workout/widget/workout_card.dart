@@ -1,4 +1,5 @@
 import 'package:card_swiper/card_swiper.dart';
+import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/home/widget/block.dart';
 import 'package:fitness_app/src/network/data/enum/storage/storage_folder.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
@@ -36,6 +37,7 @@ class WorkoutCard extends StatelessWidget {
 
   Widget _buildListView(List<MWorkout> list) {
     return Swiper(
+      loop: false,
       scrollDirection: Axis.horizontal,
       itemCount: list.length,
       itemBuilder: (_, index) {
@@ -78,7 +80,7 @@ class WorkoutCard extends StatelessWidget {
       height: 230,
       tag: item.tag,
       backgroundImage: Image.asset(
-        item.thumbnail,
+        Assets.images.comingSoon.path,
         fit: BoxFit.fill,
         alignment: Alignment.topCenter,
       ),

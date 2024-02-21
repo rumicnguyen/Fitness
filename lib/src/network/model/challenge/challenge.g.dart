@@ -41,5 +41,6 @@ const _$WorkoutLevelEnumMap = {
   WorkoutLevel.any: 'any',
   WorkoutLevel.simple: 'simple',
   WorkoutLevel.medium: 'medium',
+  WorkoutLevel.hard: 'hard',
   WorkoutLevel.entry: 'entry',
 };
