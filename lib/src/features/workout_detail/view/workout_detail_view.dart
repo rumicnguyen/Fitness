@@ -42,7 +42,7 @@ class WorkoutDetailView extends StatelessWidget {
             previous.handle != current.handle,
         builder: (context, state) {
           return state.handle.isLoading
-              ? const Loading()
+              ? const Scaffold(body: Loading())
               : _body(
                   context: context,
                   item: state.workout,

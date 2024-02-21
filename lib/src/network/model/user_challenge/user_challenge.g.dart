@@ -21,7 +21,7 @@ _$MUserChallengeImpl _$$MUserChallengeImplFromJson(Map<String, dynamic> json) =>
       finishAt: json['finishAt'] == null
           ? null
           : DateTime.parse(json['finishAt'] as String),
-      isFineshed: json['isFineshed'] ?? false,
+      isFinished: json['isFinished'] ?? false,
     );
 
 Map<String, dynamic> _$$MUserChallengeImplToJson(
@@ -36,5 +36,5 @@ Map<String, dynamic> _$$MUserChallengeImplToJson(
       'pts': instance.pts,
       'startAt': instance.startAt?.toIso8601String(),
       'finishAt': instance.finishAt?.toIso8601String(),
-      'isFineshed': instance.isFineshed,
+      'isFinished': instance.isFinished,
     };

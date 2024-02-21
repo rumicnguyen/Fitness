@@ -16,7 +16,7 @@ class MUserChallenge with _$MUserChallenge {
     @Default(0) int pts,
     DateTime? startAt,
     DateTime? finishAt,
-    @Default(false) isFineshed,
+    @Default(false) isFinished,
   }) = _MUserChallenge;
 
   factory MUserChallenge.empty() {

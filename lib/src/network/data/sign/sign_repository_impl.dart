@@ -22,6 +22,7 @@ class SignRepositoryImpl extends SignRepository {
         id: firebaseUser?.uid ?? '',
         email: user.email ?? '',
         name: user.fullName ?? '',
+        createdAt: DateTime.now(),
       );
       final userResult = await DomainManager().user.getOrAddUser(newUser);
 

@@ -16,6 +16,8 @@ class MChallenge with _$MChallenge {
     @Default(WorkoutLevel.none) WorkoutLevel level,
     @Default(0) int members,
     @Default(true) bool isActive,
+    DateTime? activeAt,
+    @Default(7) double endDay,
     int? tag,
   }) = _MChallenge;
 

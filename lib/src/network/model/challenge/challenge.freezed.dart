@@ -28,6 +28,8 @@ mixin _$MChallenge {
   WorkoutLevel get level => throw _privateConstructorUsedError;
   int get members => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
+  DateTime? get activeAt => throw _privateConstructorUsedError;
+  double get endDay => throw _privateConstructorUsedError;
   int? get tag => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,6 +53,8 @@ abstract class $MChallengeCopyWith<$Res> {
       WorkoutLevel level,
       int members,
       bool isActive,
+      DateTime? activeAt,
+      double endDay,
       int? tag});
 }
 
@@ -75,6 +79,8 @@ class _$MChallengeCopyWithImpl<$Res, $Val extends MChallenge>
     Object? level = null,
     Object? members = null,
     Object? isActive = null,
+    Object? activeAt = freezed,
+    Object? endDay = null,
     Object? tag = freezed,
   }) {
     return _then(_value.copyWith(
@@ -110,6 +116,14 @@ class _$MChallengeCopyWithImpl<$Res, $Val extends MChallenge>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      activeAt: freezed == activeAt
+          ? _value.activeAt
+          : activeAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDay: null == endDay
+          ? _value.endDay
+          : endDay // ignore: cast_nullable_to_non_nullable
+              as double,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -135,6 +149,8 @@ abstract class _$$MChallengeImplCopyWith<$Res>
       WorkoutLevel level,
       int members,
       bool isActive,
+      DateTime? activeAt,
+      double endDay,
       int? tag});
 }
 
@@ -157,6 +173,8 @@ class __$$MChallengeImplCopyWithImpl<$Res>
     Object? level = null,
     Object? members = null,
     Object? isActive = null,
+    Object? activeAt = freezed,
+    Object? endDay = null,
     Object? tag = freezed,
   }) {
     return _then(_$MChallengeImpl(
@@ -192,6 +210,14 @@ class __$$MChallengeImplCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
+      activeAt: freezed == activeAt
+          ? _value.activeAt
+          : activeAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      endDay: null == endDay
+          ? _value.endDay
+          : endDay // ignore: cast_nullable_to_non_nullable
+              as double,
       tag: freezed == tag
           ? _value.tag
           : tag // ignore: cast_nullable_to_non_nullable
@@ -212,6 +238,8 @@ class _$MChallengeImpl extends _MChallenge {
       this.level = WorkoutLevel.none,
       this.members = 0,
       this.isActive = true,
+      this.activeAt,
+      this.endDay = 7,
       this.tag})
       : _workouts = workouts,
         super._();
@@ -249,11 +277,16 @@ class _$MChallengeImpl extends _MChallenge {
   @JsonKey()
   final bool isActive;
   @override
+  final DateTime? activeAt;
+  @override
+  @JsonKey()
+  final double endDay;
+  @override
   final int? tag;
 
   @override
   String toString() {
-    return 'MChallenge(id: $id, name: $name, thumbnail: $thumbnail, decription: $decription, workouts: $workouts, level: $level, members: $members, isActive: $isActive, tag: $tag)';
+    return 'MChallenge(id: $id, name: $name, thumbnail: $thumbnail, decription: $decription, workouts: $workouts, level: $level, members: $members, isActive: $isActive, activeAt: $activeAt, endDay: $endDay, tag: $tag)';
   }
 
   @override
@@ -272,6 +305,9 @@ class _$MChallengeImpl extends _MChallenge {
             (identical(other.members, members) || other.members == members) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
+            (identical(other.activeAt, activeAt) ||
+                other.activeAt == activeAt) &&
+            (identical(other.endDay, endDay) || other.endDay == endDay) &&
             (identical(other.tag, tag) || other.tag == tag));
   }
 
@@ -287,6 +323,8 @@ class _$MChallengeImpl extends _MChallenge {
       level,
       members,
       isActive,
+      activeAt,
+      endDay,
       tag);
 
   @JsonKey(ignore: true)
@@ -313,6 +351,8 @@ abstract class _MChallenge extends MChallenge {
       final WorkoutLevel level,
       final int members,
       final bool isActive,
+      final DateTime? activeAt,
+      final double endDay,
       final int? tag}) = _$MChallengeImpl;
   const _MChallenge._() : super._();
 
@@ -335,6 +375,10 @@ abstract class _MChallenge extends MChallenge {
   int get members;
   @override
   bool get isActive;
+  @override
+  DateTime? get activeAt;
+  @override
+  double get endDay;
   @override
   int? get tag;
   @override

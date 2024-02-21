@@ -103,16 +103,6 @@ class AppRouter {
                   return const FilterWorkoutView();
                 },
               ),
-              GoRoute(
-                parentNavigatorKey: AppCoordinator.navigatorKey,
-                path: AppRouteNames.listWorkout.subPath,
-                name: AppRouteNames.listWorkout.name,
-                builder: (context, state) {
-                  return SeeWorkoutView(
-                    filterWorkout: state.extra as MFilterWorkout?,
-                  );
-                },
-              ),
             ],
           ),
           GoRoute(
@@ -143,32 +133,43 @@ class AppRouter {
             name: AppRouteNames.activity.name,
             builder: (_, __) => const ActivityView(),
           ),
+        ],
+      ),
+      GoRoute(
+        parentNavigatorKey: AppCoordinator.navigatorKey,
+        path: AppRouteNames.workoutDetails.buildPathParam,
+        name: AppRouteNames.workoutDetails.name,
+        builder: (context, state) {
+          final id =
+              state.pathParameters[AppRouteNames.workoutDetails.paramName]!;
+          return WorkoutDetailView(
+            id: id,
+          );
+        },
+        routes: [
           GoRoute(
-            path: AppRouteNames.workoutDetails.buildPathParam,
-            name: AppRouteNames.workoutDetails.name,
+            parentNavigatorKey: AppCoordinator.navigatorKey,
+            path: AppRouteNames.startWorkout.subPath,
+            name: AppRouteNames.startWorkout.name,
             builder: (context, state) {
               final id =
-                  state.pathParameters[AppRouteNames.workoutDetails.paramName]!;
-              return WorkoutDetailView(
+                  state.pathParameters[AppRouteNames.startWorkout.paramName]!;
+              return StartWorkoutView(
                 id: id,
               );
             },
-            routes: [
-              GoRoute(
-                parentNavigatorKey: AppCoordinator.navigatorKey,
-                path: AppRouteNames.startWorkout.subPath,
-                name: AppRouteNames.startWorkout.name,
-                builder: (context, state) {
-                  final id = state
-                      .pathParameters[AppRouteNames.startWorkout.paramName]!;
-                  return StartWorkoutView(
-                    id: id,
-                  );
-                },
-              ),
-            ],
           ),
         ],
+      ),
+      GoRoute(
+        parentNavigatorKey: AppCoordinator.navigatorKey,
+        path: AppRouteNames.listWorkout.path,
+        name: AppRouteNames.listWorkout.name,
+        builder: (context, state) {
+          return SeeWorkoutView(
+            filterWorkout: state.extra as MFilterWorkout?,
+          );
+        },
       ),
     ],
     errorBuilder: (_, __) => const PageNotFoundView(),

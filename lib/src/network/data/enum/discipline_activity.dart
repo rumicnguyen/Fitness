@@ -33,6 +33,21 @@ enum DisciplineActivity {
           return true;
         }
         return false;
+      case dance:
+        if (discipline == dance) {
+          return true;
+        }
+        return false;
+      case yoga:
+        if (discipline == yoga) {
+          return true;
+        }
+        return false;
+      case hiit:
+        if (discipline == hiit) {
+          return true;
+        }
+        return false;
       default:
         return true;
     }
