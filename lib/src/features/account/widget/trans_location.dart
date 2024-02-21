@@ -28,7 +28,6 @@ class TransLocation extends StatelessWidget {
             width: 50,
             height: 50,
             child: state.locale == const Locale('en')
-                // state.locale == const Locale('en')
                 ? Image.asset(Assets.images.eng.path)
                 : Image.asset(Assets.images.vie.path),
           ),

@@ -27,11 +27,6 @@ class ActivityDetailRepositoryImpl extends ActivityDetailRepository {
     required DateFilter filter,
   }) async {
     try {
-      try {
-        await activityDetailRef.getActivityByUserId(userId: userId);
-      } catch (e) {
-        print('error: $e');
-      }
       final result = await activityDetailRef.getActivityDetails();
 
       if (result.isError || result.data == null) {
