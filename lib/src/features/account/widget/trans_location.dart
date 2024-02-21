@@ -1,6 +1,7 @@
 import 'package:fitness_app/gen/assets.gen.dart';
 import 'package:fitness_app/src/features/intro/logic/intro_bloc.dart';
 import 'package:fitness_app/src/features/intro/logic/intro_state.dart';
+import 'package:fitness_app/src/network/data/enum/locale_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,18 +17,18 @@ class TransLocation extends StatelessWidget {
       builder: (context, state) {
         return IconButton(
           onPressed: () {
-            state.locale == const Locale('en')
+            state.locale == LocaleEnum.en.value
                 ? context
                     .read<IntroBloc>()
-                    .onChangeLocalizations(const Locale('vi'))
+                    .onChangeLocalizations(LocaleEnum.vi.value)
                 : context
                     .read<IntroBloc>()
-                    .onChangeLocalizations(const Locale('en'));
+                    .onChangeLocalizations(LocaleEnum.en.value);
           },
           icon: SizedBox(
             width: 50,
             height: 50,
-            child: state.locale == const Locale('en')
+            child: state.locale == LocaleEnum.en.value
                 ? Image.asset(Assets.images.eng.path)
                 : Image.asset(Assets.images.vie.path),
           ),
