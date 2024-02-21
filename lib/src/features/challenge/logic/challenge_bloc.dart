@@ -53,10 +53,13 @@ class ChallengeBloc extends Cubit<ChallengeState> {
     );
     final result =
         await domain.userChallenge.getUpdateOrAddUserChallenge(userChallenge);
+    final challenge =
+        state.challenge.copyWith(members: state.challenge.members + 1);
 
     if (result.isSuccess && result.data != null) {
       emit(state.copyWith(
         handle: MHandle.result(result),
+        challenge: challenge,
         isShowJoin: false,
       ));
     } else {
