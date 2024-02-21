@@ -20,6 +20,10 @@ _$MChallengeImpl _$$MChallengeImplFromJson(Map<String, dynamic> json) =>
           WorkoutLevel.none,
       members: json['members'] as int? ?? 0,
       isActive: json['isActive'] as bool? ?? true,
+      activeAt: json['activeAt'] == null
+          ? null
+          : DateTime.parse(json['activeAt'] as String),
+      endDay: (json['endDay'] as num?)?.toDouble() ?? 7,
       tag: json['tag'] as int?,
     );
 
@@ -33,6 +37,8 @@ Map<String, dynamic> _$$MChallengeImplToJson(_$MChallengeImpl instance) =>
       'level': _$WorkoutLevelEnumMap[instance.level]!,
       'members': instance.members,
       'isActive': instance.isActive,
+      'activeAt': instance.activeAt?.toIso8601String(),
+      'endDay': instance.endDay,
       'tag': instance.tag,
     };
 

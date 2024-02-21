@@ -78,6 +78,8 @@
   "completed":"Completed",
   "cancel":"Cancel",
   "reset_all":"Reset All",
+  
+  "challenge_join":"Join this challenge",
 
   "workouts":"Workouts",
   "new_sessions":"New Sessions",

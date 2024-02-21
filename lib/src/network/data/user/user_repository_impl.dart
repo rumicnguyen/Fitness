@@ -167,9 +167,10 @@ class UserRepositoryImpl extends UserRepository {
     required String userId,
     required String challengeId,
   }) async {
-    return userChallengeRef.getUserChallengeBy(
+    return userChallengeRef.isAlready(
       userId: userId,
       challengeId: challengeId,
+      isFinished: false,
     );
   }
 }

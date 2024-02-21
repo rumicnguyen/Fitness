@@ -40,12 +40,12 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
   ) async {
     try {
       final user = await domain.user.getUser(id: userWorkout.userId);
-      if (user.isError) {
+      if (user.isError || user.data == null) {
         return MResult.error(user.error);
       }
       final workout =
           await domain.workout.getWorkoutById(id: userWorkout.workoutId);
-      if (workout.isError) {
+      if (workout.isError || workout.data == null) {
         return MResult.error(workout.error);
       }
       final getResult = await isAlready(
@@ -64,6 +64,18 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
         } else {
           final MResult<MUserWorkout> result = await set(userWorkout);
           if (result.isSuccess) {
+            final isIncrease = await isAlready(
+              userId: userWorkout.userId,
+              workoutId: userWorkout.workoutId,
+              isFinished: true,
+            );
+            if (isIncrease.isSuccess &&
+                isIncrease.data != null &&
+                isIncrease.data!.id.isEmpty) {
+              await domain.workout.workoutRef.update(userWorkout.workoutId, {
+                'members': workout.data!.members + 1,
+              });
+            }
             return MResult.success(result.data);
           }
           return MResult.error(result.error);
@@ -133,6 +145,7 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
   Future<MResult<MUserWorkout>> isAlready({
     required String workoutId,
     required String userId,
+    bool isFinished = false,
   }) async {
     try {
       final query = await ref
@@ -146,7 +159,7 @@ class UserWorkoutReference extends BaseCollectionReference<MUserWorkout> {
           )
           .where(
             'isFinished',
-            isEqualTo: false,
+            isEqualTo: isFinished,
           )
           .get();
 

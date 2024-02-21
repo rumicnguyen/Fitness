@@ -5,6 +5,7 @@ import 'package:fitness_app/src/network/data/exercise/exercise_repository_impl.d
 import 'package:fitness_app/src/network/data/goal/goal_repository_impl.dart';
 import 'package:fitness_app/src/network/data/sign/sign_repository_impl.dart';
 import 'package:fitness_app/src/network/data/user/user_repository_impl.dart';
+import 'package:fitness_app/src/network/data/user_challenge/user_challenge_repository_impl.dart';
 import 'package:fitness_app/src/network/data/user_workout/user_workout_repository_impl.dart';
 import 'package:fitness_app/src/network/data/workout/workout_repository_impl.dart';
 
@@ -20,6 +21,7 @@ class DomainManager {
   final workout = WorkoutRepositoryImpl();
   final user = UserRepositoryImpl();
   final userWorkout = UserWorkoutRepositoryImpl();
+  final userChallenge = UserChallengeRepositoryImpl();
   final challenge = ChallengeRepositoryImpl();
   final activity = ActivityRepositoryImpl();
   final sign = SignRepositoryImpl();

@@ -29,7 +29,7 @@ mixin _$MUserChallenge {
   int get pts => throw _privateConstructorUsedError;
   DateTime? get startAt => throw _privateConstructorUsedError;
   DateTime? get finishAt => throw _privateConstructorUsedError;
-  dynamic get isFineshed => throw _privateConstructorUsedError;
+  dynamic get isFinished => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -53,7 +53,7 @@ abstract class $MUserChallengeCopyWith<$Res> {
       int pts,
       DateTime? startAt,
       DateTime? finishAt,
-      dynamic isFineshed});
+      dynamic isFinished});
 }
 
 /// @nodoc
@@ -78,7 +78,7 @@ class _$MUserChallengeCopyWithImpl<$Res, $Val extends MUserChallenge>
     Object? pts = null,
     Object? startAt = freezed,
     Object? finishAt = freezed,
-    Object? isFineshed = freezed,
+    Object? isFinished = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -117,9 +117,9 @@ class _$MUserChallengeCopyWithImpl<$Res, $Val extends MUserChallenge>
           ? _value.finishAt
           : finishAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isFineshed: freezed == isFineshed
-          ? _value.isFineshed
-          : isFineshed // ignore: cast_nullable_to_non_nullable
+      isFinished: freezed == isFinished
+          ? _value.isFinished
+          : isFinished // ignore: cast_nullable_to_non_nullable
               as dynamic,
     ) as $Val);
   }
@@ -143,7 +143,7 @@ abstract class _$$MUserChallengeImplCopyWith<$Res>
       int pts,
       DateTime? startAt,
       DateTime? finishAt,
-      dynamic isFineshed});
+      dynamic isFinished});
 }
 
 /// @nodoc
@@ -166,7 +166,7 @@ class __$$MUserChallengeImplCopyWithImpl<$Res>
     Object? pts = null,
     Object? startAt = freezed,
     Object? finishAt = freezed,
-    Object? isFineshed = freezed,
+    Object? isFinished = freezed,
   }) {
     return _then(_$MUserChallengeImpl(
       id: null == id
@@ -205,7 +205,7 @@ class __$$MUserChallengeImplCopyWithImpl<$Res>
           ? _value.finishAt
           : finishAt // ignore: cast_nullable_to_non_nullable
               as DateTime?,
-      isFineshed: freezed == isFineshed ? _value.isFineshed! : isFineshed,
+      isFinished: freezed == isFinished ? _value.isFinished! : isFinished,
     ));
   }
 }
@@ -223,7 +223,7 @@ class _$MUserChallengeImpl extends _MUserChallenge {
       this.pts = 0,
       this.startAt,
       this.finishAt,
-      this.isFineshed = false})
+      this.isFinished = false})
       : super._();
 
   factory _$MUserChallengeImpl.fromJson(Map<String, dynamic> json) =>
@@ -255,11 +255,11 @@ class _$MUserChallengeImpl extends _MUserChallenge {
   final DateTime? finishAt;
   @override
   @JsonKey()
-  final dynamic isFineshed;
+  final dynamic isFinished;
 
   @override
   String toString() {
-    return 'MUserChallenge(id: $id, userId: $userId, challengeId: $challengeId, daysRunning: $daysRunning, kilometresRun: $kilometresRun, tasksCompleted: $tasksCompleted, pts: $pts, startAt: $startAt, finishAt: $finishAt, isFineshed: $isFineshed)';
+    return 'MUserChallenge(id: $id, userId: $userId, challengeId: $challengeId, daysRunning: $daysRunning, kilometresRun: $kilometresRun, tasksCompleted: $tasksCompleted, pts: $pts, startAt: $startAt, finishAt: $finishAt, isFinished: $isFinished)';
   }
 
   @override
@@ -282,7 +282,7 @@ class _$MUserChallengeImpl extends _MUserChallenge {
             (identical(other.finishAt, finishAt) ||
                 other.finishAt == finishAt) &&
             const DeepCollectionEquality()
-                .equals(other.isFineshed, isFineshed));
+                .equals(other.isFinished, isFinished));
   }
 
   @JsonKey(ignore: true)
@@ -298,7 +298,7 @@ class _$MUserChallengeImpl extends _MUserChallenge {
       pts,
       startAt,
       finishAt,
-      const DeepCollectionEquality().hash(isFineshed));
+      const DeepCollectionEquality().hash(isFinished));
 
   @JsonKey(ignore: true)
   @override
@@ -326,7 +326,7 @@ abstract class _MUserChallenge extends MUserChallenge {
       final int pts,
       final DateTime? startAt,
       final DateTime? finishAt,
-      final dynamic isFineshed}) = _$MUserChallengeImpl;
+      final dynamic isFinished}) = _$MUserChallengeImpl;
   const _MUserChallenge._() : super._();
 
   factory _MUserChallenge.fromJson(Map<String, dynamic> json) =
@@ -351,7 +351,7 @@ abstract class _MUserChallenge extends MUserChallenge {
   @override
   DateTime? get finishAt;
   @override
-  dynamic get isFineshed;
+  dynamic get isFinished;
   @override
   @JsonKey(ignore: true)
   _$$MUserChallengeImplCopyWith<_$MUserChallengeImpl> get copyWith =>
