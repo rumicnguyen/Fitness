@@ -2,6 +2,7 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:fitness_app/dialogs/toast_wrapper.dart';
 import 'package:fitness_app/src/features/account/logic/account_bloc.dart';
 import 'package:fitness_app/src/features/account/widget/friend_card.dart';
+import 'package:fitness_app/src/features/account/widget/trans_location.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
 import 'package:fitness_app/src/network/data/enum/profile_type.dart';
 import 'package:fitness_app/src/router/coordinator.dart';
@@ -36,8 +37,16 @@ class AccountView extends StatelessWidget {
         backgroundColor: AppColors.white,
         body: Column(
           children: [
+            const XSection(
+              top: 10,
+              right: 30,
+              left: 30,
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: TransLocation(),
+              ),
+            ),
             XSection(
-              top: 30,
               left: 30,
               right: 30,
               bottom: 15,
@@ -51,8 +60,8 @@ class AccountView extends StatelessWidget {
             XSection(
               vertical: 10,
               child: SizedBox(
-                height: screenSize.height > 338
-                    ? screenSize.height - 338
+                height: screenSize.height > 385
+                    ? screenSize.height - 385
                     : screenSize.height,
                 width: double.infinity,
                 child: SingleChildScrollView(

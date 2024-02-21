@@ -23,6 +23,27 @@ enum TimeData {
   hour_22h(label: '10\nPM', value: 22),
   hour_23h(label: '11\nPM', value: 23),
   hour_24h(label: '12\nPM', value: 24),
+
+  mo(label: 'Mo', value: 101),
+  tu(label: 'Tu', value: 102),
+  we(label: 'We', value: 103),
+  th(label: 'Th', value: 104),
+  fr(label: 'Fr', value: 105),
+  sa(label: 'Sa', value: 106),
+  su(label: 'Su', value: 107),
+
+  jan(label: 'Jan', value: 201),
+  feb(label: 'Feb', value: 202),
+  mar(label: 'Mar', value: 203),
+  apr(label: 'Apr', value: 204),
+  may(label: 'May', value: 205),
+  jun(label: 'Jun', value: 206),
+  jul(label: 'Jul', value: 207),
+  aug(label: 'Aug', value: 208),
+  oct(label: 'Oct', value: 209),
+  sep(label: 'Sep', value: 210),
+  nov(label: 'Nov', value: 211),
+  dec(label: 'Dec', value: 212),
   ;
 
   final String label;
@@ -30,7 +51,7 @@ enum TimeData {
 
   const TimeData({required this.label, required this.value});
 
-    static TimeData fromValue(int value) {
+  static TimeData fromValue(int value) {
     return values.firstWhere((element) => element.value == value,
         orElse: () => hour_1h);
   }

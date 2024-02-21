@@ -58,7 +58,9 @@ class WorkoutInProgress extends StatelessWidget {
               title: S.of(context).continue_label,
               titleStyle: AppStyles.primaryColorText,
               onPressed: () {
-                AppCoordinator.showWorkoutDetailsScreen(id: userWorkout.workoutId);
+                AppCoordinator.showStartWorkoutScreen(
+                  id: userWorkout.workoutId,
+                );
               },
               backgroundColor: AppColors.white,
             )
@@ -75,7 +77,8 @@ class WorkoutInProgress extends StatelessWidget {
       children: [
         _buildBlock(
           child: Text(
-            userWorkout.percentCompleted.toString() + S.of(context).percent_completed,
+            userWorkout.percentCompleted.toString() +
+                S.of(context).percent_completed,
             style: AppStyles.whiteTextSmall,
           ),
         ),

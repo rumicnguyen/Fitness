@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/domain_manager.dart';
 import 'package:fitness_app/src/network/firebase/base_collection.dart';
 import 'package:fitness_app/src/network/model/common/result.dart';
 import 'package:fitness_app/src/network/model/workout/workout.dart';
@@ -51,6 +52,33 @@ class WorkoutReference extends BaseCollectionReference<MWorkout> {
           .where(
             'goals',
             arrayContainsAny: goals,
+          )
+          .get();
+      final docs = query.docs.map((e) => e.data()).toList();
+      return MResult.success(docs);
+    } on FirebaseException catch (e) {
+      return MResult.exception(e.message);
+    } catch (e) {
+      return MResult.exception(e);
+    }
+  }
+
+  Future<MResult<List<MWorkout>>> getNextWorkouts(String userId) async {
+    final domain = DomainManager();
+    try {
+      final lastest =
+          await domain.userWorkout.getLastestUserWorkout(userId: userId);
+      if (lastest.isError || lastest.data == null) {
+        return getAll();
+      }
+      final workout = await get(lastest.data!.workoutId);
+      if (workout.isError || workout.data == null) {
+        return getAll();
+      }
+      final QuerySnapshot<MWorkout> query = await ref
+          .where(
+            'discipline',
+            isEqualTo: workout.data!.discipline.value,
           )
           .get();
       final docs = query.docs.map((e) => e.data()).toList();

@@ -26,7 +26,7 @@ class WorkoutRepositoryImpl extends WorkoutRepository {
     required String id,
   }) async {
     try {
-      MResult<List<MWorkout>> list = await getWorkouts();
+      MResult<List<MWorkout>> list = await workoutRef.getNextWorkouts(id);
       if (list.isSuccess && list.data != null) {
         return MResult.success(list.data);
       }

@@ -1,3 +1,4 @@
+import 'package:fitness_app/src/network/data/enum/time_data.dart';
 import 'package:fitness_app/src/network/model/activity/activity_detail/activity_detail.dart';
 
 class TimeDataSort {
@@ -15,11 +16,11 @@ class TimeDataSort {
   }
 
   static int partition(List<MActivityDetail> arr, int low, int high) {
-    int pivotTime = arr[high].time.value;
+    int pivotTime =  TimeData.fromValue(arr[high].time).value;
     int i = low - 1;
 
     for (int j = low; j < high; j++) {
-      if (arr[j].time.value <= pivotTime) {
+      if (TimeData.fromValue(arr[j].time).value <= pivotTime) {
         i++;
         swap(arr, i, j);
       }
