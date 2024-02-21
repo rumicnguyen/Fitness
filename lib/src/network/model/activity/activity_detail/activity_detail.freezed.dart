@@ -21,9 +21,10 @@ MActivityDetail _$MActivityDetailFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$MActivityDetail {
   String get id => throw _privateConstructorUsedError;
-  String? get activityId => throw _privateConstructorUsedError;
-  String? get workoutId => throw _privateConstructorUsedError;
-  TimeData get time =>
+  String get activityId => throw _privateConstructorUsedError;
+  String get workoutId => throw _privateConstructorUsedError;
+  String get userId => throw _privateConstructorUsedError;
+  int get time =>
       throw _privateConstructorUsedError; // The number of minute in 1 hour do exercise
   double get value => throw _privateConstructorUsedError;
 
@@ -41,9 +42,10 @@ abstract class $MActivityDetailCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      String? activityId,
-      String? workoutId,
-      TimeData time,
+      String activityId,
+      String workoutId,
+      String userId,
+      int time,
       double value});
 }
 
@@ -61,8 +63,9 @@ class _$MActivityDetailCopyWithImpl<$Res, $Val extends MActivityDetail>
   @override
   $Res call({
     Object? id = null,
-    Object? activityId = freezed,
-    Object? workoutId = freezed,
+    Object? activityId = null,
+    Object? workoutId = null,
+    Object? userId = null,
     Object? time = null,
     Object? value = null,
   }) {
@@ -71,18 +74,22 @@ class _$MActivityDetailCopyWithImpl<$Res, $Val extends MActivityDetail>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      activityId: freezed == activityId
+      activityId: null == activityId
           ? _value.activityId
           : activityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutId: freezed == workoutId
+              as String,
+      workoutId: null == workoutId
           ? _value.workoutId
           : workoutId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as TimeData,
+              as int,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -101,9 +108,10 @@ abstract class _$$MActivityDetailImplCopyWith<$Res>
   @useResult
   $Res call(
       {String id,
-      String? activityId,
-      String? workoutId,
-      TimeData time,
+      String activityId,
+      String workoutId,
+      String userId,
+      int time,
       double value});
 }
 
@@ -119,8 +127,9 @@ class __$$MActivityDetailImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? activityId = freezed,
-    Object? workoutId = freezed,
+    Object? activityId = null,
+    Object? workoutId = null,
+    Object? userId = null,
     Object? time = null,
     Object? value = null,
   }) {
@@ -129,18 +138,22 @@ class __$$MActivityDetailImplCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      activityId: freezed == activityId
+      activityId: null == activityId
           ? _value.activityId
           : activityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workoutId: freezed == workoutId
+              as String,
+      workoutId: null == workoutId
           ? _value.workoutId
           : workoutId // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
+      userId: null == userId
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
+              as String,
       time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
-              as TimeData,
+              as int,
       value: null == value
           ? _value.value
           : value // ignore: cast_nullable_to_non_nullable
@@ -154,9 +167,10 @@ class __$$MActivityDetailImplCopyWithImpl<$Res>
 class _$MActivityDetailImpl extends _MActivityDetail {
   const _$MActivityDetailImpl(
       {required this.id,
-      this.activityId,
-      this.workoutId,
-      this.time = TimeData.hour_24h,
+      this.activityId = '',
+      this.workoutId = '',
+      this.userId = '',
+      this.time = 1,
       this.value = 0.0})
       : super._();
 
@@ -166,12 +180,17 @@ class _$MActivityDetailImpl extends _MActivityDetail {
   @override
   final String id;
   @override
-  final String? activityId;
-  @override
-  final String? workoutId;
+  @JsonKey()
+  final String activityId;
   @override
   @JsonKey()
-  final TimeData time;
+  final String workoutId;
+  @override
+  @JsonKey()
+  final String userId;
+  @override
+  @JsonKey()
+  final int time;
 // The number of minute in 1 hour do exercise
   @override
   @JsonKey()
@@ -179,7 +198,7 @@ class _$MActivityDetailImpl extends _MActivityDetail {
 
   @override
   String toString() {
-    return 'MActivityDetail(id: $id, activityId: $activityId, workoutId: $workoutId, time: $time, value: $value)';
+    return 'MActivityDetail(id: $id, activityId: $activityId, workoutId: $workoutId, userId: $userId, time: $time, value: $value)';
   }
 
   @override
@@ -192,6 +211,7 @@ class _$MActivityDetailImpl extends _MActivityDetail {
                 other.activityId == activityId) &&
             (identical(other.workoutId, workoutId) ||
                 other.workoutId == workoutId) &&
+            (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.time, time) || other.time == time) &&
             (identical(other.value, value) || other.value == value));
   }
@@ -199,7 +219,7 @@ class _$MActivityDetailImpl extends _MActivityDetail {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, id, activityId, workoutId, time, value);
+      Object.hash(runtimeType, id, activityId, workoutId, userId, time, value);
 
   @JsonKey(ignore: true)
   @override
@@ -219,9 +239,10 @@ class _$MActivityDetailImpl extends _MActivityDetail {
 abstract class _MActivityDetail extends MActivityDetail {
   const factory _MActivityDetail(
       {required final String id,
-      final String? activityId,
-      final String? workoutId,
-      final TimeData time,
+      final String activityId,
+      final String workoutId,
+      final String userId,
+      final int time,
       final double value}) = _$MActivityDetailImpl;
   const _MActivityDetail._() : super._();
 
@@ -231,11 +252,13 @@ abstract class _MActivityDetail extends MActivityDetail {
   @override
   String get id;
   @override
-  String? get activityId;
+  String get activityId;
   @override
-  String? get workoutId;
+  String get workoutId;
   @override
-  TimeData get time;
+  String get userId;
+  @override
+  int get time;
   @override // The number of minute in 1 hour do exercise
   double get value;
   @override

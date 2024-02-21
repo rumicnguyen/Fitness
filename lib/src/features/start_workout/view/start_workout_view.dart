@@ -155,25 +155,29 @@ class StartWorkoutView extends StatelessWidget {
                   padding: EdgeInsets.zero,
                   itemCount: state.workout.exercises,
                   itemBuilder: (BuildContext context, int index) {
-                    return ExerciseItem(
-                      exercise: state.exercise[index],
-                      isDoing: index == state.countTaskDone,
-                      context: context,
-                      isDone: index < state.countTaskDone,
-                      onTap: () async {
-                        if (index == 0) {
-                          state.controller.seekTo(Duration.zero);
-                        } else {
-                          state.controller.seekTo(
-                            Duration(seconds: state.exercise[index - 1].endAt),
+                    return state.exercise.length < state.workout.exercises &&
+                            state.exercise.length <= index
+                        ? const SizedBox()
+                        : ExerciseItem(
+                            exercise: state.exercise[index],
+                            isDoing: index == state.countTaskDone,
+                            context: context,
+                            isDone: index < state.countTaskDone,
+                            onTap: () async {
+                              if (index == 0) {
+                                state.controller.seekTo(Duration.zero);
+                              } else {
+                                state.controller.seekTo(
+                                  Duration(
+                                      seconds: state.exercise[index - 1].endAt),
+                                );
+                              }
+                              const Loading().load(context
+                                  .read<StartWorkoutBloc>()
+                                  .onChangeCurrent(index));
+                            },
+                            isCurrent: state.current == index,
                           );
-                        }
-                        const Loading().load(context
-                            .read<StartWorkoutBloc>()
-                            .onChangeCurrent(index));
-                      },
-                      isCurrent: state.current == index,
-                    );
                   },
                 ),
         );

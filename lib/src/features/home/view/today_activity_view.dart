@@ -1,5 +1,6 @@
 import 'package:fitness_app/src/features/bar_chart/view/bar_chart.dart';
 import 'package:fitness_app/src/localization/localization_utils.dart';
+import 'package:fitness_app/src/network/data/enum/date_filter.dart';
 import 'package:fitness_app/src/themes/styles.dart';
 import 'package:fitness_app/widgets/title/heading.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,9 @@ class TodayActivityView extends StatelessWidget {
         const SizedBox(
           height: 15,
         ),
-        const XBarChart()
+        const XBarChart(
+          filter: DateFilter.toDay,
+        )
       ],
     );
   }

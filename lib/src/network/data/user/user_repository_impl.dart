@@ -41,10 +41,12 @@ class UserRepositoryImpl extends UserRepository {
       for (var element in user.data!.friends) {
         final data = await userWorkoutRef.getNotOrFinished(
           userId: element,
-          isFinished: true,
+          isFinished: false,
         );
         if (data.isSuccess && data.data != null && data.data!.isNotEmpty) {
-          data.data!.map((e) => result.add(e));
+          for (var element in data.data!) {
+            result.add(element);
+          }
         }
       }
 

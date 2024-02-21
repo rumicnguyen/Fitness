@@ -1,4 +1,5 @@
 import 'package:fitness_app/src/features/bar_chart/logic/bar_chart_bloc.dart';
+import 'package:fitness_app/src/network/data/enum/date_filter.dart';
 import 'package:fitness_app/src/network/data/enum/time_data.dart';
 import 'package:fitness_app/src/network/model/activity/activity_detail/activity_detail.dart';
 import 'package:fitness_app/src/themes/colors.dart';
@@ -8,23 +9,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class XBarChart extends StatelessWidget {
-  const XBarChart({Key? key}) : super(key: key);
+  const XBarChart({
+    Key? key,
+    this.filter,
+  }) : super(key: key);
+
+  final DateFilter? filter;
 
   @override
   Widget build(BuildContext context) {
-    final List<MActivityDetail> emptyData = [
-      const MActivityDetail(id: '1', time: TimeData.hour_6h, value: 0),
-      const MActivityDetail(id: '2', time: TimeData.hour_7h, value: 0),
-      const MActivityDetail(id: '3', time: TimeData.hour_8h, value: 0),
-      const MActivityDetail(id: '4', time: TimeData.hour_9h, value: 0),
-      const MActivityDetail(id: '5', time: TimeData.hour_10h, value: 0),
-      const MActivityDetail(id: '6', time: TimeData.hour_11h, value: 0),
-      const MActivityDetail(id: '7', time: TimeData.hour_12h, value: 0),
-    ];
-
     return BlocProvider<BarChartBloc>(
       create: (context) {
-        return BarChartBloc();
+        return BarChartBloc(filter);
       },
       child: Container(
           padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -39,7 +35,7 @@ class XBarChart extends StatelessWidget {
               return previous.list != current.list;
             },
             builder: (context, state) {
-              if (state.list.isEmpty) return _buildChart(emptyData);
+              if (state.list.isEmpty) return const SizedBox();
               return _buildChart(state.list);
             },
           )),
@@ -52,7 +48,7 @@ class XBarChart extends StatelessWidget {
       borderWidth: 0,
       backgroundColor: AppColors.transparent,
       primaryXAxis: const CategoryAxis(
-        maximumLabels: 8,
+        maximumLabels: 24,
         axisLine: AxisLine(width: 0),
         labelStyle: AppStyles.blackTextSmall,
         majorTickLines: MajorTickLines(width: 0),
@@ -74,7 +70,7 @@ class XBarChart extends StatelessWidget {
         ColumnSeries<MActivityDetail, String>(
           dataSource: list,
           xValueMapper: (MActivityDetail data, _) {
-            return data.time.label;
+            return TimeData.fromValue(data.time).label;
           },
           yValueMapper: (MActivityDetail data, _) {
             return data.value;

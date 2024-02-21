@@ -99,6 +99,7 @@ class UserChallengeReference extends BaseCollectionReference<MUserChallenge> {
                   id: StringUtils.generateId(),
                   userId: user.data!.id,
                   challengeParticipatedIn: 1,
+                  date: DateTime.now(),
                 ),
               );
             }

@@ -60,14 +60,16 @@ class ActivityView extends StatelessWidget {
                   ? screenSize.height
                   : screenSize.height - 240,
               width: double.infinity,
-              child: const SingleChildScrollView(
+              child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    XBarChart(),
-                    SizedBox(
+                    XBarChart(
+                      filter: state.currentTab,
+                    ),
+                    const SizedBox(
                       height: 15,
                     ),
-                    OverallStats(),
+                    const OverallStats(),
                   ],
                 ),
               ),
